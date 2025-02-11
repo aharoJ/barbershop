@@ -43,8 +43,9 @@ export default function SignupPage() {
           id: loginResponse.id.toString(),
           email: loginResponse.email,
           roles: loginResponse.roles,
+          username:"",
         },
-        loginResponse.token
+        loginResponse.token,
       );
 
       // 4. Redirect to profile creation
