@@ -7,12 +7,16 @@ export const customerService = {
   createCustomer: async (payload: CustomerPayload) => {
     const { data } = await apiClient.post<CustomerResponse>(
       "/api/customers/profile", // CORRECTED ENDPOINT
-      payload
+      {
+        ...payload,
+        // Convert Date to ISO string
+        dateOfBirth: payload.dateOfBirth.toISOString(),
+      },
     );
     return data;
   },
 
-  // should I remove this? 
+  // should I remove this?
   getCustomers: async () => {
     const { data } = await apiClient.get<CustomerResponse[]>("/api/customers");
     return data;

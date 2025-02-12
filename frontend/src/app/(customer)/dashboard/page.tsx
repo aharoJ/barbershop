@@ -26,39 +26,64 @@ export default function CustomerDashboard() {
 
         <div className="space-y-3 mx-auto ">
           <div className="flex items-center gap-4">
-            <span className="text-lg  text-black/60 w-auto">
-              First Name:
-            </span>
+            <span className="text-lg  text-black/60 w-auto">First Name:</span>
             <span className="text-lg tracking-wider font-mono text-black/70">
               {profile?.firstName}
             </span>
           </div>
 
           <div className="flex items-center gap-4">
-            <span className="text-lg  text-black/60 w-auto">
-              Last Name:
-            </span>
+            <span className="text-lg  text-black/60 w-auto">Last Name:</span>
             <span className="text-lg tracking-wider font-mono text-black/70">
               {profile?.lastName}
             </span>
           </div>
 
           <div className="flex items-center gap-4">
-            <span className="text-lg  text-black/60 w-auto">
-              Phone:
-            </span>
+            <span className="text-lg  text-black/60 w-auto">Phone:</span>
             <span className="text-lg tracking-wider font-mono text-black/70">
               {profile?.phoneNumber}
             </span>
           </div>
 
           <div className="flex items-center gap-4">
-            <span className="text-lg  text-black/60 w-auto">
-              Role:
-            </span>
+            <span className="text-lg  text-black/60 w-auto">Role:</span>
             <span className="text-lg tracking-wider font-mono text-black/70">
               {user?.roles.join(", ")}
             </span>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <span className="text-lg text-black/60 w-auto">Date of Birth:</span>
+            <span className="text-lg tracking-wider font-mono text-black/70">
+              {profile?.dateOfBirth?.toLocaleDateString()}
+            </span>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <span className="text-lg text-black/60 w-auto">Gender:</span>
+            <span className="text-lg tracking-wider font-mono text-black/70">
+              {profile?.gender?.toLowerCase()}
+            </span>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <span className="text-lg text-black/60 w-auto">Notifications:</span>
+            <span className="text-lg tracking-wider font-mono text-black/70">
+              {profile?.marketingNotifications?.toLowerCase()}
+            </span>
+          </div>
+
+          <div className="mt-6 p-4 bg-white rounded-lg shadow">
+            <h3 className="text-lg font-semibold mb-2">Address</h3>
+            <div className="space-y-1">
+              <p>{profile?.address?.street}</p>
+              <p>
+                {profile?.address?.city}, {profile?.address?.state}{" "}
+                {profile?.address?.postalCode}
+              </p>
+              <p>{profile?.address?.country}</p>
+            </div>
           </div>
         </div>
       </div>
