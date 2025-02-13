@@ -1,8 +1,6 @@
 package io.aharoj.barbershop_backend.modules.auth.model.entity;
 
-
-
-import io.aharoj.barbershop_backend.modules.auth.model.enums.RoleName;
+import io.aharoj.barbershop_backend.modules.auth.model.enums.RoleType;
 import jakarta.persistence.*;
 
 @Entity
@@ -14,13 +12,13 @@ public class Role {
 
   @Enumerated(EnumType.STRING)
   @Column(unique = true, nullable = false, length = 20)
-  private RoleName roleName;
+  private RoleType roleType;
 
   public Role() {
   }
 
-  public Role(RoleName roleName) {
-    this.roleName = roleName;
+  public Role(RoleType roleType) {
+    this.roleType = roleType;
   }
 
   public Long getId() {
@@ -31,12 +29,13 @@ public class Role {
     this.id = id;
   }
 
-  public RoleName getRoleName() {
-    return roleName;
+  public RoleType getRoleType() {
+    return roleType;
   }
 
-  public void setRoleName(RoleName roleName) {
-    this.roleName = roleName;
+  public void setRoleType(RoleType roleType) {
+    this.roleType = roleType;
   }
+
 
 }

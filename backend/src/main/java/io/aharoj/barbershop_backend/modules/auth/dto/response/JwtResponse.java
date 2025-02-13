@@ -1,14 +1,7 @@
 package io.aharoj.barbershop_backend.modules.auth.dto.response;
 
-
-
 import java.util.List;
 
-import io.aharoj.barbershop_backend.modules.auth.model.enums.RoleName;
-
-/**
- * JwtResponse
- */
 public class JwtResponse {
   private String token;
   private String type = "Bearer"; // The type of token (e.g., "Bearer") is a textual piece of information

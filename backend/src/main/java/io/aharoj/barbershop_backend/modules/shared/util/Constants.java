@@ -1,7 +1,7 @@
 package io.aharoj.barbershop_backend.modules.shared.util;
 
 import io.aharoj.barbershop_backend.modules.appointment.model.enums.AppointmentStatus;
-import io.aharoj.barbershop_backend.modules.auth.model.enums.RoleName;
+import io.aharoj.barbershop_backend.modules.auth.model.enums.RoleType;
 
 /**
  * Create a utility class to store application-wide constants.
@@ -10,10 +10,10 @@ import io.aharoj.barbershop_backend.modules.auth.model.enums.RoleName;
 public class Constants {
 
   // Role Constants
-  public static final RoleName ROLE_CUSTOMER = RoleName.ROLE_CUSTOMER;
-  public static final RoleName ROLE_BARBER = RoleName.ROLE_BARBER;
-  public static final RoleName ROLE_OWNER = RoleName.ROLE_OWNER;
-  // public static final RoleName ROLE_ADMIN = RoleName.ROLE_OWNER; // REMOVED FOR NOW ?
+  public static final RoleType ROLE_CUSTOMER = RoleType.ROLE_CUSTOMER;
+  public static final RoleType ROLE_BARBER = RoleType.ROLE_BARBER;
+  public static final RoleType ROLE_OWNER = RoleType.ROLE_OWNER;
+  // public static final RoleType ROLE_ADMIN = RoleType.ROLE_OWNER; // REMOVED FOR NOW ?
 
 
   // Error Messages

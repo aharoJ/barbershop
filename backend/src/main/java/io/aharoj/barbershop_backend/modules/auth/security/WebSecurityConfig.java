@@ -62,10 +62,10 @@ public class WebSecurityConfig {
   public SecurityFilterChain filterChain(HttpSecurity httpSecurity, CustomAccessDeniedHandler accessDeniedHandler)
       throws Exception {
     httpSecurity
-        // FRONTEND -->  newest modification for cors <-> frontend access to backend 
-      .cors(Customizer.withDefaults())
+        .cors(Customizer.withDefaults()) // FRONTEND --> newest modification for cors <-> frontend access to backend
+        .csrf(csrf -> csrf.disable()) // tied to top
+        // .addFilterBefore(new JwtRequestFilter(), UsernamePasswordAuthenticationFilter.class) -- THIS BREAKS DB 
 
-      .csrf(csrf -> csrf.disable())
         // exceptionHandlingCustomizer
         .exceptionHandling(e -> {
           e.authenticationEntryPoint(unauthorizedHandler);
