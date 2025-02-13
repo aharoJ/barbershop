@@ -9,6 +9,6 @@ import io.aharoj.barbershop_backend.modules.auth.model.entity.Role;
 import io.aharoj.barbershop_backend.modules.auth.model.enums.RoleType;
 
 @Repository
-public interface RoleRepository extends JpaRepository<Role, Long> {
+public interface RoleTypeRepository extends JpaRepository<Role, Long> {
   Optional<Role> findByRoleType(RoleType roleType);
 }
