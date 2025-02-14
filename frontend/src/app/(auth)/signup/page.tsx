@@ -40,21 +40,23 @@ export default function SignupPage() {
       // 3. Set credentials in store
       setCredentials(
         {
-          id: loginResponse.id.toString(),
+          id: loginResponse.id.toString(), // Use response ID directly
+          username: "",
           email: loginResponse.email,
           roles: loginResponse.roles,
-          username:"",
         },
-        loginResponse.token,
+        loginResponse.token
       );
 
       // 4. Redirect to profile creation
-      router.push("/profile/create");
+      router.push(`/customer/${loginResponse.id}/profile/create`);
+
+      //5. Catch any errors below
     } catch (error) {
       console.error("Signup failed:", error);
+      // alert("Signup failed: " + error.response?.data?.message || error.message);
     }
   };
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <form

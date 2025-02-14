@@ -1,17 +1,34 @@
 // @app/(customer)/dashboard/page.tsx
-
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
+import { useParams } from "next/navigation";
+
 import { customerService } from "@/services/customer.service";
 import { useAuthStore } from "@/stores/auth.store";
 
 export default function CustomerDashboard() {
-  const { user } = useAuthStore();
-  const { data: profile } = useQuery({
-    queryKey: ["customer-profile"],
-    queryFn: customerService.getCustomerProfile,
+  // const { userId } = useParams(); // e.g. /customer/[userId]/dashboard
+  const params = useParams();
+  const userId = params.userId as string; // Casting to a single string
+
+  const { user } = useAuthStore(); // just to display user roles, etc.
+
+  // Fetch the customer profile for userId
+  const {
+    data: profile,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["customer-profile", userId],
+    queryFn: () => customerService.getCustomerProfile(userId),
+    // Only run query if userId is defined
+    enabled: Boolean(userId),
   });
+
+  // Handle loading / error states
+  if (isLoading) return <div>Loading profile...</div>;
+  if (isError || !profile) return <div>Could not load profile.</div>;
 
   return (
     <div className="p-8">
@@ -55,8 +72,16 @@ export default function CustomerDashboard() {
 
           <div className="flex items-center gap-4">
             <span className="text-lg text-black/60 w-auto">Date of Birth:</span>
+            {/* <span className="text-lg tracking-wider font-mono text-black/70"> */}
+            {/*   {profile?.dateOfBirth?.toLocaleDateString()} */}
+            {/* </span> */}
             <span className="text-lg tracking-wider font-mono text-black/70">
-              {profile?.dateOfBirth?.toLocaleDateString()}
+              {profile?.dateOfBirth &&
+                new Date(profile.dateOfBirth).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
             </span>
           </div>
 

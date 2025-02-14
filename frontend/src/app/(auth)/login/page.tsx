@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/stores/auth.store";
 import { authService } from "@/services/auth.service";
-import { loginSchema, type LoginPayload } from "@/types/auth.types";
+import { loginSchema, RegisterPayload, type LoginPayload } from "@/types/auth.types";
 
 export default function LoginPage() {
   const { register, handleSubmit } = useForm<LoginPayload>({
@@ -16,16 +16,32 @@ export default function LoginPage() {
   const { setCredentials } = useAuthStore();
   const router = useRouter();
 
+  // login/page.tsx
   const onSubmit = async (data: LoginPayload) => {
     try {
       const response = await authService.login(data);
-      setCredentials(response.user, response.token);
-      router.push("/profile/create");
+
+      // Because response.id, response.email, etc. are top-level:
+    const user = {
+      id: response.id.toString(),
+      username: response.username,
+      email: response.email,
+      roles: response.roles,  // or transform these if needed
+    };
+
+
+      // Then store them
+      setCredentials(user, response.token);
+
+      // Push to the user’s ID
+      // router.push(/customer/${response.id}/dashboard);
+      router.push(`/customer/${response.id}/profile/create`);
+
+      // router.push(/customer/${loginResponse.id}/profile/create);
     } catch (error) {
       console.error("Login failed:", error);
     }
   };
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <form
