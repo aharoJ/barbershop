@@ -50,4 +50,16 @@ public class CustomerController {
       @RequestBody CustomerProfileRequest request) {
     return customerService.updateCustomerProfile(userDetails.getId(), request);
   }
+
+  /**
+   * Get a CustomerProfile by the user's ID path param.
+   * Useful if your front-end calls /api/customers/7/profile, for example.
+   */
+  @GetMapping("/{userId}/profile")
+  @PreAuthorize("hasRole('CUSTOMER')")
+  public CustomerProfileResponse getCustomerProfileByUserIdParam(
+      @PathVariable Long userId,
+      @AuthenticationPrincipal UserDetailsImpl userDetails) {
+    return customerService.getCustomerProfileByUserId(userId);
+  }
 }

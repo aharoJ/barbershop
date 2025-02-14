@@ -100,6 +100,9 @@ public class WebSecurityConfig {
 
             // CUSTOMER
             .requestMatchers("/api/customers/**").permitAll()
+            
+            // ACTUATOR 
+            .requestMatchers("/actuator/**").permitAll()
 
             .anyRequest().authenticated())
 
