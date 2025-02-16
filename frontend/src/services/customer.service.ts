@@ -25,7 +25,7 @@ export const customerService = {
   getCustomerProfile: async (userId: string) => {
     const { data } = await apiClient.get<CustomerResponse>(
       // "/api/customers/profile", // Corrected endpoint
-      `/api/customers/${userId}/profile`
+      `/api/customers/${userId}/profile`,
     );
     return data;
   },

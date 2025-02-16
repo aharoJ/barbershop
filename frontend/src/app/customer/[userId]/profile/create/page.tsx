@@ -11,6 +11,7 @@ import {
   Gender,
   MarketingNotifications,
 } from "@/types/customer.types";
+import { useAuthStore } from "@/stores/auth.store";
 
 export default function CreateProfilePage() {
   const {
@@ -22,10 +23,20 @@ export default function CreateProfilePage() {
   });
   const router = useRouter();
 
+  // Grab the current user from store:
+  const { user } = useAuthStore();
+
   const onSubmit = async (data: CustomerPayload) => {
     try {
       await customerService.createCustomer(data);
-      router.push("/dashboard");
+
+      // Option A: use store user’s ID
+      if (user?.id) {
+        router.push(`/customer/${user.id}/dashboard`);
+      } else {
+        // Fallback, if user is missing for some reason
+        router.push("/dashboard");
+      }
     } catch (error) {
       console.error("Profile creation failed:", error);
       alert("Failed to create profile. Please try again.");

@@ -72,9 +72,6 @@ export default function CustomerDashboard() {
 
           <div className="flex items-center gap-4">
             <span className="text-lg text-black/60 w-auto">Date of Birth:</span>
-            {/* <span className="text-lg tracking-wider font-mono text-black/70"> */}
-            {/*   {profile?.dateOfBirth?.toLocaleDateString()} */}
-            {/* </span> */}
             <span className="text-lg tracking-wider font-mono text-black/70">
               {profile?.dateOfBirth &&
                 new Date(profile.dateOfBirth).toLocaleDateString("en-US", {

@@ -41,7 +41,8 @@ export default function SignupPage() {
       setCredentials(
         {
           id: loginResponse.id.toString(), // Use response ID directly
-          username: "",
+          username: loginResponse.username,
+          // password: response.password, -- never store passwords in state
           email: loginResponse.email,
           roles: loginResponse.roles,
         },
