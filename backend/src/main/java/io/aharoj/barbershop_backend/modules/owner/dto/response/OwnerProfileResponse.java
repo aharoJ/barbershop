@@ -3,21 +3,27 @@ package io.aharoj.barbershop_backend.modules.owner.dto.response;
 public class OwnerProfileResponse {
 
   private Long id;
-  private String ownerName;
+
+  private String firstName;
+
+  private String lastName;
+
+  private String email;
+
+  private String phoneNumber;
+
   private Long userId;
 
-  // No-arg constructor (optional but often convenient for JSON serialization)
-  public OwnerProfileResponse() {
-  }
-
-  // All-arg constructor
-  public OwnerProfileResponse(Long id, String ownerName, Long userId) {
+  public OwnerProfileResponse(Long id, String firstName, String lastName, String email, String phoneNumber,
+      Long userId) {
     this.id = id;
-    this.ownerName = ownerName;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.email = email;
+    this.phoneNumber = phoneNumber;
     this.userId = userId;
   }
 
-  // Getters and Setters
   public Long getId() {
     return id;
   }
@@ -26,12 +32,36 @@ public class OwnerProfileResponse {
     this.id = id;
   }
 
-  public String getOwnerName() {
-    return ownerName;
+  public String getFirstName() {
+    return firstName;
   }
 
-  public void setOwnerName(String ownerName) {
-    this.ownerName = ownerName;
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public String getPhoneNumber() {
+    return phoneNumber;
+  }
+
+  public void setPhoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
   }
 
   public Long getUserId() {
@@ -41,4 +71,5 @@ public class OwnerProfileResponse {
   public void setUserId(Long userId) {
     this.userId = userId;
   }
+
 }

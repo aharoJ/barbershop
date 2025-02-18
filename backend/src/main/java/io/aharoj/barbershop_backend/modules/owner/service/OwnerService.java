@@ -17,7 +17,8 @@ public interface OwnerService {
    *
    * @sidenote This ensures the response remains tailored for the client.
    */
-  OwnerProfileResponse createOwnerProfile(User user, OwnerProfileRequest request);
+  // OwnerProfileResponse createOwnerProfile(User user, OwnerProfileRequest request);
+  OwnerProfileResponse createOwnerProfile(Long user, OwnerProfileRequest request);
 
   /**
    * Retrieve owner profile by user ID

@@ -39,6 +39,7 @@ public class CustomerProfileRequest {
   @LastModifiedDate
   private Instant updatedAt;
 
+  // No-argument constructor is essential for data binding.
   public CustomerProfileRequest() {
   }
 
