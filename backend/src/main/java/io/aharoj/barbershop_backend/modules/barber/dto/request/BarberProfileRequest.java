@@ -1,36 +1,26 @@
 package io.aharoj.barbershop_backend.modules.barber.dto.request;
 
-import jakarta.validation.constraints.*;
-
 public class BarberProfileRequest {
 
-  @NotBlank
   private String firstName;
-
-  @NotBlank
   private String lastName;
-
+  private String email;
   private String phoneNumber;
 
-  @NotBlank
-  private String email;
-
   private String summary;
-  
   private String skills;
-  
-  @NotBlank 
   private int experienceYears;
 
+  // No-argument constructor is essential for data binding.
   public BarberProfileRequest() {
   }
 
-  public BarberProfileRequest(@NotBlank String firstName, @NotBlank String lastName, String phoneNumber,
-      @NotBlank String email, String summary, String skills, @NotBlank int experienceYears) {
+  public BarberProfileRequest(String firstName, String lastName, String email, String phoneNumber, String summary,
+      String skills, int experienceYears) {
     this.firstName = firstName;
     this.lastName = lastName;
-    this.phoneNumber = phoneNumber;
     this.email = email;
+    this.phoneNumber = phoneNumber;
     this.summary = summary;
     this.skills = skills;
     this.experienceYears = experienceYears;
@@ -52,20 +42,20 @@ public class BarberProfileRequest {
     this.lastName = lastName;
   }
 
-  public String getPhoneNumber() {
-    return phoneNumber;
-  }
-
-  public void setPhoneNumber(String phoneNumber) {
-    this.phoneNumber = phoneNumber;
-  }
-
   public String getEmail() {
     return email;
   }
 
   public void setEmail(String email) {
     this.email = email;
+  }
+
+  public String getPhoneNumber() {
+    return phoneNumber;
+  }
+
+  public void setPhoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
   }
 
   public String getSummary() {
@@ -91,7 +81,5 @@ public class BarberProfileRequest {
   public void setExperienceYears(int experienceYears) {
     this.experienceYears = experienceYears;
   }
-
-  
 
 }

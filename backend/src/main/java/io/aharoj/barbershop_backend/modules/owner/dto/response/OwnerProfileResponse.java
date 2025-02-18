@@ -13,7 +13,7 @@ public class OwnerProfileResponse {
   private String phoneNumber;
 
   private Long userId;
-
+  
   public OwnerProfileResponse(Long id, String firstName, String lastName, String email, String phoneNumber,
       Long userId) {
     this.id = id;

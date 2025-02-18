@@ -17,11 +17,9 @@ public class BarberProfile {
 
   private String firstName;
   private String lastName;
-  
-  @Column(name = "phone_number")
+  private String email;
   private String phoneNumber;
 
-  private String email;
   private String summary;
   private String skills;
   
@@ -31,13 +29,13 @@ public class BarberProfile {
   public BarberProfile() {
   }
 
-  public BarberProfile(User user, String firstName, String lastName, String phoneNumber, String email, String summary,
+  public BarberProfile(User user, String firstName, String lastName, String email, String phoneNumber, String summary,
       String skills, int experienceYears) {
     this.user = user;
     this.firstName = firstName;
     this.lastName = lastName;
-    this.phoneNumber = phoneNumber;
     this.email = email;
+    this.phoneNumber = phoneNumber;
     this.summary = summary;
     this.skills = skills;
     this.experienceYears = experienceYears;
@@ -75,20 +73,20 @@ public class BarberProfile {
     this.lastName = lastName;
   }
 
-  public String getPhoneNumber() {
-    return phoneNumber;
-  }
-
-  public void setPhoneNumber(String phoneNumber) {
-    this.phoneNumber = phoneNumber;
-  }
-
   public String getEmail() {
     return email;
   }
 
   public void setEmail(String email) {
     this.email = email;
+  }
+
+  public String getPhoneNumber() {
+    return phoneNumber;
+  }
+
+  public void setPhoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
   }
 
   public String getSummary() {
@@ -114,6 +112,10 @@ public class BarberProfile {
   public void setExperienceYears(int experienceYears) {
     this.experienceYears = experienceYears;
   }
+
+  
+
+
 
   
 }
