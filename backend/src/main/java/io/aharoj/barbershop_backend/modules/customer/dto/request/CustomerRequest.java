@@ -13,7 +13,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.Past;
 
-public class CustomerProfileRequest {
+public class CustomerRequest {
   private String firstName;
 
   private String lastName;
@@ -40,10 +40,10 @@ public class CustomerProfileRequest {
   private Instant updatedAt;
 
   // No-argument constructor is essential for data binding.
-  public CustomerProfileRequest() {
+  public CustomerRequest() {
   }
 
-  public CustomerProfileRequest(String firstName, String lastName, String email, String phoneNumber,
+  public CustomerRequest(String firstName, String lastName, String email, String phoneNumber,
       @Past LocalDate dateOfBirth, Gender gender, Address address, MarketingNotifications marketingNotifications,
       Instant createdAt, Instant updatedAt) {
     this.firstName = firstName;
@@ -126,16 +126,8 @@ public class CustomerProfileRequest {
     return createdAt;
   }
 
-  public void setCreatedAt(Instant createdAt) {
-    this.createdAt = createdAt;
-  }
-
   public Instant getUpdatedAt() {
     return updatedAt;
   }
-
-  public void setUpdatedAt(Instant updatedAt) {
-    this.updatedAt = updatedAt;
-  }
-
+  
 }

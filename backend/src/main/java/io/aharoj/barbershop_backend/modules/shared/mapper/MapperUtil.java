@@ -5,9 +5,9 @@ import java.time.LocalDateTime;
 import org.springframework.stereotype.Component;
 
 import io.aharoj.barbershop_backend.modules.appointment.model.entity.Appointment;
-import io.aharoj.barbershop_backend.modules.barber.dto.request.BarberProfileRequest;
-import io.aharoj.barbershop_backend.modules.barber.model.entity.BarberProfile;
-import io.aharoj.barbershop_backend.modules.customer.model.entity.CustomerProfile;
+import io.aharoj.barbershop_backend.modules.barber.dto.request.BarberRequest;
+import io.aharoj.barbershop_backend.modules.barber.model.entity.Barber;
+import io.aharoj.barbershop_backend.modules.customer.model.entity.Customer;
 import io.aharoj.barbershop_backend.modules.image.dto.request.ImageRequest;
 import io.aharoj.barbershop_backend.modules.image.dto.response.ImageResponse;
 import io.aharoj.barbershop_backend.modules.image.model.entity.Image;
@@ -27,7 +27,7 @@ public class MapperUtil {
 
   /**
    * // Customer Mappings
-   * public static CustomerProfileResponse toCustomerResponse(CustomerProfile
+   * public static CustomerProfileResponse toCustomerResponse(Customer
    * customerProfile) {
    * return new CustomerProfileResponse(
    * customerProfile.getId(),
@@ -38,9 +38,9 @@ public class MapperUtil {
    * customerProfile.getPhoneNumber());
    * }
    * 
-   * public static CustomerProfile toCustomerProfile(CustomerRegistrationRequest
+   * public static Customer toCustomerProfile(CustomerRegistrationRequest
    * request, User user) {
-   * CustomerProfile profile = new CustomerProfile();
+   * Customer profile = new Customer();
    * profile.setUser(user);
    * profile.setFirstName(request.getFirstName());
    * profile.setLastName(request.getLastName());
@@ -83,8 +83,8 @@ public class MapperUtil {
    * }
    */
 
-  public static BarberProfile toBarberProfile(BarberProfileRequest request) {
-    BarberProfile profile = new BarberProfile();
+  public static Barber toBarberProfile(BarberRequest request) {
+    Barber profile = new Barber();
     profile.setFirstName(request.getFirstName());
     profile.setLastName(request.getLastName());
     profile.setPhoneNumber(request.getPhoneNumber());
@@ -125,7 +125,7 @@ public class MapperUtil {
         review.getComment());
   }
 
-  public static Review toReview(ReviewRequest request, CustomerProfile customer, Shop shop, BarberProfile barber) {
+  public static Review toReview(ReviewRequest request, Customer customer, Shop shop, Barber barber) {
     Review review = new Review();
     review.setCustomer(customer); // mandatory
 
@@ -209,7 +209,7 @@ public class MapperUtil {
         entityType);
   }
 
-  public static Image toImage(ImageRequest request, Shop shop, BarberProfile barber, CustomerProfile customer) {
+  public static Image toImage(ImageRequest request, Shop shop, Barber barber, Customer customer) {
     Image image = new Image();
     image.setImageUrl(request.getImageUrl());
 
@@ -223,7 +223,7 @@ public class MapperUtil {
         image.setBarber(barber); // Pass the BarberProfile object
         break;
       case "CUSTOMER":
-        image.setCustomer(customer); // Pass the CustomerProfile object
+        image.setCustomer(customer); // Pass the Customer object
         break;
       default:
         throw new IllegalArgumentException("Invalid entityType provided: " + entityType);

@@ -1,32 +1,38 @@
 package io.aharoj.barbershop_backend.modules.owner.service;
 
-import io.aharoj.barbershop_backend.modules.auth.model.entity.User;
-import io.aharoj.barbershop_backend.modules.owner.dto.request.OwnerProfileRequest;
-import io.aharoj.barbershop_backend.modules.owner.dto.response.OwnerProfileResponse;
-import io.aharoj.barbershop_backend.modules.owner.model.entity.OwnerProfile;
+import io.aharoj.barbershop_backend.modules.owner.dto.request.OwnerRequest;
+import io.aharoj.barbershop_backend.modules.owner.dto.response.OwnerResponse;
+import io.aharoj.barbershop_backend.modules.owner.model.entity.Owner;
 
 public interface OwnerService {
 
   /**
-   * Create owner Profiles
+   * Create a new OwnerProfile for a given user.
    *
-   * @param user    creating the owner profile
-   * @param request owner profile request
-   *
-   * @returns owner profile response
-   *
+   * @param userId  the ID of the user who is creating the OwnerProfile
+   * @param request the data needed to create the OwnerProfile
+   * @return an OwnerProfileResponse with the newly created OwnerProfile data
    * @sidenote This ensures the response remains tailored for the client.
    */
-  // OwnerProfileResponse createOwnerProfile(User user, OwnerProfileRequest request);
-  OwnerProfileResponse createOwnerProfile(Long user, OwnerProfileRequest request);
+  OwnerResponse createOwnerProfile(Long userId, OwnerRequest request);
 
   /**
-   * Retrieve owner profile by user ID
+   * Retrieve an OwnerProfile by user ID.
    *
-   * @param id the ID of the user whose owner profile is being retrieved
-   * @return the OwnerProfile entity representing the owner's profile
-   *
+   * @param userId the ID of the user whose OwnerProfile we want
+   * @return an OwnerProfileResponse if found; otherwise throws an exception 
    * @sidenote This ensures the entity remains an internal detail
    */
-  OwnerProfile getOwnerProfileByUserId(Long userId);
+  OwnerResponse getOwnerProfileByUserId(Long userId);
+
+
+    /**
+     * Update the OwnerProfile for a given user.
+     *
+     * @param userId  the ID of the user whose profile should be updated
+     * @param request the new data for the OwnerProfile
+     * @return an OwnerProfileResponse containing the updated data
+     */
+    OwnerResponse updateOwnerProfile(Long userId, OwnerRequest request);
+
 }

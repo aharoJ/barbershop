@@ -1,6 +1,6 @@
 package io.aharoj.barbershop_backend.modules.shop.model.entity;
 
-import io.aharoj.barbershop_backend.modules.barber.model.entity.BarberProfile;
+import io.aharoj.barbershop_backend.modules.barber.model.entity.Barber;
 import jakarta.persistence.*;
 
 @Entity
@@ -21,7 +21,7 @@ public class Seat {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name= "barber_profile_id")
-    private BarberProfile barberProfile;
+    private Barber barberProfile;
 
     // The "many" side of OneToMany
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -60,11 +60,11 @@ public class Seat {
         this.shop = shop;
     }
 
-    public BarberProfile getBarberProfile() {
+    public Barber getBarberProfile() {
         return barberProfile;
     }
 
-    public void setBarberProfile(BarberProfile barberProfile) {
+    public void setBarberProfile(Barber barberProfile) {
         this.barberProfile = barberProfile;
     }
 }

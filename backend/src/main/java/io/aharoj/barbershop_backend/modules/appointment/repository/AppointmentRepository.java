@@ -7,19 +7,19 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import io.aharoj.barbershop_backend.modules.appointment.model.entity.Appointment;
-import io.aharoj.barbershop_backend.modules.barber.model.entity.BarberProfile;
-import io.aharoj.barbershop_backend.modules.customer.model.entity.CustomerProfile;
+import io.aharoj.barbershop_backend.modules.barber.model.entity.Barber;
+import io.aharoj.barbershop_backend.modules.customer.model.entity.Customer;
 
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
 
   // Find appointments for a specific barber in a time range
   List<Appointment> findByBarberProfileAndAppointmentTimeBetween(
-      BarberProfile barberProfile,
+      Barber barberProfile,
       LocalDateTime start,
       LocalDateTime end);
 
   // Find appointments for a specific customer
-  List<Appointment> findByCustomerProfile(CustomerProfile customerProfile);
+  List<Appointment> findByCustomerProfile(Customer customerProfile);
 
 }

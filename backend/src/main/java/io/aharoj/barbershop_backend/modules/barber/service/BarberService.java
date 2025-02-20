@@ -1,7 +1,7 @@
 package io.aharoj.barbershop_backend.modules.barber.service;
 
-import io.aharoj.barbershop_backend.modules.barber.dto.request.BarberProfileRequest;
-import io.aharoj.barbershop_backend.modules.barber.dto.response.BarberProfileResponse;
+import io.aharoj.barbershop_backend.modules.barber.dto.request.BarberRequest;
+import io.aharoj.barbershop_backend.modules.barber.dto.response.BarberResponse;
 
 
 public interface BarberService {
@@ -15,7 +15,7 @@ public interface BarberService {
      *         BarberProfile
      * @note for client
      */
-    BarberProfileResponse createBarberProfile(Long userId, BarberProfileRequest request);
+    BarberResponse createBarberProfile(Long userId, BarberRequest request);
 
     /**
      * Retrieve an existing BarberProfile by the user ID.
@@ -24,7 +24,7 @@ public interface BarberService {
      * @return a BarberProfileResponse containing the details of the BarberProfile
      * @note for client
      */
-    BarberProfileResponse getBarberProfileByUserId(Long userId);
+    BarberResponse getBarberProfileByUserId(Long userId);
 
     /**
      * Update the BarberProfile for a user if needed.
@@ -34,5 +34,5 @@ public interface BarberService {
      * @return a BarberProfileResponse containing the updated BarberProfile details
      * @note for client
      */
-    BarberProfileResponse updateBarberProfile(Long userId, BarberProfileRequest request);
+    BarberResponse updateBarberProfile(Long userId, BarberRequest request);
 }

@@ -3,7 +3,7 @@ package io.aharoj.barbershop_backend.modules.shop.model.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.aharoj.barbershop_backend.modules.owner.model.entity.OwnerProfile;
+import io.aharoj.barbershop_backend.modules.owner.model.entity.Owner;
 import jakarta.persistence.*;
 
 @Entity
@@ -24,13 +24,13 @@ public class Shop {
   // Many shops can be owned by 1 OwnerProfile
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "owner_profile_id")
-  private OwnerProfile ownerProfile;
+  private Owner ownerProfile;
 
   // Constructors
   public Shop() {
   }
 
-  public Shop(String name, String address, OwnerProfile ownerProfile) {
+  public Shop(String name, String address, Owner ownerProfile) {
     this.name = name;
     this.address = address;
     this.ownerProfile = ownerProfile;
@@ -68,11 +68,11 @@ public class Shop {
     this.seats = seats;
   }
 
-  public OwnerProfile getOwnerProfile() {
+  public Owner getOwnerProfile() {
     return ownerProfile;
   }
 
-  public void setOwnerProfile(OwnerProfile ownerProfile) {
+  public void setOwnerProfile(Owner ownerProfile) {
     this.ownerProfile = ownerProfile;
   }
   

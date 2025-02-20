@@ -1,7 +1,7 @@
 package io.aharoj.barbershop_backend.modules.customer.service;
 
-import io.aharoj.barbershop_backend.modules.customer.dto.request.CustomerProfileRequest;
-import io.aharoj.barbershop_backend.modules.customer.dto.response.CustomerProfileResponse;
+import io.aharoj.barbershop_backend.modules.customer.dto.request.CustomerRequest;
+import io.aharoj.barbershop_backend.modules.customer.dto.response.CustomerResponse;
 
 public interface CustomerService {
 
@@ -15,7 +15,7 @@ public interface CustomerService {
      *         CustomerProfile
      * @note for client
      */
-    CustomerProfileResponse createCustomerProfile(Long userId, CustomerProfileRequest request);
+    CustomerResponse createCustomerProfile(Long userId, CustomerRequest request);
 
     /**
      * Retrieve an existing CustomerProfile by the user ID.
@@ -25,7 +25,7 @@ public interface CustomerService {
      *         CustomerProfile
      * @note for client
      */
-    CustomerProfileResponse getCustomerProfileByUserId(Long userId);
+    CustomerResponse getCustomerProfileByUserId(Long userId);
 
     /**
      * Update the CustomerProfile for a user if needed.
@@ -36,5 +36,5 @@ public interface CustomerService {
      *         details
      * @note for client
      */
-    CustomerProfileResponse updateCustomerProfile(Long userId, CustomerProfileRequest request);
+    CustomerResponse updateCustomerProfile(Long userId, CustomerRequest request);
 }

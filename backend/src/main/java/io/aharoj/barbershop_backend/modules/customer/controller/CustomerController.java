@@ -5,8 +5,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import io.aharoj.barbershop_backend.modules.auth.serviceImpl.UserDetailsImpl;
-import io.aharoj.barbershop_backend.modules.customer.dto.request.CustomerProfileRequest;
-import io.aharoj.barbershop_backend.modules.customer.dto.response.CustomerProfileResponse;
+import io.aharoj.barbershop_backend.modules.customer.dto.request.CustomerRequest;
+import io.aharoj.barbershop_backend.modules.customer.dto.response.CustomerResponse;
 import io.aharoj.barbershop_backend.modules.customer.service.CustomerService;
 
 @RestController
@@ -20,46 +20,54 @@ public class CustomerController {
   }
 
   /**
-   * Create a CustomerProfile for the currently logged-in user with ROLE_CUSTOMER.
+   * Create a CustomerProfile for the currently logged-in user (ROLE_CUSTOMER).
    */
-  @PostMapping("/profile")
+  // @PostMapping("/profile")
+  @PostMapping("/me")
   @PreAuthorize("hasRole('CUSTOMER')")
-  public CustomerProfileResponse createCustomerProfile(
+  public CustomerResponse createCustomerProfile(
       @AuthenticationPrincipal UserDetailsImpl userDetails,
-      @RequestBody CustomerProfileRequest request) {
+      @RequestBody CustomerRequest request) {
     return customerService.createCustomerProfile(userDetails.getId(), request);
   }
 
   /**
-   * Get the CustomerProfile for the logged-in user with ROLE_CUSTOMER.
+   * Get the CustomerProfile for the logged-in user (ROLE_CUSTOMER).
    */
-  @GetMapping("/profile")
+  @GetMapping("/me")
   @PreAuthorize("hasRole('CUSTOMER')")
-  public CustomerProfileResponse getCustomerProfile(
+  public CustomerResponse getCustomerProfile(
       @AuthenticationPrincipal UserDetailsImpl userDetails) {
     return customerService.getCustomerProfileByUserId(userDetails.getId());
   }
 
   /**
-   * Update the CustomerProfile for the logged-in user with ROLE_CUSTOMER.
+   * Update the CustomerProfile for the logged-in user (ROLE_CUSTOMER).
    */
-  @PutMapping("/profile")
+  @PutMapping("/me")
   @PreAuthorize("hasRole('CUSTOMER')")
-  public CustomerProfileResponse updateCustomerProfile(
+  public CustomerResponse updateCustomerProfile(
       @AuthenticationPrincipal UserDetailsImpl userDetails,
-      @RequestBody CustomerProfileRequest request) {
+      @RequestBody CustomerRequest request) {
     return customerService.updateCustomerProfile(userDetails.getId(), request);
   }
 
   /**
    * Get a CustomerProfile by the user's ID path param.
    * Useful if your front-end calls /api/customers/7/profile, for example.
+   * 
+   * 
+   * actually looking back after doing research
+   * this should not be allowed unless a SUPER_USER is here 
    */
-  @GetMapping("/{userId}/profile")
-  @PreAuthorize("hasRole('CUSTOMER')")
-  public CustomerProfileResponse getCustomerProfileByUserIdParam(
-      @PathVariable Long userId,
-      @AuthenticationPrincipal UserDetailsImpl userDetails) {
-    return customerService.getCustomerProfileByUserId(userId);
-  }
+
+  // @GetMapping("/{userId}/profile")
+  // @PreAuthorize("hasRole('CUSTOMER')")
+  // public CustomerResponse getCustomerProfileByUserIdParam(
+  //     @PathVariable Long userId,
+  //     @AuthenticationPrincipal UserDetailsImpl userDetails) {
+  //   return customerService.getCustomerProfileByUserId(userId);
+  // }
+
+
 }

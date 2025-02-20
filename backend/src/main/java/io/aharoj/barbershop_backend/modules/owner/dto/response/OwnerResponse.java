@@ -1,7 +1,9 @@
-package io.aharoj.barbershop_backend.modules.owner.dto.request;
+package io.aharoj.barbershop_backend.modules.owner.dto.response;
 
-public class OwnerProfileRequest {
-  
+public class OwnerResponse {
+
+  private Long OwnerId;
+
   private String firstName;
 
   private String lastName;
@@ -10,15 +12,24 @@ public class OwnerProfileRequest {
 
   private String phoneNumber;
 
-  // No-argument constructor is essential for data binding.
-  public OwnerProfileRequest() {
-  }
+  private Long userId;
 
-  public OwnerProfileRequest(String firstName, String lastName, String email, String phoneNumber) {
+  public OwnerResponse(Long ownerId, String firstName, String lastName, String email, String phoneNumber,
+      Long userId) {
+    OwnerId = ownerId;
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
     this.phoneNumber = phoneNumber;
+    this.userId = userId;
+  }
+
+  public Long getOwnerId() {
+    return OwnerId;
+  }
+
+  public void setOwnerId(Long ownerId) {
+    OwnerId = ownerId;
   }
 
   public String getFirstName() {
@@ -53,8 +64,13 @@ public class OwnerProfileRequest {
     this.phoneNumber = phoneNumber;
   }
 
-  
+  public Long getUserId() {
+    return userId;
+  }
 
+  public void setUserId(Long userId) {
+    this.userId = userId;
+  }
   
-
+  
 }

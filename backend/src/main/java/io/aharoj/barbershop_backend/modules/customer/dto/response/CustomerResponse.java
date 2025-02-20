@@ -7,8 +7,8 @@ import io.aharoj.barbershop_backend.modules.shared.model.entity.Address;
 import io.aharoj.barbershop_backend.modules.shared.model.enums.Gender;
 import io.aharoj.barbershop_backend.modules.shared.model.enums.MarketingNotifications;
 
-public class CustomerProfileResponse {
-  private Long id;
+public class CustomerResponse {
+  private Long customerId;
   private String firstName;
   private String lastName;
   private String email;
@@ -21,13 +21,10 @@ public class CustomerProfileResponse {
   private Instant updatedAt;
   private Long userId; // to show which user this belongs to (backend USEFUL)
 
-  public CustomerProfileResponse() {
-  }
-
-  public CustomerProfileResponse(Long id, String firstName, String lastName, String email, String phoneNumber,
+  public CustomerResponse(Long customerId, String firstName, String lastName, String email, String phoneNumber,
       LocalDate dateOfBirth, Gender gender, Address address, MarketingNotifications marketingNotifications,
       Instant createdAt, Instant updatedAt, Long userId) {
-    this.id = id;
+    this.customerId = customerId;
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
@@ -41,12 +38,12 @@ public class CustomerProfileResponse {
     this.userId = userId;
   }
 
-  public Long getId() {
-    return id;
+  public Long getCustomerId() {
+    return customerId;
   }
 
-  public void setId(Long id) {
-    this.id = id;
+  public void setCustomerId(Long customerId) {
+    this.customerId = customerId;
   }
 
   public String getFirstName() {
@@ -137,5 +134,4 @@ public class CustomerProfileResponse {
     this.userId = userId;
   }
 
-  
 }

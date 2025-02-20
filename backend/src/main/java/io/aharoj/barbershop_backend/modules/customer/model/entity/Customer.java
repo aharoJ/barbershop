@@ -18,7 +18,7 @@ import io.aharoj.barbershop_backend.modules.shared.model.enums.MarketingNotifica
 @Entity
 @Table(name = "customer_profiles")
 @EntityListeners(AuditingEntityListener.class) // ← Crucial for auto timestamps
-public class CustomerProfile {
+public class Customer {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,11 +31,7 @@ public class CustomerProfile {
 
   private String firstName;
   private String lastName;
-
-  // @Column(unique = true) -- NOT FOR NOW
   private String email;
-
-  // @Column(unique = true) -- NOT FOR NOW
   private String phoneNumber;
 
   @Past
@@ -58,16 +54,16 @@ public class CustomerProfile {
   @LastModifiedDate
   private Instant updatedAt;
 
-  public CustomerProfile() {
+  public Customer() {
   }
 
-  public CustomerProfile(User user, String firstName, String lastName, String email, String phoneNumber,
+  public Customer(User user, String firstName, String lastName, String phoneNumber,
       @Past LocalDate dateOfBirth, Gender gender, MarketingNotifications marketingNotifications, Address address,
       Instant createdAt, Instant updatedAt) {
     this.user = user;
     this.firstName = firstName;
     this.lastName = lastName;
-    this.email = email;
+    this.email = user.getEmail();
     this.phoneNumber = phoneNumber;
     this.dateOfBirth = dateOfBirth;
     this.gender = gender;
@@ -111,10 +107,6 @@ public class CustomerProfile {
 
   public String getEmail() {
     return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
   }
 
   public String getPhoneNumber() {
@@ -172,7 +164,5 @@ public class CustomerProfile {
   public void setUpdatedAt(Instant updatedAt) {
     this.updatedAt = updatedAt;
   }
-
-
 
 }

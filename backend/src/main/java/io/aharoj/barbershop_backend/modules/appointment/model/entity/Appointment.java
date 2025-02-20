@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 import io.aharoj.barbershop_backend.modules.appointment.model.enums.AppointmentStatus;
-import io.aharoj.barbershop_backend.modules.barber.model.entity.BarberProfile;
-import io.aharoj.barbershop_backend.modules.customer.model.entity.CustomerProfile;
+import io.aharoj.barbershop_backend.modules.barber.model.entity.Barber;
+import io.aharoj.barbershop_backend.modules.customer.model.entity.Customer;
 import io.aharoj.barbershop_backend.modules.shop.model.entity.Shop;
 
 @Entity
@@ -28,7 +28,7 @@ public class Appointment {
    */
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "customer_id", nullable = false)
-  private CustomerProfile customerProfile;
+  private Customer customerProfile;
 
   /**
    * Which barber is this appointment with?
@@ -37,7 +37,7 @@ public class Appointment {
    */
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "barber_id", nullable = false)
-  private BarberProfile barberProfile;
+  private Barber barberProfile;
 
   /**
    * If you want to tie it to a specific Shop (especially if the barber
@@ -58,8 +58,8 @@ public class Appointment {
   }
 
   public Appointment(LocalDateTime appointmentTime, AppointmentStatus status,
-      CustomerProfile customerProfile,
-      BarberProfile barberProfile,
+      Customer customerProfile,
+      Barber barberProfile,
       Shop shop) {
     this.appointmentTime = appointmentTime;
     this.status = status;
@@ -92,19 +92,19 @@ public class Appointment {
     this.status = status;
   }
 
-  public CustomerProfile getCustomerProfile() {
+  public Customer getCustomerProfile() {
     return customerProfile;
   }
 
-  public void setCustomerProfile(CustomerProfile customerProfile) {
+  public void setCustomerProfile(Customer customerProfile) {
     this.customerProfile = customerProfile;
   }
 
-  public BarberProfile getBarberProfile() {
+  public Barber getBarberProfile() {
     return barberProfile;
   }
 
-  public void setBarberProfile(BarberProfile barberProfile) {
+  public void setBarberProfile(Barber barberProfile) {
     this.barberProfile = barberProfile;
   }
 

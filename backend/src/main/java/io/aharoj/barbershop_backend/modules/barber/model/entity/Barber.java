@@ -1,12 +1,12 @@
-package io.aharoj.barbershop_backend.modules.owner.model.entity;
+package io.aharoj.barbershop_backend.modules.barber.model.entity;
 
 import io.aharoj.barbershop_backend.modules.auth.model.entity.User;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "owner_profile")
-public class OwnerProfile {
-
+@Table(name = "barber_profiles")
+public class Barber {
+  
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
@@ -16,23 +16,29 @@ public class OwnerProfile {
   private User user;
 
   private String firstName;
-
   private String lastName;
-
   private String email;
-
   private String phoneNumber;
 
-  public OwnerProfile() {
+  private String summary;
+  private String skills;
+  
+  @Column(name = "years_of_experience")
+  private int experienceYears;
+  
+  public Barber() {
   }
 
-  public OwnerProfile(User user, String firstName, String lastName, String email,
-      String phoneNumber) {
+  public Barber(User user, String firstName, String lastName, String phoneNumber, String summary,
+      String skills, int experienceYears) {
     this.user = user;
     this.firstName = firstName;
     this.lastName = lastName;
-    this.email = email;
+    this.email = user.getEmail();
     this.phoneNumber = phoneNumber;
+    this.summary = summary;
+    this.skills = skills;
+    this.experienceYears = experienceYears;
   }
 
   public Long getId() {
@@ -71,10 +77,6 @@ public class OwnerProfile {
     return email;
   }
 
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
   public String getPhoneNumber() {
     return phoneNumber;
   }
@@ -83,4 +85,33 @@ public class OwnerProfile {
     this.phoneNumber = phoneNumber;
   }
 
+  public String getSummary() {
+    return summary;
+  }
+
+  public void setSummary(String summary) {
+    this.summary = summary;
+  }
+
+  public String getSkills() {
+    return skills;
+  }
+
+  public void setSkills(String skills) {
+    this.skills = skills;
+  }
+
+  public int getExperienceYears() {
+    return experienceYears;
+  }
+
+  public void setExperienceYears(int experienceYears) {
+    this.experienceYears = experienceYears;
+  }
+
+  
+
+
+
+  
 }

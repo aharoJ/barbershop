@@ -1,27 +1,38 @@
-package io.aharoj.barbershop_backend.modules.owner.dto.response;
+package io.aharoj.barbershop_backend.modules.owner.model.entity;
 
-public class OwnerProfileResponse {
+import io.aharoj.barbershop_backend.modules.auth.model.entity.User;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "owner_profile")
+public class Owner {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+
+  @OneToOne(fetch = FetchType.LAZY, optional = false)
+  @JoinColumn(name = "user_id", unique = true, nullable = false)
+  private User user;
 
   private String firstName;
 
   private String lastName;
-
+  
   private String email;
 
   private String phoneNumber;
 
-  private Long userId;
-  
-  public OwnerProfileResponse(Long id, String firstName, String lastName, String email, String phoneNumber,
-      Long userId) {
-    this.id = id;
+  public Owner() {
+  }
+
+  public Owner(User user, String firstName, String lastName,
+      String phoneNumber) {
+    this.user = user;
     this.firstName = firstName;
     this.lastName = lastName;
-    this.email = email;
+    this.email = user.getEmail(); // Set from user, not request
     this.phoneNumber = phoneNumber;
-    this.userId = userId;
   }
 
   public Long getId() {
@@ -30,6 +41,14 @@ public class OwnerProfileResponse {
 
   public void setId(Long id) {
     this.id = id;
+  }
+
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
   }
 
   public String getFirstName() {
@@ -48,12 +67,9 @@ public class OwnerProfileResponse {
     this.lastName = lastName;
   }
 
+  // removed setEmail() design choice 
   public String getEmail() {
     return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
   }
 
   public String getPhoneNumber() {
@@ -62,14 +78,6 @@ public class OwnerProfileResponse {
 
   public void setPhoneNumber(String phoneNumber) {
     this.phoneNumber = phoneNumber;
-  }
-
-  public Long getUserId() {
-    return userId;
-  }
-
-  public void setUserId(Long userId) {
-    this.userId = userId;
   }
 
 }

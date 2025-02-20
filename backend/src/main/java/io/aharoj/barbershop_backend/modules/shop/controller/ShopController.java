@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.aharoj.barbershop_backend.modules.auth.serviceImpl.UserDetailsImpl;
-import io.aharoj.barbershop_backend.modules.owner.model.entity.OwnerProfile;
-import io.aharoj.barbershop_backend.modules.owner.repository.OwnerProfileRepository;
+import io.aharoj.barbershop_backend.modules.owner.model.entity.Owner;
+import io.aharoj.barbershop_backend.modules.owner.repository.OwnerRepository;
 import io.aharoj.barbershop_backend.modules.shop.dto.request.AssignBarberRequest;
 import io.aharoj.barbershop_backend.modules.shop.dto.request.SeatRequest;
 import io.aharoj.barbershop_backend.modules.shop.dto.request.ShopRequest;
@@ -25,10 +25,10 @@ import io.aharoj.barbershop_backend.modules.shop.service.ShopService;
 public class ShopController {
 
   private final ShopService shopService;
-  private final OwnerProfileRepository ownerProfileRepository;
+  private final OwnerRepository ownerProfileRepository;
 
   @Autowired
-  public ShopController(ShopService shopService, OwnerProfileRepository ownerProfileRepository) {
+  public ShopController(ShopService shopService, OwnerRepository ownerProfileRepository) {
     this.shopService = shopService;
     this.ownerProfileRepository = ownerProfileRepository;
   }
@@ -43,7 +43,7 @@ public class ShopController {
       @RequestBody ShopRequest request) {
     // 1) Find the logged-in user's OwnerProfile
     // (We assume each user with ROLE_OWNER has an OwnerProfile)
-    OwnerProfile ownerProfile = ownerProfileRepository.findByUserId(userDetails.getId())
+    Owner ownerProfile = ownerProfileRepository.findByUserId(userDetails.getId())
         .orElseThrow(() -> new RuntimeException("No owner profile found for user"));
 
     // 2) Create the shop

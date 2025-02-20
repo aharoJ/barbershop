@@ -5,12 +5,12 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import io.aharoj.barbershop_backend.modules.barber.model.entity.BarberProfile;
+import io.aharoj.barbershop_backend.modules.barber.model.entity.Barber;
 
 @Repository
-public interface BarberProfileRepository extends JpaRepository<BarberProfile, Long> {
+public interface BarberRepository extends JpaRepository<Barber, Long> {
 
   // If you want to find by user ID
-  Optional<BarberProfile> findByUserId(Long userId);
+  Optional<Barber> findByUserId(Long userId);
 
 }

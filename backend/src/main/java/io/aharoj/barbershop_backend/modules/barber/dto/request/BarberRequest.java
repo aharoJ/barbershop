@@ -1,19 +1,6 @@
-package io.aharoj.barbershop_backend.modules.barber.model.entity;
+package io.aharoj.barbershop_backend.modules.barber.dto.request;
 
-import io.aharoj.barbershop_backend.modules.auth.model.entity.User;
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "barber_profiles")
-public class BarberProfile {
-  
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
-
-  @OneToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "user_id", unique = true, nullable = false)
-  private User user;
+public class BarberRequest {
 
   private String firstName;
   private String lastName;
@@ -22,16 +9,14 @@ public class BarberProfile {
 
   private String summary;
   private String skills;
-  
-  @Column(name = "years_of_experience")
   private int experienceYears;
-  
-  public BarberProfile() {
+
+  // No-argument constructor is essential for data binding.
+  public BarberRequest() {
   }
 
-  public BarberProfile(User user, String firstName, String lastName, String email, String phoneNumber, String summary,
+  public BarberRequest(String firstName, String lastName, String email, String phoneNumber, String summary,
       String skills, int experienceYears) {
-    this.user = user;
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
@@ -39,22 +24,6 @@ public class BarberProfile {
     this.summary = summary;
     this.skills = skills;
     this.experienceYears = experienceYears;
-  }
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public User getUser() {
-    return user;
-  }
-
-  public void setUser(User user) {
-    this.user = user;
   }
 
   public String getFirstName() {
@@ -113,9 +82,4 @@ public class BarberProfile {
     this.experienceYears = experienceYears;
   }
 
-  
-
-
-
-  
 }
