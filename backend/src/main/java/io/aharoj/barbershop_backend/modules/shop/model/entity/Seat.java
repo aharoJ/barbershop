@@ -1,6 +1,5 @@
 package io.aharoj.barbershop_backend.modules.shop.model.entity;
 
-import io.aharoj.barbershop_backend.modules.barber.model.entity.Barber;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,23 +12,16 @@ public class Seat {
 
     private String seatName;
 
-    /**
-     * For simplicity, we store just a "barberId" here.
-     * If your design uses a BarberProfile entity, 
-     * you could map a real relationship. 
-     */
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name= "barber_profile_id")
-    private Barber barberProfile;
-
-    // The "many" side of OneToMany
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "shop_id", nullable = false)
+    @JoinColumn(name = "shop_id")
     private Shop shop;
 
-    // Constructors
-    public Seat() {}
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "association_id")
+    private BarberShopAssociation association;
+
+    public Seat() {
+    }
 
     public Seat(String seatName, Shop shop) {
         this.seatName = seatName;
@@ -60,11 +52,13 @@ public class Seat {
         this.shop = shop;
     }
 
-    public Barber getBarberProfile() {
-        return barberProfile;
+    public BarberShopAssociation getAssociation() {
+        return association;
     }
 
-    public void setBarberProfile(Barber barberProfile) {
-        this.barberProfile = barberProfile;
+    public void setAssociation(BarberShopAssociation association) {
+        this.association = association;
     }
+
+
 }

@@ -1,5 +1,7 @@
 package io.aharoj.barbershop_backend.modules.shop.service;
 
+import java.util.List;
+
 import io.aharoj.barbershop_backend.modules.shop.dto.request.AssignBarberRequest;
 import io.aharoj.barbershop_backend.modules.shop.dto.request.SeatRequest;
 import io.aharoj.barbershop_backend.modules.shop.dto.request.ShopRequest;
@@ -9,43 +11,55 @@ import io.aharoj.barbershop_backend.modules.shop.dto.response.ShopResponse;
 public interface ShopService {
 
   /**
-   * Create shop with the given owner profile and shop request.
+   * Creates a new shop.
    *
-   * @param ownerProfileId the ID of the owner profile
-   * @param request        the details for creating a new shop
-   * @return a ShopResponse containing the created shop details
-   * @note for client
+   * @param ownerId the ID of the owner creating the shop
+   * @param request the data required to create the shop
+   * @return a ShopResponse containing the newly created shop details
+   * @sidenote This method encapsulates the creation logic and validation rules
+   *           required to establish a new shop.
    */
-  ShopResponse createShop(Long ownerProfileId, ShopRequest request);
+  ShopResponse createShop(Long ownerId, ShopRequest request);
 
   /**
-   * Add a new seat to the specified shop.
+   * Retrieves a shop by its unique identifier.
    *
-   * @param shopId  the ID of the shop
-   * @param request the details of the seat to be added
-   * @return a SeatResponse containing the details of the newly added seat
-   * @note for client
+   * @param shopId the ID of the shop to retrieve
+   * @return a ShopResponse containing the shop's details
+   * @sidenote This method ensures that the shop details are fetched while keeping
+   *           the underlying entity secure.
    */
-  SeatResponse addSeatToShop(Long shopId, SeatRequest request);
+  ShopResponse getShopById(Long shopId);
 
   /**
-   * Assign a barber to a specific seat in a shop.
+   * Retrieves a list of all available shops.
    *
-   * @param shopId  the ID of the shop
-   * @param seatId  the ID of the seat where the barber will be assigned
-   * @param request the details of the barber assignment
-   * @return a SeatResponse containing the updated seat details with the assigned
-   *         barber
-   * @note for client
+   * @return a list of ShopResponse objects representing all shops
+   * @sidenote This method provides public access to shop information, allowing
+   *           barbers to discover available shops.
    */
-  SeatResponse assignBarberToSeat(Long shopId, Long seatId, AssignBarberRequest request);
+  List<ShopResponse> getAllShops();
 
   /**
-   * Retrieve details of a shop by its ID.
+   * Adds a new seat to a shop.
    *
-   * @param shopId the ID of the shop to be retrieved
-   * @return a ShopResponse containing the shop details
-   * @note for client
+   * @param shopId  the ID of the shop to which a seat is being added
+   * @param request the data required to create the new seat
+   * @return a SeatResponse containing details of the newly added seat
+   * @sidenote This method manages seat configurations within a shop, facilitating
+   *           the expansion of seating capacity.
    */
-  ShopResponse getShop(Long shopId);
+  SeatResponse addSeat(Long shopId, SeatRequest request);
+
+  /**
+   * Assigns a seat to an existing barber association.
+   *
+   * @param shopId  the ID of the shop containing the seat
+   * @param seatId  the ID of the seat to be assigned
+   * @param request the details required to assign the seat to a barber
+   * @return a SeatResponse reflecting the updated seat assignment
+   * @sidenote This method ensures a proper association between a barber and a
+   *           designated seat within the shop.
+   */
+  SeatResponse assignSeatToBarber(Long shopId, Long seatId, AssignBarberRequest request);
 }

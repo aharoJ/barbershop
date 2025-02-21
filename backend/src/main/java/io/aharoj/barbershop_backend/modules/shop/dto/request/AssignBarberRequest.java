@@ -1,31 +1,23 @@
 package io.aharoj.barbershop_backend.modules.shop.dto.request;
 
 public class AssignBarberRequest {
-  private Long barberId;
-  private Long barberProfileId;
+    // We'll pass in the ID of the BarberShopAssociation to assign
+    private Long associationId;
 
-  public AssignBarberRequest() {
-  }
+    public AssignBarberRequest() {
+    }
 
-public AssignBarberRequest(Long barberId, Long barberProfileId) {
-    this.barberId = barberId;
-    this.barberProfileId = barberProfileId;
-}
+    public AssignBarberRequest(Long associationId) {
+        this.associationId = associationId;
+    }
 
-public Long getBarberId() {
-  return barberId;
-}
+    public Long getAssociationId() {
+        return associationId;
+    }
 
-public void setBarberId(Long barberId) {
-  this.barberId = barberId;
-}
+    public void setAssociationId(Long associationId) {
+        this.associationId = associationId;
+    }
 
-public Long getBarberProfileId() {
-  return barberProfileId;
-}
-
-public void setBarberProfileId(Long barberProfileId) {
-  this.barberProfileId = barberProfileId;
-}
 
 }

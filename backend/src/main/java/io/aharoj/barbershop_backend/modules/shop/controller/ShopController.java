@@ -1,6 +1,7 @@
 package io.aharoj.barbershop_backend.modules.shop.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.aharoj.barbershop_backend.modules.auth.serviceImpl.UserDetailsImpl;
-import io.aharoj.barbershop_backend.modules.owner.model.entity.Owner;
-import io.aharoj.barbershop_backend.modules.owner.repository.OwnerRepository;
 import io.aharoj.barbershop_backend.modules.shop.dto.request.AssignBarberRequest;
 import io.aharoj.barbershop_backend.modules.shop.dto.request.SeatRequest;
 import io.aharoj.barbershop_backend.modules.shop.dto.request.ShopRequest;
@@ -25,60 +24,58 @@ import io.aharoj.barbershop_backend.modules.shop.service.ShopService;
 public class ShopController {
 
   private final ShopService shopService;
-  private final OwnerRepository ownerProfileRepository;
 
-  @Autowired
-  public ShopController(ShopService shopService, OwnerRepository ownerProfileRepository) {
+  public ShopController(ShopService shopService) {
     this.shopService = shopService;
-    this.ownerProfileRepository = ownerProfileRepository;
   }
 
   /**
-   * Create a new Shop (only an Owner should do this).
+   * Public endpoint for barbers or anyone to see the list of shops.
    */
-  @PostMapping
+  @GetMapping
+  public List<ShopResponse> listShops() {
+    return shopService.getAllShops();
+  }
+
+  /**
+   * Owner creates a new Shop.
+   */
+  @PostMapping("/owner/create")
   @PreAuthorize("hasRole('OWNER')")
   public ShopResponse createShop(
       @AuthenticationPrincipal UserDetailsImpl userDetails,
       @RequestBody ShopRequest request) {
-    // 1) Find the logged-in user's OwnerProfile
-    // (We assume each user with ROLE_OWNER has an OwnerProfile)
-    Owner ownerProfile = ownerProfileRepository.findByUserId(userDetails.getId())
-        .orElseThrow(() -> new RuntimeException("No owner profile found for user"));
-
-    // 2) Create the shop
-    return shopService.createShop(ownerProfile.getId(), request);
+    return shopService.createShop(userDetails.getId(), request);
   }
 
   /**
-   * Add a seat to a shop.
+   * Get details of a specific shop (public or restricted, your call).
+   */
+  @GetMapping("/{shopId}")
+  public ShopResponse getShopDetails(@PathVariable Long shopId) {
+    return shopService.getShopById(shopId);
+  }
+
+  /**
+   * Add a new seat to a shop (OWNER).
    */
   @PostMapping("/{shopId}/seats")
   @PreAuthorize("hasRole('OWNER')")
-  public SeatResponse addSeatToShop(
+  public SeatResponse addSeat(
       @PathVariable Long shopId,
-      @RequestBody SeatRequest request) {
-    return shopService.addSeatToShop(shopId, request);
+      @RequestBody SeatRequest seatRequest) {
+    return shopService.addSeat(shopId, seatRequest);
   }
 
   /**
-   * Assign a barber to a seat.
+   * Assign an APPROVED barber (via association) to a seat.
    */
-  @PostMapping("/{shopId}/seats/{seatId}/assign-barber")
+  @PostMapping("/{shopId}/seats/{seatId}/assign")
   @PreAuthorize("hasRole('OWNER')")
-  public SeatResponse assignBarberToSeat(
+  public SeatResponse assignBarber(
       @PathVariable Long shopId,
       @PathVariable Long seatId,
       @RequestBody AssignBarberRequest request) {
-    return shopService.assignBarberToSeat(shopId, seatId, request);
-  }
-
-  /**
-   * Get shop by id (with seats).
-   */
-  @GetMapping("/{shopId}")
-  @PreAuthorize("hasRole('OWNER') or hasRole('BARBER') or hasRole('CUSTOMER')")
-  public ShopResponse getShop(@PathVariable Long shopId) {
-    return shopService.getShop(shopId);
+    return shopService.assignSeatToBarber(shopId, seatId, request);
   }
 }

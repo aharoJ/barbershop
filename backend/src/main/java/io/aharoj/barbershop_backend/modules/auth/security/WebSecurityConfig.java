@@ -3,6 +3,7 @@ package io.aharoj.barbershop_backend.modules.auth.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
@@ -64,7 +65,8 @@ public class WebSecurityConfig {
     httpSecurity
         .cors(Customizer.withDefaults()) // FRONTEND --> newest modification for cors <-> frontend access to backend
         .csrf(csrf -> csrf.disable()) // tied to top
-        // .addFilterBefore(new JwtRequestFilter(), UsernamePasswordAuthenticationFilter.class) -- THIS BREAKS DB 
+        // .addFilterBefore(new JwtRequestFilter(),
+        // UsernamePasswordAuthenticationFilter.class) -- THIS BREAKS DB
 
         // exceptionHandlingCustomizer
         .exceptionHandling(e -> {
@@ -77,34 +79,63 @@ public class WebSecurityConfig {
 
         // authoriezed request
         .authorizeHttpRequests(auth -> auth
+        
+            // Authentication endpoints
             .requestMatchers("/api/auth/**").permitAll()
 
-            // Permit H2 Console access
+            // H2 console
             .requestMatchers(PathRequest.toH2Console()).permitAll()
 
-            // Public endpoints: signup, signin
+            // Some test endpoints
             .requestMatchers("/api/test/auth/all").permitAll()
             .requestMatchers("/api/test/auth/user").hasAnyRole("CUSTOMER", "BARBER", "OWNER")
             .requestMatchers("/api/test/auth/owner").hasRole("OWNER")
-            // .requestMatchers("/api/test/auth/admin").hasRole("ADMIN") // removed to
-            // reduce complexity
 
-            // OWNER PROFILES
+            // Owner profiles
             .requestMatchers("/api/owners/**").hasRole("OWNER")
 
-            // SHOP && SEATS
-            .requestMatchers("/api/shops/**").hasRole("OWNER")
-
-            // BARBER
+            // Barber profiles
             .requestMatchers("/api/barbers/**").hasRole("BARBER")
 
-            // CUSTOMER
-            .requestMatchers("/api/customers/**").permitAll()
-            
-            // ACTUATOR 
+            // Customer profiles (example: maybe you let them see themselves)
+            .requestMatchers("/api/customers/**").hasRole("CUSTOMER")
+
+            // Shop endpoints:
+            // 1) Everyone can GET /api/shops, GET /api/shops/{id}
+            .requestMatchers(HttpMethod.GET, "/api/shops").permitAll()
+            .requestMatchers(HttpMethod.GET, "/api/shops/*").permitAll()
+
+            // 2) Only owners can create a shop (POST /api/shops/owner/create, or however
+            // you named it)
+            .requestMatchers(HttpMethod.POST, "/api/shops/owner/create").hasRole("OWNER")
+
+            // 3) If you want owners to do other CRUD on shops:
+            // e.g. PUT /api/shops/{id}, DELETE /api/shops/{id}, etc.:
+            .requestMatchers(HttpMethod.PUT, "/api/shops/*").hasRole("OWNER")
+            .requestMatchers(HttpMethod.DELETE, "/api/shops/*").hasRole("OWNER")
+
+            // 4) Seats:
+            // POST /api/shops/{shopId}/seats => owners
+            // POST /api/shops/{shopId}/seats/{seatId}/assign => owners
+            .requestMatchers(HttpMethod.POST, "/api/shops/*/seats/**").hasRole("OWNER")
+
+            // 5) Applications:
+            // - POST /api/shops/{shopId}/applications => barbers apply
+            // - GET /api/shops/{shopId}/applications => owners see them
+            // - POST /api/shops/{shopId}/applications/{appId}/approve => owners
+            // - POST /api/shops/{shopId}/applications/{appId}/reject => owners
+            .requestMatchers(HttpMethod.POST, "/api/shops/*/applications").hasRole("BARBER")
+            .requestMatchers(HttpMethod.GET, "/api/shops/*/applications").hasRole("OWNER")
+            .requestMatchers(HttpMethod.POST, "/api/shops/*/applications/*/approve").hasRole("OWNER")
+            .requestMatchers(HttpMethod.POST, "/api/shops/*/applications/*/reject").hasRole("OWNER")
+
+            // Actuator, etc.
             .requestMatchers("/actuator/**").permitAll()
 
-            .anyRequest().authenticated())
+            // fallback
+            .anyRequest()
+            .authenticated()
+            )
 
         .headers(headers -> headers.frameOptions().sameOrigin()) // Allow H2 Console frames
         .authenticationProvider(authenticationProvider());

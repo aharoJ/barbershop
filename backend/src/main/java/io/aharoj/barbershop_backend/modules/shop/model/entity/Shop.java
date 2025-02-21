@@ -7,73 +7,74 @@ import io.aharoj.barbershop_backend.modules.owner.model.entity.Owner;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "shop")
+@Table(name = "shops")
 public class Shop {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  private String name;
-  private String address;
+    private String name;
+    private String address;
 
-  // The "one" side of OneToMany with seats
-  @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL, orphanRemoval = true)
-  private List<Seat> seats = new ArrayList<>();
+    // Many Shops can be owned by 1 Owner
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "owner_id")
+    private Owner owner;
 
-  // Many shops can be owned by 1 OwnerProfile
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "owner_profile_id")
-  private Owner ownerProfile;
+    // A shop has many seats
+    @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Seat> seats = new ArrayList<>();
 
-  // Constructors
-  public Shop() {
-  }
+    // constructors
+    public Shop() {
+    }
 
-  public Shop(String name, String address, Owner ownerProfile) {
-    this.name = name;
-    this.address = address;
-    this.ownerProfile = ownerProfile;
-  }
+    public Shop(String name, String address, Owner owner) {
+        this.name = name;
+        this.address = address;
+        this.owner = owner;
+    }
 
-  public Long getId() {
-    return id;
-  }
+    public Long getId() {
+        return id;
+    }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-  public String getName() {
-    return name;
-  }
+    public String getName() {
+        return name;
+    }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  public String getAddress() {
-    return address;
-  }
+    public String getAddress() {
+        return address;
+    }
 
-  public void setAddress(String address) {
-    this.address = address;
-  }
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-  public List<Seat> getSeats() {
-    return seats;
-  }
+    public Owner getOwner() {
+        return owner;
+    }
 
-  public void setSeats(List<Seat> seats) {
-    this.seats = seats;
-  }
+    public void setOwner(Owner owner) {
+        this.owner = owner;
+    }
 
-  public Owner getOwnerProfile() {
-    return ownerProfile;
-  }
+    public List<Seat> getSeats() {
+        return seats;
+    }
 
-  public void setOwnerProfile(Owner ownerProfile) {
-    this.ownerProfile = ownerProfile;
-  }
-  
+    public void setSeats(List<Seat> seats) {
+        this.seats = seats;
+    }
+
+
 }
