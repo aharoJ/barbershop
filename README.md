@@ -22,4 +22,4 @@
 
 > function snippet
 
-[text](public/REJECTED_FUNCTION.gif)
+![alt text](public/REJECTED_FUNCTION.gif)
