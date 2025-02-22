@@ -11,6 +11,21 @@ Next.js web application for barbershop management.
 - Shop browsing and management interface
 - Protected routes using JWT
 
+## UI Sample 
+
+> Sign up
+
+![alt text](../public/frontend-img/signup.png)
+
+> Complete your Profile
+
+![alt text](../public/frontend-img/complete-your-profile.png)
+
+> Dynamic routing {id}/dashboard
+
+![alt text](../public/frontend-img/dashboard.png)
+
+
 ## Project Structure
 
 ```bash
