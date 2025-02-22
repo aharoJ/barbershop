@@ -20,6 +20,16 @@ REST API for managing barbershop operations, built with Java Spring Boot.
 ### Applications System
 - Barber applications workflow with owner approval/rejection
 
+## Image Samples 
+
+> function snippet
+
+![alt text](../public/backend-img/REJECTED_FUNCTION.gif)
+
+> Database sample
+
+![alt text](../public/backend-img/database.png)
+
 ### Project Structure
 
 > Auth and Barber minimal sample 
