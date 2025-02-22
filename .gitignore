@@ -10,6 +10,9 @@ serviceImpl/
 application.properties
 modules/auth/security/util/
 modules/auth/controller/
+.docs/
+.automation/
+*impl*
 
 # 🚀 Backend (Spring Boot)
 target/
