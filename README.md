@@ -1,25 +1,20 @@
-# barbershop
+# BarberShop Platform ✂️
+A full-stack platform connecting barbers, shop owners, and clients through modern digital solutions.
 
-> Sign up
+### [VISIT BACKEND](backend/)
+Spring Boot API handling business logic, authentication, and data management
 
-![alt text](public/signup.png)
 
-> Complete your Profile
+### [VISIT FRONTEND](frontend/)
+Next.js web application implementing user workflows
 
-![alt text](public/complete-your-profile.png)
+## Tech Stack
+**Frontend**:  
+`Next.js 15` · `TypeScript` · `Tailwind CSS` · `Zustand`
 
-> Dynamic routing {id}/dashboard
+**Backend**:  
+`Spring Boot 3` · `Java 17` · `PostgreSQL` · `JWT`
 
-![alt text](public/dashboard.png)
+**Tooling**:  
+`Maven` · `Git` · `Postman` · `Npm` · `Pip` · `Nvim`
 
-> Database sample
-
-![alt text](public/database.png)
-
-> Tree of an Isolated module
-
-![alt text](public/owner-module.png)
-
-> function snippet
-
-![alt text](public/REJECTED_FUNCTION.gif)
