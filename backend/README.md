@@ -24,7 +24,7 @@ REST API for managing barbershop operations, built with Java Spring Boot.
 
 > function snippet
 
-![alt text](../public/backend-img/REJECTED_FUNCTION.gif)
+![alt text](../public/backend-img/reject-application.gif)
 
 > Database sample
 
