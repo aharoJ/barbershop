@@ -22,6 +22,15 @@ public interface ShopService {
   ShopResponse createShop(Long ownerId, ShopRequest request);
 
   /**
+   * Retrieves a list of all available shops.
+   *
+   * @return a list of ShopResponse objects representing all shops
+   * @sidenote This method provides public access to shop information, allowing
+   *           barbers to discover available shops.
+   */
+  List<ShopResponse> getAllShops();
+
+  /**
    * Retrieves a shop by its unique identifier.
    *
    * @param shopId the ID of the shop to retrieve
@@ -31,14 +40,8 @@ public interface ShopService {
    */
   ShopResponse getShopById(Long shopId);
 
-  /**
-   * Retrieves a list of all available shops.
-   *
-   * @return a list of ShopResponse objects representing all shops
-   * @sidenote This method provides public access to shop information, allowing
-   *           barbers to discover available shops.
-   */
-  List<ShopResponse> getAllShops();
+  // need to make documentation better here
+  ShopResponse updateShop(Long ownerId, Long shopId, ShopRequest request);
 
   /**
    * Adds a new seat to a shop.
@@ -62,4 +65,8 @@ public interface ShopService {
    *           designated seat within the shop.
    */
   SeatResponse assignSeatToBarber(Long shopId, Long seatId, AssignBarberRequest request);
+
+  // testing get shop by owner
+  List<ShopResponse> getShopsByOwner(Long ownerId);
+
 }

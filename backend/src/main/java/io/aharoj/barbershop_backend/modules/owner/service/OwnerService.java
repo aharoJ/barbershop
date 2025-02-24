@@ -2,7 +2,6 @@ package io.aharoj.barbershop_backend.modules.owner.service;
 
 import io.aharoj.barbershop_backend.modules.owner.dto.request.OwnerRequest;
 import io.aharoj.barbershop_backend.modules.owner.dto.response.OwnerResponse;
-import io.aharoj.barbershop_backend.modules.owner.model.entity.Owner;
 
 public interface OwnerService {
 
@@ -35,4 +34,6 @@ public interface OwnerService {
      */
     OwnerResponse updateOwnerProfile(Long userId, OwnerRequest request);
 
+    // NEED TO CREATE A SELF DESTRUCT 
+    
 }

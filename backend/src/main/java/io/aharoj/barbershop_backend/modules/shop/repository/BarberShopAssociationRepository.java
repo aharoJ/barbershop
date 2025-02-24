@@ -12,8 +12,8 @@ import io.aharoj.barbershop_backend.modules.shop.model.entity.Shop;
 @Repository
 public interface BarberShopAssociationRepository extends JpaRepository<BarberShopAssociation, Long> {
 
-    List<BarberShopAssociation> findByShopId(Long shopId);
+  List<BarberShopAssociation> findByShopId(Long shopId);
 
-    // If you want to check if a barber is already in a shop
-    boolean existsByShopAndBarber(Shop shop, Barber barber);
+  // If you want to check if a barber is already in a shop
+  boolean existsByShopAndBarber(Shop shop, Barber barber);
 }
