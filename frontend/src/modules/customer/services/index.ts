@@ -1,5 +1,5 @@
 import { CustomerServiceImpl } from "./customer.service.impl";
-import { CustomerService } from "./owner.service";
+import { CustomerService } from "./customer.service";
 
 
 // Create a default instance
