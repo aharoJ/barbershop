@@ -6,7 +6,7 @@ import type { OwnerPayload, OwnerResponse } from "../types/owner.types";
  */
 export interface OwnerService {
   createOwnerProfile(payload: OwnerPayload): Promise<OwnerResponse>;
-  getOwnerProfile(userId: string): Promise<OwnerResponse>;
-  updateOwnerProfile(userId: string, payload: OwnerPayload): Promise<OwnerResponse>;
-//   deleteOwnerProfile(userId: string): Promise<void>; -- not created yet
+  getOwnerProfile(): Promise<OwnerResponse>;
+  updateOwnerProfile(payload: OwnerPayload): Promise<OwnerResponse>;
+  //   deleteOwnerProfile(userId: string): Promise<void>; -- not created yet
 }

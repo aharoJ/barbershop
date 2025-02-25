@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { customerSchema, type CustomerPayload } from "@/modules/customer/types/customer.types";
 import { useRouter, useParams } from "next/navigation";
-import { customerServiceImpl } from "@/modules/customer/services";
+import { customerService } from "@/modules/customer/services";
 import { useAuthStore } from "@/stores/auth.store";
 
 export default function CreateCustomerProfilePage() {
@@ -41,7 +41,7 @@ export default function CreateCustomerProfilePage() {
 
   const onSubmit = async (data: CustomerPayload) => {
     try {
-      await customerServiceImpl.createCustomerProfile(data);
+      await customerService.createCustomerProfile(data);
       router.push(`/customers/${userId}`); // e.g. a "dashboard" page
     } catch (error) {
       console.error("Create Customer Profile error:", error);

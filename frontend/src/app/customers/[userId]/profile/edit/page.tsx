@@ -6,7 +6,7 @@ import { customerSchema, type CustomerPayload } from "@/modules/customer/types/c
 import { useQuery } from "@tanstack/react-query";
 import { useRouter, useParams } from "next/navigation";
 import { useEffect } from "react";
-import { customerServiceImpl } from "@/modules/customer/services";
+import { customerService } from "@/modules/customer/services";
 
 export default function EditCustomerProfilePage() {
   const router = useRouter();
@@ -19,7 +19,7 @@ export default function EditCustomerProfilePage() {
     isError,
   } = useQuery({
     queryKey: ["customer-profile"],
-    queryFn: () => customerServiceImpl.getCustomerProfile(userId),
+    queryFn: () => customerService.getCustomerProfile(userId),
     enabled: !!userId, // only run if userId is defined
   });
 
@@ -50,7 +50,7 @@ export default function EditCustomerProfilePage() {
 
   const onSubmit = async (data: CustomerPayload) => {
     try {
-      await customerServiceImpl.updateCustomerProfile(userId, data);
+      await customerService.updateCustomerProfile(userId, data);
       router.push(`/customers/${userId}`);
     } catch (error) {
       console.error("Update Customer Profile error:", error);

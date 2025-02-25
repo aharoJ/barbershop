@@ -3,7 +3,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { shopSchema, type ShopPayload } from "@/modules/shop/types/shop.types";
-import { shopServiceImpl } from "@/modules/shop/services";
+import { shopService } from "@/modules/shop/services";
 import { useRouter } from "next/navigation";
 
 export default function CreateShopPage() {
@@ -18,7 +18,7 @@ export default function CreateShopPage() {
 
   const onSubmit = async (payload: ShopPayload) => {
     try {
-      const newShop = await shopServiceImpl.createShop(payload);
+      const newShop = await shopService.createShop(payload);
       router.push(`/shops/${newShop.id}`);
     } catch (error) {
       console.error("Create shop error:", error);

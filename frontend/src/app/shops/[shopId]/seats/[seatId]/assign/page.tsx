@@ -1,7 +1,7 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { shopServiceImpl } from "@/modules/shop/services";
+import { shopService } from "@/modules/shop/services";
 import { useParams, useRouter } from "next/navigation";
 
 type AssignBarberPayload = {
@@ -19,7 +19,7 @@ export default function AssignSeatPage() {
 
   const onSubmit = async (data: AssignBarberPayload) => {
     try {
-      const seat = await shopServiceImpl.assignSeatToBarber(
+      const seat = await shopService.assignSeatToBarber(
         shopId,
         seatId,
         data.associationId

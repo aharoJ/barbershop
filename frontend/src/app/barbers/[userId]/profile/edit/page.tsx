@@ -9,7 +9,7 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { useRouter, useParams } from "next/navigation";
 import { useEffect } from "react";
-import { barberServiceImpl } from "@/modules/barber/services";
+import { barberService } from "@/modules/barber/services";
 import { useAuthStore } from "@/stores/auth.store";
 
 export default function EditBarberProfilePage() {
@@ -30,7 +30,7 @@ export default function EditBarberProfilePage() {
     isError,
   } = useQuery({
     queryKey: ["barber-profile"],
-    queryFn:()=> barberServiceImpl.getBarberProfile(userId),
+    queryFn:()=> barberService.getBarberProfile(userId),
     enabled: !!userId, // only run if userId is defined
   });
 
@@ -53,7 +53,7 @@ export default function EditBarberProfilePage() {
 
   const onSubmit = async (data: BarberPayload) => {
     try {
-      await barberServiceImpl.updateBarberProfile(userId, data);
+      await barberService.updateBarberProfile(userId, data);
       router.push(`/barbers/${userId}`);
     } catch (error) {
       console.error("Update Barber Profile error:", error);

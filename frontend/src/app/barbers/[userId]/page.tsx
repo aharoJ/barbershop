@@ -1,5 +1,5 @@
 "use client";
-import { barberServiceImpl } from "@/modules/barber/services";
+import { barberService } from "@/modules/barber/services";
 import { BarberResponse } from "@/modules/barber/types/barber.types";
 import { useAuthStore } from "@/stores/auth.store";
 import { useQuery } from "@tanstack/react-query";
@@ -23,7 +23,7 @@ export default function BarberDashboard() {
     isError,
   } = useQuery<BarberResponse>({
     queryKey: ["barber-profile", userId],
-    queryFn: () => barberServiceImpl.getBarberProfile(userId),
+    queryFn: () => barberService.getBarberProfile(userId),
     enabled: !!userId,
   });
 

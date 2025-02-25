@@ -1,6 +1,6 @@
 "use client";
 
-import { customerServiceImpl } from "@/modules/customer/services";
+import { customerService } from "@/modules/customer/services";
 import { CustomerResponse } from "@/modules/customer/types/customer.types";
 import { useQuery } from "@tanstack/react-query";
 import { useParams, useRouter } from "next/navigation";
@@ -16,7 +16,7 @@ export default function CustomerDashboard() {
     isError,
   } = useQuery<CustomerResponse>({
     queryKey: ["customer-profile"],
-    queryFn: () => customerServiceImpl.getCustomerProfile(userId),
+    queryFn: () => customerService.getCustomerProfile(userId),
     enabled: !!userId, // only run if userId is defined
   });
 

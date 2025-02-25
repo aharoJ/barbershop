@@ -3,7 +3,7 @@ import { CustomerService } from "./customer.service";
 
 
 // Create a default instance
-const customerServiceImpl: CustomerService = new CustomerServiceImpl();
+const customerService: CustomerService = new CustomerServiceImpl();
 
 // Optionally export the interface and a default instance
-export { customerServiceImpl };
+export { customerService };

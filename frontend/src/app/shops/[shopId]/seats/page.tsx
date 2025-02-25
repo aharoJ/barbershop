@@ -1,9 +1,10 @@
+// @/app/shops/[shopId]/seats/page.tsx
 "use client";
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { seatSchema, type SeatResponse } from "@/modules/shop/types/seat.types";
-import { shopServiceImpl } from "@/modules/shop/services";
+import { shopService } from "@/modules/shop/services";
 import { useParams, useRouter } from "next/navigation";
 
 export default function AddSeatPage() {
@@ -24,7 +25,7 @@ export default function AddSeatPage() {
 
   const onSubmit = async (payload: { seatName: string }) => {
     try {
-      const seat = await shopServiceImpl.addSeat(shopId, payload);
+      const seat = await shopService.addSeat(shopId, payload);
       console.log("Added seat:", seat);
       router.push(`/shops/${shopId}`);
     } catch (error) {

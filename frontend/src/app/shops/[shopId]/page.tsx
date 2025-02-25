@@ -1,8 +1,9 @@
+// @/app/shops/[shopId]/page.tsx
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
 import { useParams, useRouter } from "next/navigation"; // Add useRouter
-import { shopServiceImpl } from "@/modules/shop/services";
+import { shopService } from "@/modules/shop/services";
 import type { ShopResponse } from "@/modules/shop/types/shop.types";
 
 export default function ShopDetailPage() {
@@ -16,7 +17,7 @@ export default function ShopDetailPage() {
     isError,
   } = useQuery<ShopResponse>({
     queryKey: ["shop", shopId],
-    queryFn: () => shopServiceImpl.getShop(shopId),
+    queryFn: () => shopService.getShop(shopId),
     enabled: !!shopId,
   });
 
@@ -28,7 +29,7 @@ export default function ShopDetailPage() {
       <div className="flex justify-between items-start mb-4">
         <h1 className="text-3xl font-bold">{shop.name}</h1>
         <button
-          onClick={() => router.push(`/shops/${shopId}/update`)}
+          onClick={() => router.push(`/shops/${shopId}/edit`)}
           className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
         >
           Edit Shop
@@ -49,6 +50,16 @@ export default function ShopDetailPage() {
           </ul>
         </div>
       )}
+
+      {/* testing  */}
+      <div className="flex justify-center items-start mb-4">
+        <button
+          onClick={() => router.push(`/owners/dashboard`)}
+          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        >
+          Return to Dashboard
+        </button>
+      </div>
     </div>
   );
 }

@@ -1,18 +1,25 @@
 "use client";
-// app/owners/[userId]/profile/edit/page.tx
+// app/owners/[userId]/profile/createpage.tx
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ownerSchema, type OwnerPayload } from "@/modules/owner/types/owner.types";
-import { useQuery } from "@tanstack/react-query";
 import { useRouter, useParams } from "next/navigation";
-import { useEffect } from "react";
-import { ownerServiceImpl } from "@/modules/owner/services";
 import { useAuthStore } from "@/stores/auth.store";
+import { ownerService } from "@/modules/owner/services";
 
-export default function EditOwnerProfilePage() {
+export default function CreateOwnerProfilePage() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<OwnerPayload>({
+    resolver: zodResolver(ownerSchema),
+  });
+
   const router = useRouter();
   const params = useParams();
-  const userId = params.userId as string; // Casting to a single string
+  const userId = params.userId; // e.g. /owner/7/profile/create
+  
   const { user } = useAuthStore();
 
   // Basic security check (optional):
@@ -20,44 +27,14 @@ export default function EditOwnerProfilePage() {
     router.push("/unauthorized");
   }
 
-  const {
-    data: existingProfile,
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: ["owner-profile", userId],
-    queryFn: () => ownerServiceImpl.getOwnerProfile(userId),
-    enabled: !!userId, // only run if userId is defined
-  });
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<OwnerPayload>({ resolver: zodResolver(ownerSchema) });
-
-  useEffect(() => {
-    if (existingProfile && !isLoading) {
-      reset({
-        firstName: existingProfile.firstName,
-        lastName: existingProfile.lastName,
-        phoneNumber: existingProfile.phoneNumber,
-      });
-    }
-  }, [existingProfile, isLoading, reset]);
-
   const onSubmit = async (data: OwnerPayload) => {
     try {
-      await ownerServiceImpl.updateOwnerProfile(userId, data);
-      router.push(`/owners/${userId}`);
+      await ownerService.createOwnerProfile(data);
+      router.push(`/owners/${userId}`); // e.g. go to "dashboard" or something
     } catch (error) {
-      console.error("Update Owner Profile error:", error);
+      console.error("Create Owner Profile error:", error);
     }
   };
-
-  if (isLoading) return <div>Loading existing profile...</div>;
-  if (isError) return <div>Failed to load profile. Please try again.</div>;
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -66,7 +43,7 @@ export default function EditOwnerProfilePage() {
         className="p-6 bg-white rounded-lg shadow-md w-[500px]"
       >
         <h2 className="text-2xl font-bold mb-6 text-center">
-          Edit Owner Profile
+          Create Owner Profile
         </h2>
 
         <div className="mb-4">
@@ -112,7 +89,7 @@ export default function EditOwnerProfilePage() {
           type="submit"
           className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700"
         >
-          Save Changes
+          Create
         </button>
       </form>
     </div>

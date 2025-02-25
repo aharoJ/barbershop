@@ -7,7 +7,7 @@ import {
   type BarberPayload,
 } from "@/modules/barber/types/barber.types";
 import { useRouter, useParams } from "next/navigation";
-import { barberServiceImpl } from "@/modules/barber/services";
+import { barberService } from "@/modules/barber/services";
 import { useAuthStore } from "@/stores/auth.store";
 
 export default function CreateBarberProfilePage() {
@@ -36,7 +36,7 @@ export default function CreateBarberProfilePage() {
 
   const onSubmit = async (data: BarberPayload) => {
     try {
-      await barberServiceImpl.createBarberProfile(data);
+      await barberService.createBarberProfile(data);
       // Go to barber "dashboard"
       router.push(`/barbers/${userId}`);
     } catch (error) {
