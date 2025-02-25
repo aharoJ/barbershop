@@ -1,10 +1,17 @@
-// @/app/shops/[shopId]/page.tsx
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { useParams, useRouter } from "next/navigation"; // Add useRouter
+import { useParams, useRouter } from "next/navigation";
+import Link from "next/link";
 import { shopService } from "@/modules/shop/services";
 import type { ShopResponse } from "@/modules/shop/types/shop.types";
+import { Button } from "@/modules/shadcn/ui/button";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/modules/shadcn/ui/card";
 
 export default function ShopDetailPage() {
   const router = useRouter();
@@ -21,44 +28,81 @@ export default function ShopDetailPage() {
     enabled: !!shopId,
   });
 
-  if (isLoading) return <div>Loading shop details...</div>;
-  if (isError || !shop) return <div>Failed to load shop</div>;
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 p-8 flex justify-center items-center">
+        <p className="text-gray-600">Loading shop details...</p>
+      </div>
+    );
+  }
+
+  if (isError || !shop) {
+    return (
+      <div className="min-h-screen bg-gray-50 p-8 flex justify-center items-center">
+        <p className="text-red-500">Failed to load shop</p>
+      </div>
+    );
+  }
 
   return (
-    <div className="p-6">
-      <div className="flex justify-between items-start mb-4">
-        <h1 className="text-3xl font-bold">{shop.name}</h1>
-        <button
-          onClick={() => router.push(`/shops/${shopId}/edit`)}
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-        >
-          Edit Shop
-        </button>
-      </div>
-
-      <p className="mb-4">{shop.address}</p>
-
-      {shop.seats && shop.seats.length > 0 && (
-        <div className="mt-4">
-          <h2 className="text-xl font-semibold mb-2">Seats</h2>
-          <ul className="space-y-2">
-            {shop.seats.map((seat) => (
-              <li key={seat.id} className="border p-2 rounded">
-                {seat.seatName} - {seat.barberFullName || "Unassigned"}
-              </li>
-            ))}
-          </ul>
+    <div className="min-h-screen bg-gray-50 p-8">
+      <div className="max-w-4xl mx-auto space-y-8">
+        {/* Header Section */}
+        <div className="flex justify-between items-center">
+          <h1 className="text-3xl font-bold">Shop Details</h1>
+          <div className="flex space-x-2">
+            <Button asChild variant="default">
+              <Link href={`/shops/${shopId}/edit`}>Edit Shop</Link>
+            </Button>
+            <Button asChild variant="outline">
+              <Link href={`/shops/${shopId}/seats`}>Edit Seats</Link>
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() => router.push(`/owners/dashboard`)}
+            >
+              Return to Dashboard
+            </Button>
+          </div>
         </div>
-      )}
 
-      {/* testing  */}
-      <div className="flex justify-center items-start mb-4">
-        <button
-          onClick={() => router.push(`/owners/dashboard`)}
-          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-        >
-          Return to Dashboard
-        </button>
+        {/* Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Shop Info Card */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-xl">{shop.name}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-600">{shop.address}</p>
+            </CardContent>
+          </Card>
+
+          {/* Seats Card */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-xl">Seats</CardTitle>
+            </CardHeader>
+            <CardContent>
+              {shop.seats && shop.seats.length > 0 ? (
+                <ul className="space-y-2">
+                  {shop.seats.map((seat) => (
+                    <li
+                      key={seat.id}
+                      className="p-2 border rounded flex items-center justify-between transition-colors hover:bg-gray-50"
+                    >
+                      <span>
+                        {seat.seatName} - {seat.barberFullName || "Unassigned"}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-gray-500">No seats available.</p>
+              )}
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );

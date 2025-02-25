@@ -49,7 +49,7 @@ export default function SignupPage() {
 
       // dynamic roles 
       if (loginRes.roles.includes("ROLE_OWNER")) {
-        router.push(`/owners/${loginRes.id}/profile/create`);
+        router.push(`/owners/profile/create`);
       } 
       else if (loginRes.roles.includes("ROLE_CUSTOMER")) {
         router.push(`/customers/${loginRes.id}/profile/create`);

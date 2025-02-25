@@ -16,30 +16,30 @@ export default function ShopListPage() {
     queryFn: () => shopService.listShops(),
   });
 
-  if (isLoading) return <div>Loading shops...</div>;
-  if (isError || !shops) return <div>Failed to load shops</div>;
+  if (isLoading) return <div className="p-6 text-center">Loading shops...</div>;
+  if (isError || !shops)
+    return (
+      <div className="p-6 text-center text-red-500">Failed to load shops</div>
+    );
 
   return (
     <div className="p-6">
-      <h1 className="text-3xl font-bold mb-4">All Shops</h1>
-      <div className="flex justify-start items-center mb-4">
-        {/* <Link
-          href="owners/my-shops"
-          className="text-blue-600 hover:text-blue-800"
-        >
-          View My Shops
-        </Link> */}
-        <ul className="space-y-3">
-          {shops.map((shop) => (
-            <li key={shop.id} className="bg-white shadow p-3 rounded">
-              <Link href={`/shops/${shop.id}`}>
-                <span className="text-xl font-semibold">{shop.name}</span>
-                <p className="text-sm">{shop.address}</p>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <h1 className="text-3xl font-bold mb-6">All Shops</h1>
+      <ul className="space-y-4">
+        {shops.map((shop) => (
+          <li
+            key={shop.id}
+            className="bg-white shadow-md hover:shadow-xl transition-shadow duration-200 p-4 rounded"
+          >
+            <Link href={`/shops/${shop.id}`} className="block">
+              <span className="text-xl font-semibold text-gray-800">
+                {shop.name}
+              </span>
+              <p className="text-sm text-gray-500">{shop.address}</p>
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

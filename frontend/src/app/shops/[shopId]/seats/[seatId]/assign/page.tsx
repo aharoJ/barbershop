@@ -1,11 +1,13 @@
+// @/app/shops/[shopId]/seats/[seatId]/assign/page.tsx
 "use client";
 
 import { useForm } from "react-hook-form";
-import { shopService } from "@/modules/shop/services";
 import { useParams, useRouter } from "next/navigation";
+import { seatService } from "@/modules/seat/services";
+import { Button } from "@/modules/shadcn/ui/button";
 
 type AssignBarberPayload = {
-  associationId: number; // or a string
+  associationId: number;
 };
 
 export default function AssignSeatPage() {
@@ -19,12 +21,7 @@ export default function AssignSeatPage() {
 
   const onSubmit = async (data: AssignBarberPayload) => {
     try {
-      const seat = await shopService.assignSeatToBarber(
-        shopId,
-        seatId,
-        data.associationId
-      );
-      console.log("Assigned seat:", seat);
+      await seatService.assignSeatToBarber(shopId, seatId, data.associationId);
       router.push(`/shops/${shopId}`);
     } catch (error) {
       console.error("Assign seat error:", error);
@@ -32,11 +29,11 @@ export default function AssignSeatPage() {
   };
 
   return (
-    <div className="p-6">
-      <h2 className="text-xl font-bold mb-4">
+    <div className="p-6 max-w-md mx-auto">
+      <h2 className="text-2xl font-bold mb-6">
         Assign Seat {seatId} in Shop {shopId}
       </h2>
-      <form onSubmit={handleSubmit(onSubmit)} className="max-w-md space-y-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
         <div>
           <label className="block text-sm font-medium mb-1">
             Barber Association ID
@@ -44,16 +41,13 @@ export default function AssignSeatPage() {
           <input
             type="number"
             {...register("associationId", { valueAsNumber: true })}
-            className="w-full border px-3 py-2 rounded"
+            className="w-full border px-3 py-2 rounded focus:outline-none focus:ring focus:border-blue-300"
           />
         </div>
 
-        <button
-          type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-        >
+        <Button type="submit" variant="default">
           Assign Barber
-        </button>
+        </Button>
       </form>
     </div>
   );

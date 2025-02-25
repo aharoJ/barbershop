@@ -1,3 +1,4 @@
+// @/app/shops/create/page.tsx
 "use client";
 
 import { useForm } from "react-hook-form";
@@ -26,17 +27,18 @@ export default function CreateShopPage() {
   };
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Create a Shop</h1>
-      <form onSubmit={handleSubmit(onSubmit)} className="max-w-md space-y-4">
+    <div className="p-6 max-w-lg mx-auto">
+      <h1 className="text-2xl font-bold mb-6">Create a Shop</h1>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
         <div>
           <label className="block text-sm font-medium mb-1">Shop Name</label>
           <input
             {...register("name")}
-            className="w-full border px-3 py-2 rounded"
+            className="w-full border px-3 py-2 rounded focus:outline-none focus:ring focus:border-blue-300"
+            placeholder="Enter shop name"
           />
           {errors.name && (
-            <p className="text-red-500 text-sm">{errors.name.message}</p>
+            <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
           )}
         </div>
 
@@ -44,16 +46,19 @@ export default function CreateShopPage() {
           <label className="block text-sm font-medium mb-1">Address</label>
           <input
             {...register("address")}
-            className="w-full border px-3 py-2 rounded"
+            className="w-full border px-3 py-2 rounded focus:outline-none focus:ring focus:border-blue-300"
+            placeholder="Enter address"
           />
           {errors.address && (
-            <p className="text-red-500 text-sm">{errors.address.message}</p>
+            <p className="text-red-500 text-sm mt-1">
+              {errors.address.message}
+            </p>
           )}
         </div>
 
         <button
           type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          className="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors duration-200"
         >
           Create
         </button>

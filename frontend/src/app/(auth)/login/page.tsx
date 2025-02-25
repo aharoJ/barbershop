@@ -41,13 +41,13 @@ export default function LoginPage() {
 
       // dynamic roles 
       if (response.roles.includes("ROLE_OWNER")) {
-        router.push(`/owners/${response.id}`);
+        router.push(`/owners/dashboard`);
       } 
       else if (response.roles.includes("ROLE_CUSTOMER")) {
-        router.push(`/customers/${response.id}`);
+        router.push(`/customers/dashboard`);
       } 
       else if (response.roles.includes("ROLE_BARBER")) {
-        router.push(`/barbers/${response.id}`);
+        router.push(`/barbers/dashboard`);
       } else {
         router.push("/"); // fallback
       }

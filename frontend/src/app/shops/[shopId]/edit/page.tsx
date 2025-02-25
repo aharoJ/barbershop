@@ -1,9 +1,8 @@
-// @/app/shops/[shopId]/edit/page.tsx
 "use client";
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/modules/shadcn/ui/button";
@@ -19,7 +18,6 @@ import {
   type ShopPayload,
   ShopResponse,
 } from "@/modules/shop/types/shop.types";
-import { seatSchema, type SeatResponse } from "@/modules/shop/types/seat.types";
 import { shopService } from "@/modules/shop/services";
 
 export default function EditShopPage() {
@@ -37,21 +35,7 @@ export default function EditShopPage() {
     resolver: zodResolver(shopSchema),
   });
 
-  // Form for adding a seat
-  const {
-    register: seatRegister,
-    handleSubmit: seatHandleSubmit,
-    formState: { errors: seatErrors },
-    reset: seatReset,
-  } = useForm<{ seatName: string }>({
-    resolver: zodResolver(seatSchema),
-    defaultValues: { seatName: "" },
-  });
-
-  // Local state for seats
-  const [seats, setSeats] = useState<SeatResponse[]>([]);
-
-  // Fetch shop details (including seats) on mount
+  // Fetch shop details on mount
   useEffect(() => {
     const fetchShop = async () => {
       try {
@@ -60,8 +44,6 @@ export default function EditShopPage() {
           name: existingShop.name,
           address: existingShop.address,
         });
-        // Assume the shop object includes seats
-        setSeats(existingShop.seats || []);
       } catch (error) {
         console.error("Failed to load shop:", error);
         router.push("/shops");
@@ -77,18 +59,7 @@ export default function EditShopPage() {
       const updatedShop = await shopService.updateShop(shopId, payload);
       router.push(`/shops/${updatedShop.id}`);
     } catch (error) {
-      console.error("Update error:", error);
-    }
-  };
-
-  // Handler for adding a new seat
-  const onSubmitSeat = async (payload: { seatName: string }) => {
-    try {
-      const newSeat = await shopService.addSeat(shopId, payload);
-      setSeats((prev) => [...prev, newSeat]);
-      seatReset({ seatName: "" });
-    } catch (error) {
-      console.error("Add seat error:", error);
+      console.error("Update shop error:", error);
     }
   };
 
@@ -102,95 +73,48 @@ export default function EditShopPage() {
           </Button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Shop Edit Card */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Edit Shop Details</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit(onSubmitShop)} className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium mb-1">
-                    Shop Name
-                  </label>
-                  <input
-                    {...register("name")}
-                    className="w-full border px-3 py-2 rounded"
-                    placeholder="Enter shop name"
-                  />
-                  {errors.name && (
-                    <p className="text-red-500 text-sm">
-                      {errors.name.message}
-                    </p>
-                  )}
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1">
-                    Address
-                  </label>
-                  <input
-                    {...register("address")}
-                    className="w-full border px-3 py-2 rounded"
-                    placeholder="Enter address"
-                  />
-                  {errors.address && (
-                    <p className="text-red-500 text-sm">
-                      {errors.address.message}
-                    </p>
-                  )}
-                </div>
-                <Button type="submit" variant="default">
-                  Save Changes
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
-
-          {/* Seats Management Card */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Manage Seats</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <form
-                onSubmit={seatHandleSubmit(onSubmitSeat)}
-                className="flex flex-col space-y-4"
-              >
-                <div className="flex space-x-2">
-                  <input
-                    {...seatRegister("seatName")}
-                    className="w-full border px-3 py-2 rounded"
-                    placeholder="Seat Name"
-                  />
-                  <Button type="submit" variant="secondary">
-                    Add Seat
-                  </Button>
-                </div>
-                {seatErrors.seatName && (
-                  <p className="text-red-500 text-sm">
-                    {seatErrors.seatName.message}
+        <Card>
+          <CardHeader>
+            <CardTitle>Edit Shop Details</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleSubmit(onSubmitShop)} className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium mb-1">
+                  Shop Name
+                </label>
+                <input
+                  {...register("name")}
+                  className="w-full border px-3 py-2 rounded focus:outline-none focus:ring focus:border-blue-300"
+                  placeholder="Enter shop name"
+                />
+                {errors.name && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.name.message}
                   </p>
                 )}
-              </form>
-
-              <div className="mt-6">
-                <h3 className="text-lg font-medium">Existing Seats</h3>
-                {seats.length === 0 ? (
-                  <p className="text-gray-500 mt-2">No seats added yet.</p>
-                ) : (
-                  <ul className="mt-2 space-y-2">
-                    {seats.map((seat) => (
-                      <li key={seat.id} className="p-2 border rounded">
-                        {seat.seatName}
-                      </li>
-                    ))}
-                  </ul>
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-1">
+                  Address
+                </label>
+                <input
+                  {...register("address")}
+                  className="w-full border px-3 py-2 rounded focus:outline-none focus:ring focus:border-blue-300"
+                  placeholder="Enter address"
+                />
+                {errors.address && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.address.message}
+                  </p>
                 )}
               </div>
-            </CardContent>
-          </Card>
-        </div>
+              <Button type="submit" variant="default">
+                Save Changes
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
