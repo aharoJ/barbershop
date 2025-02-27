@@ -1,12 +1,13 @@
 package io.aharoj.barbershop_backend.modules.auth.dto.request;
 
+import jakarta.validation.constraints.NotBlank;
 
-
-/**
- * LoginRequest: For user login (username, password)
- */
 public class LoginRequest {
+  
+  @NotBlank
   private String username;
+  
+  @NotBlank
   private String password;
 
   public LoginRequest() {
@@ -32,5 +33,4 @@ public class LoginRequest {
   public void setPassword(String password) {
     this.password = password;
   }
-
 }

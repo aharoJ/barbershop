@@ -22,15 +22,6 @@ public interface ShopService {
   ShopResponse createShop(Long ownerId, ShopRequest request);
 
   /**
-   * Retrieves a list of all available shops.
-   *
-   * @return a list of ShopResponse objects representing all shops
-   * @sidenote This method provides public access to shop information, allowing
-   *           barbers to discover available shops.
-   */
-  List<ShopResponse> getAllShops();
-
-  /**
    * Retrieves a shop by its unique identifier.
    *
    * @param shopId the ID of the shop to retrieve
@@ -39,34 +30,22 @@ public interface ShopService {
    *           the underlying entity secure.
    */
   ShopResponse getShopById(Long shopId);
+  
+  /**
+   * Retrieves a list of all available shops.
+   *
+   * @return a list of ShopResponse objects representing all shops
+   * @sidenote This method provides public access to shop information, allowing
+   *           barbers to discover available shops.
+   */
+  List<ShopResponse> getAllShops();
+
 
   // need to make documentation better here
   ShopResponse updateShop(Long ownerId, Long shopId, ShopRequest request);
 
-  /**
-   * Adds a new seat to a shop.
-   *
-   * @param shopId  the ID of the shop to which a seat is being added
-   * @param request the data required to create the new seat
-   * @return a SeatResponse containing details of the newly added seat
-   * @sidenote This method manages seat configurations within a shop, facilitating
-   *           the expansion of seating capacity.
-   */
-  SeatResponse addSeat(Long shopId, SeatRequest request);
 
-  /**
-   * Assigns a seat to an existing barber association.
-   *
-   * @param shopId  the ID of the shop containing the seat
-   * @param seatId  the ID of the seat to be assigned
-   * @param request the details required to assign the seat to a barber
-   * @return a SeatResponse reflecting the updated seat assignment
-   * @sidenote This method ensures a proper association between a barber and a
-   *           designated seat within the shop.
-   */
-  SeatResponse assignSeatToBarber(Long shopId, Long seatId, AssignBarberRequest request);
-
-  // testing get shop by owner
+  // return all SHOPS that are owned by the OWNER
   List<ShopResponse> getShopsByOwner(Long ownerId);
 
 }

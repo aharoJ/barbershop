@@ -79,9 +79,10 @@ public class WebSecurityConfig {
 
         // authoriezed request
         .authorizeHttpRequests(auth -> auth
-        
+
             // Authentication endpoints
             .requestMatchers("/api/auth/**").permitAll()
+            .requestMatchers("/api/users/**").permitAll()
 
             // H2 console
             .requestMatchers(PathRequest.toH2Console()).permitAll()
@@ -134,8 +135,7 @@ public class WebSecurityConfig {
 
             // fallback
             .anyRequest()
-            .authenticated()
-            )
+            .authenticated())
 
         .headers(headers -> headers.frameOptions().sameOrigin()) // Allow H2 Console frames
         .authenticationProvider(authenticationProvider());

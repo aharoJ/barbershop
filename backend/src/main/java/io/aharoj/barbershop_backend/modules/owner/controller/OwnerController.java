@@ -2,12 +2,7 @@ package io.aharoj.barbershop_backend.modules.owner.controller;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import io.aharoj.barbershop_backend.modules.auth.repository.UserRepository;
 import io.aharoj.barbershop_backend.modules.auth.serviceImpl.UserDetailsImpl;
@@ -34,6 +29,9 @@ public class OwnerController {
       @RequestBody OwnerRequest request) {
 
     return ownerService.createOwnerProfile(userDetails.getId(), request);
+    // FRONTEND SNIPPET
+    // const { data } = await apiClient.post<OwnerResponse>(
+    // "/api/owners/me",payload);
   }
 
   /**
@@ -45,6 +43,10 @@ public class OwnerController {
       @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
     return ownerService.getOwnerProfileByUserId(userDetails.getId());
+    // FRONTEND SNIPPET
+    // const { data } = await apiClient.get<OwnerResponse>(
+    // `/api/owners/me`);
+
   }
 
   /**
@@ -55,21 +57,10 @@ public class OwnerController {
   public OwnerResponse updateOwnerProfile(
       @AuthenticationPrincipal UserDetailsImpl userDetails,
       @RequestBody OwnerRequest request) {
+
     return ownerService.updateOwnerProfile(userDetails.getId(), request);
+    // FRONTEND SNIPPET
+    // const { data } = await apiClient.put<OwnerResponse>(
+    // `/api/owners/me`, payload);
   }
-
-  
-
-  /**
-   * (Optional) Retrieve another owner's profile by ID if needed for some
-   * management
-   * function. Adjust PreAuthorize accordingly.
-   */
-  
-  // @GetMapping("/{ownerId}")
-  // @PreAuthorize("hasRole('OWNER')")
-  // public OwnerResponse getOwnerProfileById(@PathVariable Long ownerId) {
-  //   return ownerService.getOwnerProfileByUserId(ownerId);
-  // }
-
 }

@@ -49,30 +49,11 @@ public class ShopController {
     return shopService.updateShop(userDetails.getId(), shopId, request);
   }
 
-  // -------------------- SEAT BELOW --------------
-
-  @PostMapping("/{shopId}/seats")
+  // HOW DO I GET SHOPS BY OWNER?
+  @GetMapping("/owned")
   @PreAuthorize("hasRole('OWNER')")
-  public SeatResponse addSeat(
-      @PathVariable Long shopId,
-      @RequestBody SeatRequest seatRequest) {
-    return shopService.addSeat(shopId, seatRequest);
+  public List<ShopResponse> getOwnedShops(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+    return shopService.getShopsByOwner(userDetails.getId());
   }
 
-  @PostMapping("/{shopId}/seats/{seatId}/assign")
-  @PreAuthorize("hasRole('OWNER')")
-  public SeatResponse assignBarber(
-      @PathVariable Long shopId,
-      @PathVariable Long seatId,
-      @RequestBody AssignBarberRequest request) {
-    return shopService.assignSeatToBarber(shopId, seatId, request);
-  }
-
-  // -------------------- SEAT BELOW --------------
-  // ion know why I did this one?
-  @GetMapping("/owner/{ownerId}")
-  @PreAuthorize("hasRole('OWNER')")
-  public List<ShopResponse> getShopsByOwner(@PathVariable Long ownerId) {
-    return shopService.getShopsByOwner(ownerId);
-  }
 }

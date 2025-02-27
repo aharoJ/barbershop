@@ -1,20 +1,13 @@
 package io.aharoj.barbershop_backend.modules.shared.util;
 
 import io.aharoj.barbershop_backend.modules.appointment.model.enums.AppointmentStatus;
-import io.aharoj.barbershop_backend.modules.auth.model.enums.RoleType;
 
 /**
- * Create a utility class to store application-wide constants.
+ * MUST DELETE THIS AT ONE POINT
+ * 
+ * @note annoying constans attached to under developed modules
  */
-
 public class Constants {
-
-  // Role Constants
-  public static final RoleType ROLE_CUSTOMER = RoleType.ROLE_CUSTOMER;
-  public static final RoleType ROLE_BARBER = RoleType.ROLE_BARBER;
-  public static final RoleType ROLE_OWNER = RoleType.ROLE_OWNER;
-  // public static final RoleType ROLE_ADMIN = RoleType.ROLE_OWNER; // REMOVED FOR NOW ?
-
 
   // Error Messages
   public static final String USER_NOT_FOUND = "User not found";
@@ -38,15 +31,9 @@ public class Constants {
   public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
   public static final String DEFAULT_DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
-  // Other Constants
-  // ...
-
   // Appointment Status --> not sure if we linked correct
   public static final AppointmentStatus PENDING = AppointmentStatus.PENDING;
-  public static final AppointmentStatus  CONFIRMED= AppointmentStatus.CONFIRMED;
+  public static final AppointmentStatus CONFIRMED = AppointmentStatus.CONFIRMED;
   public static final AppointmentStatus COMPLETED = AppointmentStatus.COMPLETED;
 
-  private Constants() {
-    // Private constructor to prevent instantiation
-  }
 }

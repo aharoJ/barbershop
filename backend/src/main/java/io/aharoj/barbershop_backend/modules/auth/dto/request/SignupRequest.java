@@ -1,23 +1,22 @@
 package io.aharoj.barbershop_backend.modules.auth.dto.request;
 
-
-
 import java.util.Set;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-/**
- * SignupRequest: For user registration (username, email, password, roles)
- */
 public class SignupRequest {
 
-  @NotNull
+  @NotBlank
   private String username;
 
-  @NotNull
+  @Email
+  @NotBlank
   private String email;
 
-  @NotNull
+  @NotBlank
+  // @Size(min = 6) -- LATER INTEGRATION
   private String password;
 
   // @Enumerated(EnumType.STRING) // come back and CHECK IF THIS WORKED OUT

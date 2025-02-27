@@ -36,6 +36,4 @@ public class Role {
   public void setRoleType(RoleType roleType) {
     this.roleType = roleType;
   }
-
-
 }

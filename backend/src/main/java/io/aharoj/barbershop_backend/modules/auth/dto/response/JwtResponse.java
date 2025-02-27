@@ -3,30 +3,38 @@ package io.aharoj.barbershop_backend.modules.auth.dto.response;
 import java.util.List;
 
 public class JwtResponse {
-  private String token;
+  private String accessToken; // old BEARIRER TOKEN
+  private String refreshToken; // NEW LOGIC
   private String type = "Bearer"; // The type of token (e.g., "Bearer") is a textual piece of information
   private Long id;
   private String username;
   private String email;
   private List<String> roles;
 
-  public JwtResponse() {
-  }
-
-  public JwtResponse(String token, Long id, String username, String email, List<String> roles) {
-    this.token = token;
+  public JwtResponse(String accessToken, String refreshToken, Long id, String username, String email,
+      List<String> roles) {
+    this.accessToken = accessToken;
+    this.refreshToken = refreshToken;
     this.id = id;
     this.username = username;
     this.email = email;
     this.roles = roles;
   }
 
-  public String getToken() {
-    return token;
+  public String getAccessToken() {
+    return accessToken;
   }
 
-  public void setToken(String token) {
-    this.token = token;
+  public void setAccessToken(String accessToken) {
+    this.accessToken = accessToken;
+  }
+
+  public String getRefreshToken() {
+    return refreshToken;
+  }
+
+  public void setRefreshToken(String refreshToken) {
+    this.refreshToken = refreshToken;
   }
 
   public String getType() {
@@ -68,5 +76,4 @@ public class JwtResponse {
   public void setRoles(List<String> roles) {
     this.roles = roles;
   }
-
 }
