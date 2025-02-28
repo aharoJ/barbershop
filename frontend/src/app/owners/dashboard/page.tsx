@@ -8,7 +8,12 @@ import { OwnerResponse } from "@/modules/owner/types/owner.types";
 import { ShopResponse } from "@/modules/shop/types/shop.types";
 import { shopService } from "@/modules/shop/services";
 import { Button } from "@/modules/shadcn/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/modules/shadcn/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/modules/shadcn/ui/card";
 
 import { Badge } from "@/modules/shadcn/ui/badge";
 import { Loader2, PlusCircle, Settings, User } from "lucide-react";
@@ -19,15 +24,18 @@ export default function OwnerDashboard() {
   const { user } = useAuthStore();
 
   // Fetch data
-  const { data: ownerProfile, isLoading: isLoadingProfile } = useQuery<OwnerResponse>({
-    queryKey: ["owner-profile"],
-    queryFn: () => ownerService.getOwnerProfile(),
-  });
+  const { data: ownerProfile, isLoading: isLoadingProfile } =
+    useQuery<OwnerResponse>({
+      queryKey: ["owner-profile"],
+      queryFn: () => ownerService.getOwnerProfile(),
+    });
 
-  const { data: myShops, isLoading: isLoadingShops } = useQuery<ShopResponse[]>({
-    queryKey: ["my-shops"],
-    queryFn: () => shopService.getShopsByOwner(),
-  });
+  const { data: myShops, isLoading: isLoadingShops } = useQuery<ShopResponse[]>(
+    {
+      queryKey: ["my-shops"],
+      queryFn: () => shopService.getShopsByOwner(),
+    }
+  );
 
   if (isLoadingProfile || isLoadingShops) {
     return (
@@ -38,7 +46,9 @@ export default function OwnerDashboard() {
   }
 
   if (!ownerProfile || !myShops) {
-    return <div className="p-8 text-red-600">Failed to load dashboard data</div>;
+    return (
+      <div className="p-8 text-red-600">Failed to load dashboard data</div>
+    );
   }
 
   return (
@@ -47,7 +57,9 @@ export default function OwnerDashboard() {
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Owner Dashboard</h1>
+            <h1 className="text-3xl font-bold text-gray-900">
+              Owner Dashboard
+            </h1>
             <p className="text-gray-600 mt-2">
               Welcome back, {ownerProfile.firstName} 👋
             </p>
@@ -110,7 +122,10 @@ export default function OwnerDashboard() {
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {myShops.map((shop) => (
-                  <Card key={shop.id} className="hover:shadow-lg transition-shadow">
+                  <Card
+                    key={shop.id}
+                    className="hover:shadow-lg transition-shadow"
+                  >
                     <CardHeader className="pb-2">
                       <div className="flex justify-between items-start">
                         <CardTitle className="text-lg">{shop.name}</CardTitle>
@@ -120,7 +135,9 @@ export default function OwnerDashboard() {
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm text-gray-600 mb-4">{shop.address}</p>
+                      <p className="text-sm text-gray-600 mb-4">
+                        {shop.address}
+                      </p>
                       <div className="flex gap-2">
                         <Button variant="outline" size="sm" asChild>
                           <Link href={`/shops/${shop.id}`}>View Details</Link>

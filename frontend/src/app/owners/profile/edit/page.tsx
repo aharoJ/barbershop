@@ -2,7 +2,10 @@
 // app/owners/[userId]/profile/edit/page.tx
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ownerSchema, type OwnerPayload } from "@/modules/owner/types/owner.types";
+import {
+  ownerSchema,
+  type OwnerPayload,
+} from "@/modules/owner/types/owner.types";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter, useParams } from "next/navigation";
 import { useEffect } from "react";
@@ -41,7 +44,7 @@ export default function EditOwnerProfilePage() {
 
   const onSubmit = async (data: OwnerPayload) => {
     try {
-      await ownerService.updateOwnerProfile( data);
+      await ownerService.updateOwnerProfile(data);
       router.push(`/owners/dashboard`);
     } catch (error) {
       console.error("Update Owner Profile error:", error);

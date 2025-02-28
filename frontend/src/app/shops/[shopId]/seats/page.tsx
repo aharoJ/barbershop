@@ -82,11 +82,15 @@ export default function SeatManagementPage() {
     try {
       // Convert numeric seat ID to string before passing to seatService
       const seatIdAsString = String(numericSeatId); // <-- changed
-      const updatedSeat = await seatService.updateSeatInfo(shopId, seatIdAsString, {
-        seatName: editingSeatName,
-      });
+      const updatedSeat = await seatService.updateSeatInfo(
+        shopId,
+        seatIdAsString,
+        {
+          seatName: editingSeatName,
+        },
+      );
       setSeats((prev) =>
-        prev.map((seat) => (seat.id === numericSeatId ? updatedSeat : seat))
+        prev.map((seat) => (seat.id === numericSeatId ? updatedSeat : seat)),
       );
       cancelEditing();
     } catch (error) {
@@ -140,7 +144,11 @@ export default function SeatManagementPage() {
                   </p>
                 )}
               </div>
-              <Button type="submit" variant="secondary" className="mt-4 sm:mt-0">
+              <Button
+                type="submit"
+                variant="secondary"
+                className="mt-4 sm:mt-0"
+              >
                 Create Seat
               </Button>
             </form>
@@ -172,10 +180,16 @@ export default function SeatManagementPage() {
                             className="border px-2 py-1 rounded focus:outline-none focus:ring focus:border-blue-300"
                           />
                           <div className="flex space-x-2">
-                            <Button variant="default" onClick={() => saveEdit(seat.id)}>
+                            <Button
+                              variant="default"
+                              onClick={() => saveEdit(seat.id)}
+                            >
                               Save
                             </Button>
-                            <Button variant="destructive" onClick={cancelEditing}>
+                            <Button
+                              variant="destructive"
+                              onClick={cancelEditing}
+                            >
                               Cancel
                             </Button>
                           </div>
@@ -189,10 +203,16 @@ export default function SeatManagementPage() {
                               : "- Unassigned"}
                           </span>
                           <div className="flex space-x-2">
-                            <Button variant="default" onClick={() => startEditing(seat)}>
+                            <Button
+                              variant="default"
+                              onClick={() => startEditing(seat)}
+                            >
                               Edit
                             </Button>
-                            <Button variant="destructive" onClick={() => removeSeat(seat.id)}>
+                            <Button
+                              variant="destructive"
+                              onClick={() => removeSeat(seat.id)}
+                            >
                               Delete
                             </Button>
                             <Button asChild variant="secondary">

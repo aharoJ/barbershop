@@ -35,7 +35,7 @@ export default function EditSeatPage() {
       try {
         const seat: SeatResponse = await seatService.getSeatById(
           shopId,
-          seatId
+          seatId,
         );
         reset({ seatName: seat.seatName });
       } catch (error) {

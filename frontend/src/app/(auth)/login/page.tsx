@@ -7,7 +7,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/stores/auth.store";
 import { authService } from "@/modules/auth/services/auth.service";
-import { loginSchema, type LoginPayload } from "@/modules/auth/types/auth.types";
+import {
+  loginSchema,
+  type LoginPayload,
+} from "@/modules/auth/types/auth.types";
 import { useState } from "react";
 
 export default function LoginPage() {
@@ -36,17 +39,16 @@ export default function LoginPage() {
           email: response.email,
           roles: response.roles,
         },
-        response.token
+        response.accessToken,
+        response.refreshToken,
       );
 
-      // dynamic roles 
+      // dynamic roles
       if (response.roles.includes("ROLE_OWNER")) {
         router.push(`/owners/dashboard`);
-      } 
-      else if (response.roles.includes("ROLE_CUSTOMER")) {
+      } else if (response.roles.includes("ROLE_CUSTOMER")) {
         router.push(`/customers/dashboard`);
-      } 
-      else if (response.roles.includes("ROLE_BARBER")) {
+      } else if (response.roles.includes("ROLE_BARBER")) {
         router.push(`/barbers/dashboard`);
       } else {
         router.push("/"); // fallback

@@ -12,6 +12,7 @@ import {
   type RegisterPayload,
   roles,
 } from "@/modules/auth/types/auth.types";
+import { userService } from "@/modules/auth/services/user.service";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -29,7 +30,7 @@ export default function SignupPage() {
   const onSubmit = async (data: RegisterPayload) => {
     try {
       // Sign up
-      await authService.register(data);
+      await userService.createUser(data);
 
       // Then log in automatically
       const loginRes = await authService.login({
@@ -44,26 +45,22 @@ export default function SignupPage() {
           email: loginRes.email,
           roles: loginRes.roles,
         },
-        loginRes.token
+        loginRes.accessToken,
+        loginRes.refreshToken,
       );
 
-      // dynamic roles 
+
       if (loginRes.roles.includes("ROLE_OWNER")) {
         router.push(`/owners/profile/create`);
-      } 
-      else if (loginRes.roles.includes("ROLE_CUSTOMER")) {
-        router.push(`/customers/${loginRes.id}/profile/create`);
-      } 
-      else if (loginRes.roles.includes("ROLE_BARBER")) {
-        router.push(`/barbers/${loginRes.id}/profile/create`);
-      } 
-      
-      else {
+      } else if (loginRes.roles.includes("ROLE_CUSTOMER")) {
+        router.push(`/customers/profile/create`);
+      } else if (loginRes.roles.includes("ROLE_BARBER")) {
+        router.push(`/barbers/profile/create`);
+      } else {
         router.push("/");
       }
     } catch (error) {
       console.error("Signup error:", error);
-      // handle error UI
     }
   };
 

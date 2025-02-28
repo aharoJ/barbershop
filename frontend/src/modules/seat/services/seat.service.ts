@@ -8,7 +8,7 @@ export interface SeatService {
    */
   addSeat(
     shopId: string,
-    payload: z.infer<typeof seatSchema>
+    payload: z.infer<typeof seatSchema>,
   ): Promise<SeatResponse>;
 
   /**
@@ -29,7 +29,7 @@ export interface SeatService {
   updateSeatInfo(
     shopId: string,
     seatId: string,
-    payload: z.infer<typeof seatSchema>
+    payload: z.infer<typeof seatSchema>,
   ): Promise<SeatResponse>;
 
   /**
@@ -45,6 +45,6 @@ export interface SeatService {
   assignSeatToBarber(
     shopId: string,
     seatId: string,
-    barberAssociationId: number
+    barberAssociationId: number,
   ): Promise<SeatResponse>;
 }

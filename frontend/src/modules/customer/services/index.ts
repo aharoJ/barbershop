@@ -1,7 +1,6 @@
 import { CustomerServiceImpl } from "./customer.service.impl";
 import { CustomerService } from "./customer.service";
 
-
 // Create a default instance
 const customerService: CustomerService = new CustomerServiceImpl();
 

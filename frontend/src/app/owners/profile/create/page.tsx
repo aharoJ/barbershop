@@ -2,7 +2,10 @@
 // app/owners/profile/createpage.tx
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ownerSchema, type OwnerPayload } from "@/modules/owner/types/owner.types";
+import {
+  ownerSchema,
+  type OwnerPayload,
+} from "@/modules/owner/types/owner.types";
 import { useRouter, useParams } from "next/navigation";
 import { useAuthStore } from "@/stores/auth.store";
 import { ownerService } from "@/modules/owner/services";
@@ -17,14 +20,13 @@ export default function CreateOwnerProfilePage() {
   });
 
   const router = useRouter();
-  
-  const { user } = useAuthStore();
 
+  const { user } = useAuthStore();
 
   const onSubmit = async (data: OwnerPayload) => {
     try {
       await ownerService.createOwnerProfile(data);
-      router.push(`/owners/dashboard`); // e.g. go to "dashboard" or something
+      router.push(`/owners/dashboard`);
     } catch (error) {
       console.error("Create Owner Profile error:", error);
     }
