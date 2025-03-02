@@ -10,6 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { ownerService } from "@/modules/owner/services";
+import { Button } from "@/modules/shadcn/ui/button";
 
 export default function EditOwnerProfilePage() {
   const router = useRouter();
@@ -92,12 +93,13 @@ export default function EditOwnerProfilePage() {
             </span>
           )}
         </div>
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700"
-        >
-          Save Changes
-        </button>
+        
+          <Button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700"
+            >
+            Save Changes
+          </Button>
       </form>
     </div>
   );

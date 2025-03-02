@@ -16,7 +16,7 @@ import {
 } from "@/modules/shadcn/ui/card";
 
 import { Badge } from "@/modules/shadcn/ui/badge";
-import { Loader2, PlusCircle, Settings, User } from "lucide-react";
+import { Loader2, PlusCircle, Settings, Trash, User } from "lucide-react";
 import Link from "next/link";
 
 export default function OwnerDashboard() {
@@ -64,12 +64,21 @@ export default function OwnerDashboard() {
               Welcome back, {ownerProfile.firstName} 👋
             </p>
           </div>
+          
+          <div className="flex gap-4">
+          <Button asChild className="bg-red-400/90 hover:bg-red-500">
+            <Link href="profile/delete">
+              <Trash className="mr-2 h-4 w-4" />
+              Delete Profile
+            </Link>
+          </Button>
           <Button asChild>
             <Link href="profile/edit">
               <Settings className="mr-2 h-4 w-4" />
               Edit Profile
             </Link>
           </Button>
+          </div>
         </div>
 
         {/* Dashboard Grid */}
