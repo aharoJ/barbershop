@@ -31,6 +31,7 @@ export default function SignupPage() {
     try {
       // Sign up
       await userService.createUser(data);
+      
 
       // Then log in automatically
       const loginRes = await authService.login({
@@ -46,9 +47,8 @@ export default function SignupPage() {
           roles: loginRes.roles,
         },
         loginRes.accessToken,
-        loginRes.refreshToken,
+        loginRes.refreshToken
       );
-
 
       if (loginRes.roles.includes("ROLE_OWNER")) {
         router.push(`/owners/profile/create`);
@@ -60,7 +60,7 @@ export default function SignupPage() {
         router.push("/");
       }
     } catch (error) {
-      console.error("Signup error:", error);
+      console.error("Signup errorRRRR:", error);
     }
   };
 

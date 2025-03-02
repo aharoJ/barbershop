@@ -8,5 +8,5 @@ export interface OwnerService {
   createOwnerProfile(payload: OwnerPayload): Promise<OwnerResponse>;
   getOwnerProfile(): Promise<OwnerResponse>;
   updateOwnerProfile(payload: OwnerPayload): Promise<OwnerResponse>;
-  //   deleteOwnerProfile(userId: string): Promise<void>; -- not created yet
+  deleteOwnerProfile(): Promise<void>;
 }

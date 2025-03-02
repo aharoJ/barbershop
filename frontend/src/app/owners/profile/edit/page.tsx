@@ -7,30 +7,20 @@ import {
   type OwnerPayload,
 } from "@/modules/owner/types/owner.types";
 import { useQuery } from "@tanstack/react-query";
-import { useRouter, useParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { ownerService } from "@/modules/owner/services";
-import { useAuthStore } from "@/stores/auth.store";
 
 export default function EditOwnerProfilePage() {
   const router = useRouter();
-  const { user } = useAuthStore();
-
-  const {
-    data: existingProfile,
-    isLoading,
-    isError,
-  } = useQuery({
+  const {data: existingProfile,isLoading,isError,} = 
+  useQuery({
     queryKey: ["owner-profile"],
     queryFn: () => ownerService.getOwnerProfile(),
   });
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<OwnerPayload>({ resolver: zodResolver(ownerSchema) });
+  const {register,handleSubmit,formState: { errors }, reset} = 
+  useForm<OwnerPayload>({ resolver: zodResolver(ownerSchema) });
 
   useEffect(() => {
     if (existingProfile && !isLoading) {
@@ -102,7 +92,6 @@ export default function EditOwnerProfilePage() {
             </span>
           )}
         </div>
-
         <button
           type="submit"
           className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700"

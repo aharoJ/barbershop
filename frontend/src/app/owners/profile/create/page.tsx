@@ -6,8 +6,7 @@ import {
   ownerSchema,
   type OwnerPayload,
 } from "@/modules/owner/types/owner.types";
-import { useRouter, useParams } from "next/navigation";
-import { useAuthStore } from "@/stores/auth.store";
+import { useRouter } from "next/navigation";
 import { ownerService } from "@/modules/owner/services";
 
 export default function CreateOwnerProfilePage() {
@@ -20,8 +19,6 @@ export default function CreateOwnerProfilePage() {
   });
 
   const router = useRouter();
-
-  const { user } = useAuthStore();
 
   const onSubmit = async (data: OwnerPayload) => {
     try {
