@@ -1,5 +1,6 @@
 package io.aharoj.barbershop_backend.modules.owner.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -63,4 +64,12 @@ public class OwnerController {
     // const { data } = await apiClient.put<OwnerResponse>(
     // `/api/owners/me`, payload);
   }
+
+  @DeleteMapping("/me")
+  @PreAuthorize("hasRole('OWNER')")
+  public ResponseEntity<?> deleteOwnerProfile(@AuthenticationPrincipal UserDetailsImpl userDetails){
+    ownerService.deleteOwnerProfile(userDetails.getId());
+    return ResponseEntity.ok("Owner profile deleted successfully.");
+  }
+
 }

@@ -34,6 +34,7 @@ public interface OwnerService {
      */
     OwnerResponse updateOwnerProfile(Long userId, OwnerRequest request);
 
-    // NEED TO CREATE A SELF DESTRUCT 
+    // created... come back to annotate nicely 
+    void deleteOwnerProfile(Long userId);
     
 }
