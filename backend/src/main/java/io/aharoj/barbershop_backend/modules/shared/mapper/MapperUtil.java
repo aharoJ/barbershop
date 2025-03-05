@@ -8,7 +8,6 @@ import io.aharoj.barbershop_backend.modules.appointment.model.entity.Appointment
 import io.aharoj.barbershop_backend.modules.barber.dto.request.BarberRequest;
 import io.aharoj.barbershop_backend.modules.barber.model.entity.Barber;
 import io.aharoj.barbershop_backend.modules.customer.model.entity.Customer;
-import io.aharoj.barbershop_backend.modules.image.dto.request.ImageRequest;
 import io.aharoj.barbershop_backend.modules.image.dto.response.ImageResponse;
 import io.aharoj.barbershop_backend.modules.image.model.entity.Image;
 import io.aharoj.barbershop_backend.modules.payment.dto.request.PaymentRequest;
@@ -187,48 +186,48 @@ public class MapperUtil {
   }
 
   // Image Mappings
-  public static ImageResponse toImageResponse(Image image) {
-    Long entityId = null;
-    String entityType = null;
+  // public static ImageResponse toImageResponse(Image image) {
+  //   Long entityId = null;
+  //   String entityType = null;
 
-    if (image.getShop() != null) {
-      entityId = image.getShop().getId();
-      entityType = "SHOP";
-    } else if (image.getBarber() != null) {
-      entityId = image.getBarber().getId();
-      entityType = "BARBER";
-    } else if (image.getCustomer() != null) {
-      entityId = image.getCustomer().getId();
-      entityType = "CUSTOMER";
-    }
+  //   if (image.getShop() != null) {
+  //     entityId = image.getShop().getId();
+  //     entityType = "SHOP";
+  //   } else if (image.getBarber() != null) {
+  //     entityId = image.getBarber().getId();
+  //     entityType = "BARBER";
+  //   } else if (image.getCustomer() != null) {
+  //     entityId = image.getCustomer().getId();
+  //     entityType = "CUSTOMER";
+  //   }
 
-    return new ImageResponse(
-        image.getId(),
-        image.getImageUrl(),
-        entityId,
-        entityType);
-  }
+  //   return new ImageResponse(
+  //       image.getId(),
+  //       image.getImageUrl(),
+  //       entityId,
+  //       entityType);
+  // }
 
-  public static Image toImage(ImageRequest request, Shop shop, Barber barber, Customer customer) {
-    Image image = new Image();
-    image.setImageUrl(request.getImageUrl());
+  // public static Image toImage(ImageRequest request, Shop shop, Barber barber, Customer customer) {
+  //   Image image = new Image();
+  //   image.setImageUrl(request.getImageUrl());
 
-    // Dynamically assign the relationship based on entityType
-    String entityType = request.getEntityType().toUpperCase();
-    switch (entityType) {
-      case "SHOP":
-        image.setShop(shop); // Pass the Shop object
-        break;
-      case "BARBER":
-        image.setBarber(barber); // Pass the BarberProfile object
-        break;
-      case "CUSTOMER":
-        image.setCustomer(customer); // Pass the Customer object
-        break;
-      default:
-        throw new IllegalArgumentException("Invalid entityType provided: " + entityType);
-    }
+  //   // Dynamically assign the relationship based on entityType
+  //   String entityType = request.getEntityType().toUpperCase();
+  //   switch (entityType) {
+  //     case "SHOP":
+  //       image.setShop(shop); // Pass the Shop object
+  //       break;
+  //     case "BARBER":
+  //       image.setBarber(barber); // Pass the BarberProfile object
+  //       break;
+  //     case "CUSTOMER":
+  //       image.setCustomer(customer); // Pass the Customer object
+  //       break;
+  //     default:
+  //       throw new IllegalArgumentException("Invalid entityType provided: " + entityType);
+  //   }
 
-    return image;
-  }
+  //   return image;
+  // }
 }

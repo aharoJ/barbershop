@@ -111,24 +111,24 @@ public class WebSecurityConfig {
             .requestMatchers(HttpMethod.POST, "/api/shops/owner/create").hasRole("OWNER")
 
             // 3) If you want owners to do other CRUD on shops:
-            // e.g. PUT /api/shops/{id}, DELETE /api/shops/{id}, etc.:
             .requestMatchers(HttpMethod.PUT, "/api/shops/*").hasRole("OWNER")
             .requestMatchers(HttpMethod.DELETE, "/api/shops/*").hasRole("OWNER")
 
             // 4) Seats:
-            // POST /api/shops/{shopId}/seats => owners
-            // POST /api/shops/{shopId}/seats/{seatId}/assign => owners
             .requestMatchers(HttpMethod.POST, "/api/shops/*/seats/**").hasRole("OWNER")
 
             // 5) Applications:
-            // - POST /api/shops/{shopId}/applications => barbers apply
-            // - GET /api/shops/{shopId}/applications => owners see them
-            // - POST /api/shops/{shopId}/applications/{appId}/approve => owners
-            // - POST /api/shops/{shopId}/applications/{appId}/reject => owners
             .requestMatchers(HttpMethod.POST, "/api/shops/*/applications").hasRole("BARBER")
             .requestMatchers(HttpMethod.GET, "/api/shops/*/applications").hasRole("OWNER")
             .requestMatchers(HttpMethod.POST, "/api/shops/*/applications/*/approve").hasRole("OWNER")
             .requestMatchers(HttpMethod.POST, "/api/shops/*/applications/*/reject").hasRole("OWNER")
+
+            // 5) Images:
+            .requestMatchers(HttpMethod.POST, "/api/images/owners/**").hasRole("OWNER")
+            .requestMatchers(HttpMethod.POST, "/api/images/barbers/**").hasRole("BARBER")
+            .requestMatchers(HttpMethod.POST, "/api/images/customers/**").hasRole("CUSTOMER")
+            // .requestMatchers(HttpMethod.POST, "/api/images/shops/**").hasRole("OWNER") // -- this is buggy?
+            .requestMatchers(HttpMethod.GET, "/api/images/files/**").permitAll()
 
             // Actuator, etc.
             .requestMatchers("/actuator/**").permitAll()
@@ -145,5 +145,4 @@ public class WebSecurityConfig {
 
     return httpSecurity.build();
   }
-
 }

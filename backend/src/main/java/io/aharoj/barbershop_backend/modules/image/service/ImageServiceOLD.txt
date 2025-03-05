@@ -1,0 +1,26 @@
+package io.aharoj.barbershop_backend.modules.image.service;
+
+import io.aharoj.barbershop_backend.modules.image.dto.request.ImageRequest;
+import io.aharoj.barbershop_backend.modules.image.dto.response.ImageResponse;
+
+/**
+ * Service interface for Image operations.
+ */
+public interface ImageServiceOLD {
+
+    /**
+     * Uploads a new image.
+     *
+     * @param request The image request DTO.
+     * @return The image response DTO.
+     */
+    ImageResponse uploadImage(ImageRequest request);
+
+    /**
+     * Retrieves an image by ID.
+     *
+     * @param imageId The ID of the image.
+     * @return The image response DTO.
+     */
+    ImageResponse getImageById(Long imageId);
+}
