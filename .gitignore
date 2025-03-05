@@ -13,6 +13,8 @@ modules/auth/controller/
 .docs/
 .automation/
 *impl*
+uploads/
+
 
 # 🚀 Backend (Spring Boot)
 target/
