@@ -1,3 +1,94 @@
+
+### **Frontend README.md** (copy-paste)  
+```markdown
+# BarberOS Frontend 🖥️  
+**Next.js 15 • TypeScript • Tailwind CSS**  
+
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript)](https://typescriptlang.org)  
+[![Zustand](https://img.shields.io/badge/State_Zustand-4.4.1-2A2A2A)](https://zustand-demo.pmnd.rs/)  
+
+## 🌈 UI Features  
+- **Role-based Dashboards**  
+  ![Dashboard Preview](../public/frontend-img/dashboard.png)  
+
+- **Authentication Flows**  
+  ```tsx  
+  // Protected route example  
+  const { user } = useAuthStore();  
+  return user ? <Dashboard /> : <Login />;  
+  ```  
+
+## 🚦 Routing System  
+| Path                  | Component              |  
+|-----------------------|------------------------|  
+| `/owner/[id]/dashboard` | Shop analytics        |  
+| `/barber/[id]/schedule` | Appointment calendar  |  
+
+## 🧱 Project Structure  
+```bash  
+src/  
+├── app/          # App router  
+├── stores/       # Zustand state  
+│   └── authStore.ts  
+└── modules/  
+    ├── auth/     # Auth services  
+    └── payment/  # Stripe integration  
+```  
+
+[🔼 Back to Main README](../README.md)  
+
+
+---
+---
+---
+---
+---
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # BarberShop Frontend
 
 Next.js web application for barbershop management.

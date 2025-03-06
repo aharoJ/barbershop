@@ -1,3 +1,87 @@
+
+---
+
+### **Backend README.md** (copy-paste)  
+```markdown
+# BarberOS Backend API 💻  
+**Spring Boot 3 • PostgreSQL • JWT/RSA Security**  
+
+[![Java 17](https://img.shields.io/badge/Java-17-007396?logo=java)](https://java.com/)  
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?logo=postgresql)](https://www.postgresql.org/)  
+
+## 🛠 Features  
+| Module       | Endpoints                          | Security          |  
+|--------------|------------------------------------|-------------------|  
+| **Auth**     | `POST /api/auth/*`                 | RSA-encrypted JWT |  
+| **Shops**    | `GET /api/shops` (public)          | RBAC-protected    |  
+| **Payments** | `POST /api/payments/process`       | PCI-compliant     |  
+
+## 📦 Database Schema  
+![Database Diagram](public/backend-img/database.png)  
+
+## 📚 API Documentation  
+```bash  
+# Local access after running:  
+http://localhost:8080/swagger-ui.html  
+```  
+
+## 🧩 Project Structure  
+```bash  
+barber/  
+├── controller    # API endpoints  
+├── service       # Business logic  
+├── model         # JPA entities  
+└── security/     # Auth config  
+    ├── JwtTokenUtil.java  
+    └── WebSecurityConfig.java  
+```  
+
+[🔼 Back to Main README](../README.md)  
+
+
+---
+---
+---
+---
+---
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # BarberShop Backend API
 
 REST API for managing barbershop operations, built with Java Spring Boot.
