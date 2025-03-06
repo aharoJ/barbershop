@@ -1,6 +1,3 @@
-
-### **Frontend README.md** (copy-paste)  
-```markdown
 # BarberOS Frontend 🖥️  
 **Next.js 15 • TypeScript • Tailwind CSS**  
 
