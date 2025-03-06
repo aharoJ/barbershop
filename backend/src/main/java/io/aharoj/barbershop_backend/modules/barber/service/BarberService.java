@@ -35,4 +35,6 @@ public interface BarberService {
      * @note for client
      */
     BarberResponse updateBarberProfile(Long userId, BarberRequest request);
+
+    void deleteBarberProfile(Long userId);
 }

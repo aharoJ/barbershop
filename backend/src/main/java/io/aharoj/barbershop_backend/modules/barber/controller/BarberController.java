@@ -67,4 +67,12 @@ public class BarberController {
         return ResponseEntity.ok(response);
     }
 
+
+    @DeleteMapping("/me")
+    @PreAuthorize("hasRole('BARBER')")
+    public ResponseEntity<?> deleteBarberProfile(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+      barberService.deleteBarberProfile(userDetails.getId());
+      return ResponseEntity.ok("Barber profile deleted successfully :(");
+    }
+
 }

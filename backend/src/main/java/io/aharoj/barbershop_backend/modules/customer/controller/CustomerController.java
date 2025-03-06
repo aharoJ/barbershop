@@ -1,5 +1,6 @@
 package io.aharoj.barbershop_backend.modules.customer.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -52,22 +53,11 @@ public class CustomerController {
     return customerService.updateCustomerProfile(userDetails.getId(), request);
   }
 
-  /**
-   * Get a CustomerProfile by the user's ID path param.
-   * Useful if your front-end calls /api/customers/7/profile, for example.
-   * 
-   * 
-   * actually looking back after doing research
-   * this should not be allowed unless a SUPER_USER is here 
-   */
 
-  // @GetMapping("/{userId}/profile")
-  // @PreAuthorize("hasRole('CUSTOMER')")
-  // public CustomerResponse getCustomerProfileByUserIdParam(
-  //     @PathVariable Long userId,
-  //     @AuthenticationPrincipal UserDetailsImpl userDetails) {
-  //   return customerService.getCustomerProfileByUserId(userId);
-  // }
-
-
+  @DeleteMapping("/me")
+  @PreAuthorize("hasRole('CUSTOMER')")
+  public ResponseEntity<?> deleteCustomerProfile(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+    customerService.deleteCustomerProfile(userDetails.getId());
+    return ResponseEntity.ok("Customer profile deleted successfully :(");
+  }
 }

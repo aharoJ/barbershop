@@ -37,4 +37,6 @@ public interface CustomerService {
      * @note for client
      */
     CustomerResponse updateCustomerProfile(Long userId, CustomerRequest request);
+    
+    void deleteCustomerProfile(Long userId);
 }

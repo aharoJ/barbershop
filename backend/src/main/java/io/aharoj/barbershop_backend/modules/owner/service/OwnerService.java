@@ -19,22 +19,21 @@ public interface OwnerService {
    * Retrieve an OwnerProfile by user ID.
    *
    * @param userId the ID of the user whose OwnerProfile we want
-   * @return an OwnerProfileResponse if found; otherwise throws an exception 
+   * @return an OwnerProfileResponse if found; otherwise throws an exception
    * @sidenote This ensures the entity remains an internal detail
    */
   OwnerResponse getOwnerProfileByUserId(Long userId);
 
+  /**
+   * Update the OwnerProfile for a given user.
+   *
+   * @param userId  the ID of the user whose profile should be updated
+   * @param request the new data for the OwnerProfile
+   * @return an OwnerProfileResponse containing the updated data
+   */
+  OwnerResponse updateOwnerProfile(Long userId, OwnerRequest request);
 
-    /**
-     * Update the OwnerProfile for a given user.
-     *
-     * @param userId  the ID of the user whose profile should be updated
-     * @param request the new data for the OwnerProfile
-     * @return an OwnerProfileResponse containing the updated data
-     */
-    OwnerResponse updateOwnerProfile(Long userId, OwnerRequest request);
+  // created... come back to annotate nicely
+  void deleteOwnerProfile(Long userId);
 
-    // created... come back to annotate nicely 
-    void deleteOwnerProfile(Long userId);
-    
 }
