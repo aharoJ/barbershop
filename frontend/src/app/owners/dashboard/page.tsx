@@ -16,12 +16,20 @@ import {
 } from "@/modules/shadcn/ui/card";
 
 import { Badge } from "@/modules/shadcn/ui/badge";
-import { Loader2, PlusCircle, Settings, Trash, User } from "lucide-react";
+import {
+  Loader2,
+  LogOut,
+  LogOutIcon,
+  PlusCircle,
+  Settings,
+  Trash,
+  User,
+} from "lucide-react";
 import Link from "next/link";
+import { authService } from "@/modules/auth/services/auth.service";
 
 export default function OwnerDashboard() {
   const router = useRouter();
-  const { user } = useAuthStore();
 
   // Fetch data
   const { data: ownerProfile, isLoading: isLoadingProfile } =
@@ -34,8 +42,30 @@ export default function OwnerDashboard() {
     {
       queryKey: ["my-shops"],
       queryFn: () => shopService.getShopsByOwner(),
-    },
+    }
   );
+
+  // updated handleLogout
+  const handleLogout = async () => {
+    // 1) Grab refresh token from our store
+    const { refreshToken } = useAuthStore.getState();
+
+    if (refreshToken) {
+      try {
+        // 2) Call backend to invalidate refresh token
+        await authService.logout(refreshToken);
+      } catch (err) {
+        console.error("Logout error:", err);
+        // optionally handle error
+      }
+    }
+
+    // 3) Clear tokens from the store (this sets user=null, tokens=null)
+    useAuthStore.getState().logout();
+
+    // 4) Redirect to login
+    router.push("/login");
+  };
 
   if (isLoadingProfile || isLoadingShops) {
     return (
@@ -50,7 +80,6 @@ export default function OwnerDashboard() {
       <div className="p-8 text-red-600">Failed to load dashboard data</div>
     );
   }
-
   return (
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="max-w-7xl mx-auto">
@@ -66,13 +95,22 @@ export default function OwnerDashboard() {
           </div>
 
           <div className="flex gap-4">
-            <Button asChild className="bg-red-400/90 hover:bg-red-500">
+            {/* Delete Profile */}
+            <Button asChild className="bg-red-400/60 hover:bg-red-500">
               <Link href="profile/delete">
                 <Trash className="mr-2 h-4 w-4" />
                 Delete Profile
               </Link>
             </Button>
-            <Button asChild>
+
+            {/* Logout */}
+            <Button onClick={handleLogout} className="hover:bg-black/20">
+              <LogOut className="mr-2 h-4 w-4" />
+              Logout
+            </Button>
+
+            {/* Edit Profile */}
+            <Button asChild className="hover:bg-black/20">
               <Link href="profile/edit">
                 <Settings className="mr-2 h-4 w-4" />
                 Edit Profile

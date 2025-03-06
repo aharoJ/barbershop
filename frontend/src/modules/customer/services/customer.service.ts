@@ -4,4 +4,5 @@ export interface CustomerService {
   createCustomerProfile(payload: CustomerPayload): Promise<CustomerResponse>;
   getCustomerProfile(): Promise<CustomerResponse>;
   updateCustomerProfile(payload: CustomerPayload): Promise<CustomerResponse>;
+  deleteCustomerProfile(): Promise<void>;
 }

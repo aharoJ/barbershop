@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ownerService } from "@/modules/owner/services";
 import { Button } from "@/modules/shadcn/ui/button";
 import {
   Card,
@@ -12,8 +11,9 @@ import {
 import { Alert, AlertTitle, AlertDescription } from "@/modules/shadcn/ui/alert";
 import { AlertTriangleIcon, Loader2Icon, ArrowLeftIcon } from "lucide-react";
 import { motion } from "framer-motion";
+import { customerService } from "@/modules/customer/services";
 
-export default function DeleteOwnerProfilePage() {
+export default function DeleteCustomerProfilePage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -27,7 +27,7 @@ export default function DeleteOwnerProfilePage() {
     setLoading(true);
     setError(null);
     try {
-      await ownerService.deleteOwnerProfile();
+      await customerService.deleteCustomerProfile();
       router.push("/");
     } catch (err) {
       console.error("Delete error:", err);

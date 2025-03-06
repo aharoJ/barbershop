@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { barberService } from "@/modules/barber/services";
 import { BarberResponse } from "@/modules/barber/types/barber.types";
 import { Button } from "@/modules/shadcn/ui/button";
-import { Loader2, Settings, User } from "lucide-react";
+import { Loader2, LogOut, Settings, Trash, User } from "lucide-react";
 import Link from "next/link";
 import {
   Card,
@@ -12,13 +12,40 @@ import {
   CardHeader,
   CardTitle,
 } from "@/modules/shadcn/ui/card";
+import { useAuthStore } from "@/stores/auth.store";
+import { authService } from "@/modules/auth/services/auth.service";
+import { useRouter } from "next/navigation";
+
 
 export default function BarberDashboard() {
+  const router = useRouter();
+
   const { data: barberProfile, isLoading: isLoadingProfile } =
     useQuery<BarberResponse>({
       queryKey: ["barber-profile"],
       queryFn: () => barberService.getBarberProfile(),
     });
+
+  // updated handleLogout
+  const handleLogout = async () => {
+    // 1) Grab refresh token from our store
+    const { refreshToken } = useAuthStore.getState();
+
+    if (refreshToken) {
+      try {
+        // 2) Call backend to invalidate refresh token
+        await authService.logout(refreshToken);
+      } catch (err) {
+        console.error("Logout error:", err);
+      }
+    }
+
+    // 3) Clear tokens from the store (this sets user=null, tokens=null)
+    useAuthStore.getState().logout();
+
+    // 4) Redirect to login
+    router.push("/login");
+  };
 
   if (isLoadingProfile) {
     return (
@@ -47,12 +74,27 @@ export default function BarberDashboard() {
               Welcome back, {barberProfile.firstName} 👋
             </p>
           </div>
-          <Button asChild>
-            <Link href="/barbers/profile/edit">
-              <Settings className="mr-2 h-4 w-4" />
-              Edit Profile
-            </Link>
-          </Button>
+          <div className="flex gap-4">
+            <Button asChild className="bg-red-400/60 hover:bg-red-500">
+              <Link href="profile/delete">
+                <Trash className="mr-2 h-4 w-4" />
+                Delete Profile
+              </Link>
+            </Button>
+
+            {/* Logout */}
+            <Button onClick={handleLogout} className="hover:bg-black/20">
+              <LogOut className="mr-2 h-4 w-4" />
+              Logout
+            </Button>
+
+            <Button asChild>
+              <Link href="/barbers/profile/edit">
+                <Settings className="mr-2 h-4 w-4" />
+                Edit Profile
+              </Link>
+            </Button>
+          </div>
         </div>
 
         {/* Profile Card */}

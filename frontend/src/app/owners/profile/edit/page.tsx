@@ -1,5 +1,5 @@
 "use client";
-// app/owners/[userId]/profile/edit/page.tx
+// app/owners/profile/edit/page.tx
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -14,21 +14,14 @@ import { Button } from "@/modules/shadcn/ui/button";
 
 export default function EditOwnerProfilePage() {
   const router = useRouter();
-  const {
-    data: existingProfile,
-    isLoading,
-    isError,
-  } = useQuery({
+  const {data: existingProfile,isLoading,isError,} = 
+  useQuery({
     queryKey: ["owner-profile"],
     queryFn: () => ownerService.getOwnerProfile(),
   });
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<OwnerPayload>({ resolver: zodResolver(ownerSchema) });
+  const {register,handleSubmit,formState: { errors }, reset} = 
+  useForm<OwnerPayload>({ resolver: zodResolver(ownerSchema) });
 
   useEffect(() => {
     if (existingProfile && !isLoading) {
@@ -100,13 +93,13 @@ export default function EditOwnerProfilePage() {
             </span>
           )}
         </div>
-
-        <Button
-          type="submit"
-          className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700"
-        >
-          Save Changes
-        </Button>
+        
+          <Button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700"
+            >
+            Save Changes
+          </Button>
       </form>
     </div>
   );

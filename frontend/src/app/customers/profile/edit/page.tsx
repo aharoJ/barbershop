@@ -11,23 +11,15 @@ import { useRouter, useParams } from "next/navigation";
 import { useEffect } from "react";
 import { customerService } from "@/modules/customer/services";
 import { Button } from "@/modules/shadcn/ui/button";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-} from "@/modules/shadcn/ui/card";
+import { Card, CardHeader, CardTitle, CardContent } from "@/modules/shadcn/ui/card";
 import { Label } from "@radix-ui/react-dropdown-menu";
 import { Input } from "@/modules/shadcn/ui/input";
 
 export default function EditCustomerProfilePage() {
   const router = useRouter();
 
-  const {
-    data: existingProfile,
-    isLoading,
-    isError,
-  } = useQuery({
+  const {data: existingProfile,isLoading,isError,} = 
+  useQuery({
     queryKey: ["customer-profile"],
     queryFn: () => customerService.getCustomerProfile(),
   });

@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { customerService } from "@/modules/customer/services";
 import { CustomerResponse } from "@/modules/customer/types/customer.types";
 import { Button } from "@/modules/shadcn/ui/button";
-import { Loader2, Settings, User } from "lucide-react";
+import { Loader2, LogOut, Settings, Trash, User } from "lucide-react";
 import Link from "next/link";
 import {
   Card,
@@ -13,13 +13,31 @@ import {
   CardTitle,
 } from "@/modules/shadcn/ui/card";
 import { Badge } from "@/modules/shadcn/ui/badge";
+import { useAuthStore } from "@/stores/auth.store";
+import { authService } from "@/modules/auth/services/auth.service";
+import { useRouter } from "next/navigation";
 
 export default function CustomerDashboard() {
+  const router = useRouter();
+
   const { data: customerProfile, isLoading: isLoadingProfile } =
     useQuery<CustomerResponse>({
       queryKey: ["customer-profile"],
       queryFn: () => customerService.getCustomerProfile(),
     });
+
+  const handleLogout = async () => {
+    const { refreshToken } = useAuthStore.getState();
+    if (refreshToken) {
+      try {
+        await authService.logout(refreshToken);
+      } catch (error) {
+        console.log("Logout errro: ", error);
+      }
+    }
+    useAuthStore.getState().logout();
+    router.push("/login");
+  };
 
   if (isLoadingProfile) {
     return (
@@ -48,12 +66,27 @@ export default function CustomerDashboard() {
               Welcome back, {customerProfile.firstName} 👋
             </p>
           </div>
-          <Button asChild>
-            <Link href="/customers/profile/edit">
-              <Settings className="mr-2 h-4 w-4" />
-              Edit Profile
-            </Link>
-          </Button>
+          <div className="flex gap-4">
+            <Button asChild className="bg-red-400/60 hover:bg-red-500">
+              <Link href="profile/delete">
+                <Trash className="mr-2 h-4 w-4" />
+                Delete Profile
+              </Link>
+            </Button>
+
+            {/* Logout */}
+            <Button onClick={handleLogout} className="hover:bg-black/20">
+              <LogOut className="mr-2 h-4 w-4" />
+              Logout
+            </Button>
+
+            <Button asChild>
+              <Link href="/customers/profile/edit">
+                <Settings className="mr-2 h-4 w-4" />
+                Edit Profile
+              </Link>
+            </Button>
+          </div>
         </div>
 
         {/* Profile Card */}
