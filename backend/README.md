@@ -2,8 +2,9 @@
 
 **Spring Boot 3 • PostgreSQL • JWT/RSA Security**
 
-[![Java 17](https://img.shields.io/badge/Java-17-007396?logo=java)](https://java.com/)  
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?logo=postgresql)](https://www.postgresql.org/)
+[![Java 17](https://img.shields.io/badge/Java-17-007396?logo=java)](https://java.com/) [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?logo=postgresql)](https://www.postgresql.org/)
+
+[![Spring Boot](https://img.shields.io/badge/Spring_Boot-3-6DB33F?logo=springboot)](https://spring.io/projects/spring-boot) [![Spring Security](https://img.shields.io/badge/Spring_Security-6-6DB33F?logo=springsecurity)](https://spring.io/projects/spring-security) [![JPA](https://img.shields.io/badge/JPA-Hibernate-59666C?logo=hibernate)](https://hibernate.org) [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?logo=postgresql)](https://www.postgresql.org/) [![JWT](https://img.shields.io/badge/JWT-0.11.5-000000?logo=jsonwebtokens)](https://jwt.io) [![Java](https://img.shields.io/badge/Java-17-007396?logo=openjdk)](https://openjdk.org) [![Actuator](https://img.shields.io/badge/Spring_Actuator-3-6DB33F)]() [![Validation](https://img.shields.io/badge/Bean_Validation-3-6DB33F)]()
 
 ## 🛠 Features
 
@@ -15,14 +16,7 @@
 
 ## 📦 Database Schema
 
-![Database Diagram](public/backend-img/database.png)
-
-## 📚 API Documentation
-
-```bash
-# Local access after running:
-http://localhost:8080/swagger-ui.html
-```
+![Database Diagram](../public/backend-img/database.png)
 
 ## 🧩 Project Structure
 
