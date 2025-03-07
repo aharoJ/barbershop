@@ -170,6 +170,5 @@ graph TD
 
 
 ## End
-- [Back to top](../frontend/README.md)
 - [Check backend documentation](../backend/README.md)
 - [Landing Documentation](../README.md)
