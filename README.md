@@ -46,7 +46,7 @@
 
 ```mermaid
 graph LR
-  subgraph "BarberOS System Architecture"
+  subgraph "System Architecture"
     A[Client] --> B[Next.js Frontend]
     B --> C[Spring Boot API]
     C --> D[(PostgreSQL Database)]
