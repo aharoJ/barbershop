@@ -243,6 +243,6 @@ classDiagram
 **Licensed under AGPL-3.0** – See [LICENSE](LICENSE).
 
 ## End
-[View Backend Documentation](../backend/README.md)  
-[View Backend Documentation](../frontend/README.md)  
-[Main Project Documentation](../README.md)
+- [Back to top](../backend/README.md)
+- [Check frontend documentation](../frontend/README.md)
+- [Landing Documentation](../README.md)

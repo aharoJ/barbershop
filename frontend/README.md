@@ -170,6 +170,6 @@ graph TD
 
 
 ## End
-[View Backend Documentation](../backend/README.md)  
-[View Backend Documentation](../frontend/README.md)  
-[Main Project Documentation](../README.md)
+- [Back to top](../frontend/README.md)
+- [Check backend documentation](../backend/README.md)
+- [Landing Documentation](../README.md)
