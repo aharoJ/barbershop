@@ -60,7 +60,7 @@ sequenceDiagram
   }
   ```
 
-## Module Specification
+## Module Snippet
 
 ### Shop Management Module
 
