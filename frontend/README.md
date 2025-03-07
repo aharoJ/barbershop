@@ -28,7 +28,7 @@ A **modern web interface** for managing barbershop operations, built with **Next
 - 22 entity relationships
 - 9 enum state machines
 
-📌 **Frontend Documentation**
+📌 **Frontend Documentation (CURRENTLY HERE)**
 
 - 31 React components
 - 8 Zustand stores
