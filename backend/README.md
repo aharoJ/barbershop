@@ -1,13 +1,14 @@
 # BarberOS Backend System
 
 **Enterprise-grade barbershop management API**  
-*Spring Boot 3 | Java 17 | PostgreSQL | JWT/RSA Security*
+_Spring Boot 3 | Java 17 | PostgreSQL | JWT/RSA Security_
 
 [![Spring Boot](https://img.shields.io/badge/Spring_Boot-3-6DB33F?logo=springboot)](https://spring.io/projects/spring-boot) [![Spring Security](https://img.shields.io/badge/Spring_Security-6-6DB33F?logo=springsecurity)](https://spring.io/projects/spring-security) [![JPA](https://img.shields.io/badge/JPA-Hibernate-59666C?logo=hibernate)](https://hibernate.org) [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?logo=postgresql)](https://www.postgresql.org/) [![JWT](https://img.shields.io/badge/JWT-0.11.5-000000?logo=jsonwebtokens)](https://jwt.io) [![Java](https://img.shields.io/badge/Java-17-007396?logo=openjdk)](https://openjdk.org) [![Actuator](https://img.shields.io/badge/Spring_Actuator-3-6DB33F)]() [![Validation](https://img.shields.io/badge/Bean_Validation-3-6DB33F)]()
 
 ## Architectural Overview
 
 ### Layered Architecture
+
 ```
 Presentation Layer → Business Layer → Persistence Layer → Database
        ↑                   ↑                  ↑
@@ -15,6 +16,7 @@ Presentation Layer → Business Layer → Persistence Layer → Database
 ```
 
 ### Security Architecture
+
 ```mermaid
 sequenceDiagram
     Client->>+API Gateway: Request (No JWT)
@@ -27,6 +29,7 @@ sequenceDiagram
 ## Core Components
 
 ### 1. Authentication System
+
 - **JWT Implementation**: RSA-256 signed tokens with refresh token rotation
 - **Security Chain**:
   1. JwtRequestFilter validates token structure
@@ -35,14 +38,16 @@ sequenceDiagram
 - **Password Encoding**: BCrypt with strength 12
 
 ### 2. Domain Model
-| Entity               | Relationships              | Business Rules              |
-|----------------------|---------------------------|-----------------------------|
-| `Appointment`        | ManyToOne: User, Barber   | Time slot validation        |
-| `Payment`            | OneToOne: Appointment      | PCI-DSS compliance          |
-| `ShopApplication`    | ManyToOne: Barber, Shop   | State transition validation |
+
+| Entity            | Relationships           | Business Rules              |
+| ----------------- | ----------------------- | --------------------------- |
+| `Appointment`     | ManyToOne: User, Barber | Time slot validation        |
+| `Payment`         | OneToOne: Appointment   | PCI-DSS compliance          |
+| `ShopApplication` | ManyToOne: Barber, Shop | State transition validation |
 
 ### 3. API Design Principles
-- **Resource Naming**: 
+
+- **Resource Naming**:
   - `/api/{domain}/{resource}/{id}`
   - Example: `/api/shops/{shopId}/seats`
 - **Response Standardization**:
@@ -58,6 +63,7 @@ sequenceDiagram
 ## Module Specification
 
 ### Auth Module
+
 ```bash
 auth/
 ├── security             # Security configuration
@@ -71,6 +77,7 @@ auth/
 ```
 
 ### Shop Management Module
+
 ```java
 // Seat allocation algorithm
 public Seat allocateSeat(SeatRequest request) {
@@ -83,6 +90,7 @@ public Seat allocateSeat(SeatRequest request) {
 ## Development Guidelines
 
 ### Database Schema Management
+
 ```sql
 CREATE TABLE shops (
     id UUID PRIMARY KEY,
@@ -92,48 +100,9 @@ CREATE TABLE shops (
 );
 ```
 
-### Validation Framework
-```java
-@PostMapping
-public ResponseEntity<?> createAppointment(
-    @Valid @RequestBody AppointmentRequest request) {
-    // Bean Validation 3.0 constraints
-    // Custom business rule validation
-}
-```
 
-## Testing Strategy
-
-| Test Type         | Coverage Target      | Tools Used         |
-|-------------------|----------------------|--------------------|
-| Unit Tests        | Service Layer        | JUnit 5, Mockito   |
-| Integration Tests | API Endpoints        | Testcontainers     |
-| Security Tests    | Auth Flow            | Spring Security Test |
-| Performance Tests | Concurrent Access    | JMeter             |
-
-## API Documentation
-
-Access Swagger UI at `http://localhost:8080/swagger-ui.html`  
-OpenAPI Spec: `http://localhost:8080/v3/api-docs`
-
-## Contribution Guidelines
-
-1. Branch Naming: `feature/{jira-id}-short-description`
-2. Commit Message Format:
-   ```
-   [MODULE] [CATEGORY] Description
-   [AUTH] [SECURITY] Add refresh token rotation
-   ```
-3. Code Review Requirements:
-   - 100% unit test coverage for new features
-   - SonarQube analysis passing
-   - OpenAPI documentation updated
-
----
-
-*Licensed under AGPL-3.0 - See [LICENSE](LICENSE) for details*  
-*Architectural documentation maintained in `/docs/architecture`*
-
+_Licensed under AGPL-3.0 - See [LICENSE](LICENSE) for details_  
+_Architectural documentation maintained in `/docs/architecture`_
 
 [🔼 Back to Main README](../README.md)
 
