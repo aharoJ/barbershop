@@ -13,20 +13,22 @@ A **modern web interface** for managing barbershop operations, built with **Next
 ```
 .
 ├── backend/       # Spring Boot API (Authentication, Business Logic)
-├── frontend/      # Next.js 15 Web App (UI & Client Interaction)
+├── frontend/      # (CURRENTLY HERE)
 ├── docs/          # Documentation, ADRs, Security Reports (private for now)
 ├── public/        # Static assets (images, icons, etc.)
 ```
 
 ### 📖 **Documentation & Reference**
 
-📌 **[Backend Documentation](backend/README.md)**
+📌 **[Landing Documentation](../README.md)**
+
+📌 **[Backend Documentation](../backend/README.md)**
 
 - 48 REST endpoints
 - 22 entity relationships
 - 9 enum state machines
 
-📌 **[Frontend Documentation](frontend/README.md)**
+📌 **[Frontend Documentation](../frontend/README.md)**
 
 - 31 React components
 - 8 Zustand stores

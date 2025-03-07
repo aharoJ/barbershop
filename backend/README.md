@@ -12,7 +12,7 @@ _Spring Boot 3 | Java 17 | PostgreSQL | JWT/RSA Security_
 
 ```
 .
-├── backend/       # Spring Boot API (Authentication, Business Logic)
+├── backend/       # (CURRENTLY HERE)
 ├── frontend/      # Next.js 15 Web App (UI & Client Interaction)
 ├── docs/          # Documentation, ADRs, Security Reports (private for now)
 ├── public/        # Static assets (images, icons, etc.)
@@ -20,13 +20,15 @@ _Spring Boot 3 | Java 17 | PostgreSQL | JWT/RSA Security_
 
 ### 📖 **Documentation & Reference**
 
-📌 **[Backend Documentation](backend/README.md)**
+📌 **[Landing Documentation](../README.md)**
+
+📌 **[Backend Documentation](../backend/README.md)**
 
 - 48 REST endpoints
 - 22 entity relationships
 - 9 enum state machines
 
-📌 **[Frontend Documentation](frontend/README.md)**
+📌 **[Frontend Documentation](../frontend/README.md)**
 
 - 31 React components
 - 8 Zustand stores
