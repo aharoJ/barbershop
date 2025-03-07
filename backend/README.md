@@ -87,43 +87,6 @@ public Seat allocateSeat(SeatRequest request) {
 }
 ```
 
-## Development Guidelines
-
-### Database Schema Management
-
-```sql
-CREATE TABLE shops (
-    id UUID PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    capacity INT CHECK (capacity > 0),
-    CONSTRAINT unique_shop_name UNIQUE (name)
-);
-```
-
-
-_Licensed under AGPL-3.0 - See [LICENSE](LICENSE) for details_  
-_Architectural documentation maintained in `/docs/architecture`_
-
-[🔼 Back to Main README](../README.md)
-
----
-
----
-
----
-
----
-
----
-
----
-
-# BarberShop Backend API
-
-REST API for managing barbershop operations, built with Java Spring Boot.
-
-## Features
-
 ### Authentication
 
 - `POST /api/auth/signup` - User registration
@@ -185,3 +148,20 @@ REST API for managing barbershop operations, built with Java Spring Boot.
 │  ├── service
 │  └── serviceImpl
 ```
+
+### Database Schema Management
+
+```sql
+CREATE TABLE shops (
+    id UUID PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    capacity INT CHECK (capacity > 0),
+    CONSTRAINT unique_shop_name UNIQUE (name)
+);
+```
+
+_Licensed under AGPL-3.0 - See [LICENSE](LICENSE) for details_  
+_Architectural documentation maintained in `/docs/architecture`_
+
+[View Frontend Documentation](../frontend/README.md)  
+[Main Project Documentation](../README.md)
