@@ -40,7 +40,7 @@ export default function LoginPage() {
           roles: response.roles,
         },
         response.accessToken,
-        response.refreshToken
+        response.refreshToken,
       );
 
       // dynamic roles

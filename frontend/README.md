@@ -1,96 +1,61 @@
-# BarberOS Frontend 🖥️  
-**Next.js 15 • TypeScript • Tailwind CSS**  
+# BarberOS Frontend 🖥️
+
+**Next.js 15 • TypeScript • Tailwind CSS**
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript)](https://typescriptlang.org)  
-[![Zustand](https://img.shields.io/badge/State_Zustand-4.4.1-2A2A2A)](https://zustand-demo.pmnd.rs/)  
+[![Zustand](https://img.shields.io/badge/State_Zustand-4.4.1-2A2A2A)](https://zustand-demo.pmnd.rs/)
 
-## 🌈 UI Features  
+## 🌈 UI Features
+
 - **Role-based Dashboards**  
-  ![Dashboard Preview](../public/frontend-img/dashboard.png)  
+  ![Dashboard Preview](../public/frontend-img/dashboard.png)
 
-- **Authentication Flows**  
-  ```tsx  
-  // Protected route example  
-  const { user } = useAuthStore();  
-  return user ? <Dashboard /> : <Login />;  
-  ```  
+- **Authentication Flows**
+  ```tsx
+  // Protected route example
+  const { user } = useAuthStore();
+  return user ? <Dashboard /> : <Login />;
+  ```
 
-## 🚦 Routing System  
-| Path                  | Component              |  
-|-----------------------|------------------------|  
-| `/owner/[id]/dashboard` | Shop analytics        |  
-| `/barber/[id]/schedule` | Appointment calendar  |  
+## 🚦 Routing System
 
-## 🧱 Project Structure  
-```bash  
-src/  
-├── app/          # App router  
-├── stores/       # Zustand state  
-│   └── authStore.ts  
-└── modules/  
-    ├── auth/     # Auth services  
-    └── payment/  # Stripe integration  
-```  
+| Path                    | Component            |
+| ----------------------- | -------------------- |
+| `/owner/[id]/dashboard` | Shop analytics       |
+| `/barber/[id]/schedule` | Appointment calendar |
 
-[🔼 Back to Main README](../README.md)  
+## 🧱 Project Structure
 
+```bash
+src/
+├── app/          # App router
+├── stores/       # Zustand state
+│   └── authStore.ts
+└── modules/
+    ├── auth/     # Auth services
+    └── payment/  # Stripe integration
+```
+
+[🔼 Back to Main README](../README.md)
 
 ---
----
----
----
----
+
 ---
 
+---
 
+---
 
+---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+---
 
 # BarberShop Frontend
 
 Next.js web application for barbershop management.
 
 ## Features
+
 - Authentication flows (Login/Signup)
 - Profile management for:
   - Barbers
@@ -99,7 +64,7 @@ Next.js web application for barbershop management.
 - Shop browsing and management interface
 - Protected routes using JWT
 
-## UI Sample 
+## UI Sample
 
 > Sign up
 
@@ -112,7 +77,6 @@ Next.js web application for barbershop management.
 > Dynamic routing {id}/dashboard
 
 ![alt text](../public/frontend-img/dashboard.png)
-
 
 ## Project Structure
 

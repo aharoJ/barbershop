@@ -20,7 +20,7 @@ export default function DeleteOwnerProfilePage() {
 
   const handleDelete = async () => {
     const confirmed = window.confirm(
-      "This will permanently remove all your data. Confirm irreversible deletion:"
+      "This will permanently remove all your data. Confirm irreversible deletion:",
     );
     if (!confirmed) return;
 

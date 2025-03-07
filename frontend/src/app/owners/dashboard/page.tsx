@@ -34,7 +34,7 @@ export default function OwnerDashboard() {
     {
       queryKey: ["my-shops"],
       queryFn: () => shopService.getShopsByOwner(),
-    }
+    },
   );
 
   if (isLoadingProfile || isLoadingShops) {
@@ -64,20 +64,20 @@ export default function OwnerDashboard() {
               Welcome back, {ownerProfile.firstName} 👋
             </p>
           </div>
-          
+
           <div className="flex gap-4">
-          <Button asChild className="bg-red-400/90 hover:bg-red-500">
-            <Link href="profile/delete">
-              <Trash className="mr-2 h-4 w-4" />
-              Delete Profile
-            </Link>
-          </Button>
-          <Button asChild>
-            <Link href="profile/edit">
-              <Settings className="mr-2 h-4 w-4" />
-              Edit Profile
-            </Link>
-          </Button>
+            <Button asChild className="bg-red-400/90 hover:bg-red-500">
+              <Link href="profile/delete">
+                <Trash className="mr-2 h-4 w-4" />
+                Delete Profile
+              </Link>
+            </Button>
+            <Button asChild>
+              <Link href="profile/edit">
+                <Settings className="mr-2 h-4 w-4" />
+                Edit Profile
+              </Link>
+            </Button>
           </div>
         </div>
 
