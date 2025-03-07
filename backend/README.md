@@ -62,20 +62,6 @@ sequenceDiagram
 
 ## Module Specification
 
-### Auth Module
-
-```bash
-auth/
-├── security             # Security configuration
-│   ├── JwtTokenUtil.java      # Token generation/validation
-│   └── WebSecurityConfig.java # Security filter chain
-├── model                # Security domain objects
-│   ├── Role.java        # Role-based access control
-│   └── RefreshToken.java # Token rotation implementation
-└── serviceImpl          # Authentication providers
-    └── UserDetailsServiceImpl.java # UserDetailsService implementation
-```
-
 ### Shop Management Module
 
 ```java
@@ -117,7 +103,7 @@ public Seat allocateSeat(SeatRequest request) {
 
 ![alt text](../public/backend-img/database.png)
 
-### Project Structure
+### Minimal Tree 
 
 > Auth and Barber minimal sample
 
@@ -135,7 +121,7 @@ public Seat allocateSeat(SeatRequest request) {
 │  │  ├── entity
 │  │  └── enums
 │  ├── repository
-│  ├── security
+│  ├── security        
 ├── barber
 │  ├── controller
 │  ├── dto
