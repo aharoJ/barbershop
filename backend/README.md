@@ -93,7 +93,7 @@ public Seat allocateSeat(SeatRequest request) {
 
 - Barber applications workflow with owner approval/rejection
 
-## Image Samples
+### Image Samples
 
 > function snippet
 

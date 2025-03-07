@@ -115,3 +115,127 @@ Spring Boot API handling business logic, authentication, and data management
 ### [VISIT FRONTEND](frontend/)
 
 Next.js web application implementing user workflows
+
+
+[View Frontend Documentation](frontend/README.md)  
+[View Backend Documentation](backend/README.md)  
+
+
+---
+---
+---
+---
+---
+---
+---
+---
+
+
+
+
+
+# BarberOS Platform  
+**Enterprise Barbershop Management System**  
+
+[![AGPL-3.0](https://img.shields.io/badge/License-AGPL--3.0-blue)](LICENSE)  
+[![CI/CD Pipeline](https://img.shields.io/badge/CI/CD-GitHub_Actions-2088FF?logo=githubactions)](.github/workflows)  
+[![Documentation](https://img.shields.io/badge/Docs-MkDocs-00B388?logo=readthedocs)](docs/)  
+
+## Architectural Overview  
+
+### System Topology  
+```mermaid  
+flowchart TD  
+    Client[Web/Mobile Client] -->|HTTPS| Gateway[API Gateway]  
+    Gateway -->|gRPC| Auth[Auth Service]  
+    Gateway -->|REST| Core[Core Services]  
+    Core -->|JDBC| DB[(PostgreSQL Cluster)]  
+    Core -->|AMQP| Events[Event Bus]  
+    Events --> Notify[Notification Service]  
+    Events --> Analytics[BI Service]  
+```  
+
+## Key System Characteristics  
+
+| Attribute               | Implementation Strategy                  | Verification Method         |  
+|-------------------------|------------------------------------------|-----------------------------|  
+| Availability            | 99.9% SLA via Kubernetes HPA            | Chaos Engineering Tests     |  
+| Data Consistency        | Event Sourcing with CQRS                 | Jepsen Testing              |  
+| Audit Compliance        | Immutable Request Logging                | SOC2 Audit Reports          |  
+| Fault Tolerance         | Circuit Breakers (Resilience4j)          | Failure Injection Testing   |  
+
+## Cross-Cutting Concerns  
+
+### Security Model  
+```text
+RBAC → ABAC → ReBAC Hierarchy:  
+Role-Based Access Control → Attribute-Based → Relationship-Based  
+  ↓            ↓                  ↓  
+User Roles   Resource Tags   Owner-Barber-Shop Relationships  
+```
+
+### Observability Stack  
+| Component      | Toolchain                          | Sampling Rate |  
+|----------------|------------------------------------|---------------|  
+| Metrics        | Prometheus + Grafana               | 100%          |  
+| Logging        | ELK Stack                          | 10%           |  
+| Distributed Tracing | Jaeger                          | 5%            |  
+
+## Development Ecosystem  
+
+### Repository Structure  
+```  
+.  
+├── backend/         # Core business logic implementation  
+├── frontend/        # User interface components  
+├── docs/            # Architectural decision records  
+├── infrastructure/  # Terraform/IaC configurations  
+└── contracts/       # OpenAPI/Protobuf specifications  
+```  
+
+## Quality Assurance  
+
+### Verification Matrix  
+| Test Type         | Scope              | Tools                  | Coverage Target |  
+|-------------------|--------------------|------------------------|-----------------|  
+| Contract Testing  | API Endpoints      | Pact                   | 100% endpoints  |  
+| Property Testing  | Domain Logic       | jqwik (Java)/fast-check (TS) | 85% edge cases |  
+| Load Testing      | Concurrent Users   | k6                     | 10k RPS         |  
+
+## Getting Started  
+
+```bash  
+# Clone repository  
+git clone https://github.com/yourorg/barberos.git  
+
+# Initialize development environment  
+make init-env  
+
+# Follow component-specific guides:  
+- Backend: See backend/README.md  
+- Frontend: See frontend/README.md  
+```  
+
+## Documentation Hierarchy  
+```  
+docs/  
+├── ARCHITECTURE.md     # System-wide design decisions  
+├── DATA_MODEL.md       # Entity-relationship diagrams  
+├── API_SPEC.md         # OpenAPI documentation  
+└── OPERATIONS.md       # Deployment runbooks  
+```  
+
+## Citation & Attribution  
+If using this architecture in academic work, cite as:  
+```  
+@software{BarberOS,  
+  author = {Your Name},  
+  title = {BarberOS: Modern Barbershop Management Platform},  
+  year = {2024},  
+  url = {https://github.com/yourorg/barberos}  
+}  
+```  
+
+---  
+*This documentation reflects the implemented system architecture as of commit [a1b2c3d].  
+For implementation details, refer to component-specific documentation.*
