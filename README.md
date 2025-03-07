@@ -46,21 +46,21 @@
 
 ```mermaid
 graph LR
-  subgraph "System Architecture"
+  subgraph "BarberOS System Architecture"
     A[Client] --> B[Next.js Frontend]
     B --> C[Spring Boot API]
     C --> D[(PostgreSQL Database)]
     C --> E[Redis Cache]
-    C --> F[Payment Gateway: Stripe & PayPal]
-    C --> G[Auth Service - OAuth2]
+    C --> F["Payment Gateway \(Stripe/PayPal\)"]
+    C --> G["Auth Service \(OAuth2\)"]
   end
 
-  %% Dark Mode Styling
-  classDef primary fill:black,stroke:white,color:white,font-weight:bold;
-  classDef secondary fill:black,stroke:white,color:white;
-
+  classDef primary fill:#2E86C1,stroke:#1B4F72,color:white,font-weight:bold;
+  classDef secondary fill:#AED6F1,stroke:#2E86C1,color:black;
+  
   class A,B,C primary;
   class D,E,F,G secondary;
+
 ```
 
 ```mermaid
