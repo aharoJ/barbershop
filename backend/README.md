@@ -5,7 +5,6 @@ _Spring Boot 3 | Java 17 | PostgreSQL | JWT/RSA Security_
 
 [![Spring Boot](https://img.shields.io/badge/Spring_Boot-3-6DB33F?logo=springboot)](https://spring.io/projects/spring-boot) [![Spring Security](https://img.shields.io/badge/Spring_Security-6-6DB33F?logo=springsecurity)](https://spring.io/projects/spring-security) [![JPA](https://img.shields.io/badge/JPA-Hibernate-59666C?logo=hibernate)](https://hibernate.org) [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?logo=postgresql)](https://www.postgresql.org/) [![JWT](https://img.shields.io/badge/JWT-0.11.5-000000?logo=jsonwebtokens)](https://jwt.io) [![Java](https://img.shields.io/badge/Java-17-007396?logo=openjdk)](https://openjdk.org) [![Actuator](https://img.shields.io/badge/Spring_Actuator-3-6DB33F)]() [![Validation](https://img.shields.io/badge/Bean_Validation-3-6DB33F)]()
 
-
 ![alt text](../public/backend-img/database.png)
 
 ## **Repository Overview**
@@ -22,7 +21,7 @@ _Spring Boot 3 | Java 17 | PostgreSQL | JWT/RSA Security_
 
 📌 **[Landing Documentation](../README.md)**
 
-📌 **[Backend Documentation](../backend/README.md)**
+📌 **Backend Documentation**
 
 - 48 REST endpoints
 - 22 entity relationships
@@ -33,7 +32,6 @@ _Spring Boot 3 | Java 17 | PostgreSQL | JWT/RSA Security_
 - 31 React components
 - 8 Zustand stores
 - 4 authentication workflows
-
 
 ## **Backend Architecture Overview**
 
@@ -243,5 +241,6 @@ classDiagram
 **Licensed under AGPL-3.0** – See [LICENSE](LICENSE).
 
 ## End
+
 - [Check frontend documentation](../frontend/README.md)
 - [Landing Documentation](../README.md)
