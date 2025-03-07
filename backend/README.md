@@ -1,8 +1,4 @@
 
----
-
-### **Backend README.md** (copy-paste)  
-```markdown
 # BarberOS Backend API 💻  
 **Spring Boot 3 • PostgreSQL • JWT/RSA Security**  
 

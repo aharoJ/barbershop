@@ -1,5 +1,3 @@
-### **Root README.md** (copy-paste)  
-```markdown
 # BarberOS ✂️ - Modern Barbershop Management Platform  
 [![Spring Boot](https://img.shields.io/badge/Spring_Boot-3-6DB33F?logo=spring)](https://spring.io/)  
 [![Next.js](https://img.shields.io/badge/Next.js-15-000000?logo=next.js)](https://nextjs.org/)  
