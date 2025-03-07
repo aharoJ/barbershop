@@ -80,15 +80,3 @@ mindmap
       Payment History
 ```
 
----
-
-## Citation & Attribution
-
-```
-@software{Barbershop,
-  author = {Angel Jair Haro Jimenez},
-  title = {Barbershop: Modern Barbershop Management Platform},
-  year = {2025},
-  url = {https://github.com/aharoj/barbershop}
-}
-```
