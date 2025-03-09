@@ -1,148 +1,145 @@
-# BarberOS Frontend
+# Barbershop Frontend
 
 [![Next.js](https://img.shields.io/badge/Next.js-15-000000?logo=next.js)](https://nextjs.org/) [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)](https://react.dev) [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript)](https://www.typescriptlang.org/) [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-06B6D4?logo=tailwindcss)](https://tailwindcss.com) [![Zustand](https://img.shields.io/badge/State_Management-Zustand_5-2A2A2A)](https://zustand-demo.pmnd.rs/) [![TanStack Query](https://img.shields.io/badge/Data_Fetching-React_Query_5-FF4154)](https://tanstack.com/query) [![Framer Motion](https://img.shields.io/badge/Animations-Framer_Motion_12-0055FF)](https://www.framer.com/motion/) [![Radix UI](https://img.shields.io/badge/Components-Radix_UI-161618)](https://www.radix-ui.com/) [![React Hook Form](https://img.shields.io/badge/Forms-React_Hook_Form_7-EC5990)](https://react-hook-form.com/) [![Turbopack](https://img.shields.io/badge/Bundler-Turbopack_✓-000000)](https://turbo.build/pack) [![ESLint](https://img.shields.io/badge/Linting-ESLint_9-4B32C3?logo=eslint)](https://eslint.org)
 
-
-A **modern web interface** for managing barbershop operations, built with **Next.js 15** and optimized for **performance, scalability, and developer experience**.  
-
+A **modern web interface** for managing barbershop operations, built with **Next.js 15** and optimized for **performance, scalability, and developer experience**.
 
 ![alt text](../public/frontend-img/owner-dashboard.png)
 
-## **Repository Overview**
+---
+
+## 📖 Table of Contents
+
+- [Introduction](#introduction)
+- [Repository Overview](#repository-overview)
+- [Documentation & Reference](#documentation--reference)
+- [Frontend Architecture Overview](#frontend-architecture-overview)
+  - [High-Level Architecture](#high-level-architecture)
+  - [Component Architecture](#component-architecture)
+  - [Role-Based Access Control](#role-based-access-control)
+  - [Authentication Flow](#authentication-flow)
+- [Project Structure](#project-structure)
+- [Routing Structure](#routing-structure)
+- [License & Contribution](#license--contribution)
+
+---
+
+## Introduction
+
+The Barbershop Frontend is a performant, scalable, and developer-friendly web application built with Next.js and modern technologies, designed to simplify and optimize barbershop operations.
+
+---
+
+## Repository Overview
 
 ```
 .
 ├── backend/       # Spring Boot API (Authentication, Business Logic)
 ├── frontend/      # (CURRENTLY HERE)
-├── docs/          # Documentation, ADRs, Security Reports (private for now)
+├── docs/          # Documentation, ADRs, Security Reports (private)
 ├── public/        # Static assets (images, icons, etc.)
 ```
 
-### 📖 **Documentation & Reference**
+---
 
-📌 **[Landing Documentation](../README.md)**
+## 📚 Documentation & Reference
 
-📌 **[Backend Documentation](../backend/README.md)**
+- 📌 **[Landing Documentation](../README.md)**
+- 📌 **[Backend Documentation](../backend/README.md)**
+  - 48 REST endpoints
+  - 22 entity relationships
+  - 9 enum state machines
+- 📌 **Frontend Documentation (Currently Viewing)**
+  - 31 React components
+  - 8 Zustand stores
+  - 4 authentication workflows
 
-- 48 REST endpoints
-- 22 entity relationships
-- 9 enum state machines
+---
 
-📌 **Frontend Documentation (CURRENTLY HERE)**
+## Frontend Architecture Overview
 
-- 31 React components
-- 8 Zustand stores
-- 4 authentication workflows
-
-
-## **Frontend Architecture Overview**  
+### High-Level Architecture
 
 ```mermaid
 graph LR
-  A[Client] -->|HTTP| B[Next.js Frontend]
-  B -->|REST API| C[Spring Boot API]
-  C -->|Database Queries| D[(PostgreSQL)]
-  B -->|State Management| E[Zustand Store]
-  B -->|Data Fetching| F[TanStack Query]
-  B -->|Authentication| G[OAuth2 + JWT]
+  Client --> Next.js_Frontend
+  Next.js_Frontend -->|REST API| Spring_Boot_API
+  Spring_Boot_API -->|Queries| PostgreSQL_DB
+  Next.js_Frontend --> Zustand_Store
+  Next.js_Frontend -->|Data Fetching| React_Query
+  Next.js_Frontend -->|Auth| OAuth2_JWT
 ```
 
-- **Next.js App Router** powers the client-side rendering and SSR.  
-- **State management via Zustand** for global store handling.  
-- **React Query handles data fetching**, caching, and synchronization.  
-- **Secure authentication** with JWT tokens and OAuth2 integration.  
+- **Next.js App Router**: Handles SSR and dynamic routing.
+- **State Management (Zustand)**: Simplified global state management.
+- **Data Fetching (TanStack Query)**: Efficient data handling and caching.
+- **JWT/OAuth2 Authentication**: Secure user authentication and sessions.
 
----
-
-## **🏗 Component Architecture**  
+### Component Architecture
 
 ```mermaid
 graph TD
-  A[Pages] --> B[UI Components]
-  A --> C[Forms]
-  A --> D[State Management]
-  B --> E[Radix UI]
-  C --> F[React Hook Form + Zod]
-  D --> G[Zustand Store]
+  Pages --> UI_Components
+  Pages --> Forms
+  Pages --> State_Management
+  UI_Components --> Radix_UI
+  Forms --> React_Hook_Form
+  State_Management --> Zustand
 ```
 
-- **Pages:** Core Next.js page routes.  
-- **UI Components:** Built using Radix UI primitives and Tailwind CSS.  
-- **Forms:** Managed with React Hook Form and validated with Zod.  
-- **State Management:** Centralized logic in Zustand stores.  
+- **Pages**: Core navigational routes and entry points.
+- **Components**: Built with Radix UI primitives and Tailwind CSS.
+- **Forms**: Managed with React Hook Form and validated via Zod.
+- **State Management**: Zustand stores manage global app states.
 
----
-
-## **Project Structure**  
-
-```
-src/
-├── app/            # Next.js page routes
-│   ├── (auth)      # Authentication routes
-│   ├── barbers/    # Barber-specific views
-│   ├── owners/     # Owner management
-│   └── shops/      # Shop operations
-├── modules/        # Feature modules
-│   ├── auth/       # Authentication services
-│   ├── barber/     # Barber management
-│   └── shop/       # Shop operations
-├── stores/         # Zustand state stores
-├── lib/            # Shared utilities
-└── types/          # TypeScript definitions
-```
-
-- **Feature Modules:** Encapsulate functionality for authentication, barbers, and shops.  
-- **Zustand Stores:** Handle global application state.  
-- **Shared Utilities:** Common functions for API calls and error handling.  
-
----
-
-## **Role-Based Access Control**  
+### Role-Based Access Control
 
 ```mermaid
 graph TD
-  subgraph "User Roles & Permissions"
-    A[Shop Owners] -->|Manage| B[Multi-location Shops]
-    A -->|Track| C[Analytics & Staffing]
-
-    D[Barbers] -->|Manage| E[Schedule & Clients]
-    
-    F[Customers] -->|Book| G[Appointments]
-    F -->|View| H[Payment History]
-  end
+  Owners -->|Manage| Shops
+  Owners -->|Track| Analytics
+  Barbers -->|Manage| Schedule
+  Customers -->|Book| Appointments
 ```
 
-| **Role**      | **Capabilities**                           |
-|--------------|------------------------------------------|
-| **Owners**   | Multi-location management, analytics, staffing |
-| **Barbers**  | Schedule management, client history     |
-| **Customers**| Appointment booking, payment history    |
+| Role      | Capabilities                               |
+| --------- | ------------------------------------------ |
+| Owners    | Multi-shop management, staffing, analytics |
+| Barbers   | Scheduling, client management              |
+| Customers | Appointment booking, payment overview      |
 
-- **Owners** oversee **multiple shops** and handle **staffing**.  
-- **Barbers** manage **client appointments and personal earnings**.  
-- **Customers** book services and **view their payment history**.  
-
----
-
-## **Authentication Flow**  
+### Authentication Flow
 
 ```mermaid
 sequenceDiagram
-    Client->>+Next.js Frontend: Login Request
-    Next.js Frontend->>+Auth API: Authenticate Credentials
-    Auth API-->>-Next.js Frontend: JWT Token
-    Next.js Frontend->>+Protected Route: Forward Request (With JWT)
-    Protected Route->>+Zustand Store: Retrieve User Data
-    Zustand Store-->>-Next.js Frontend: User State Updated
+Client->>Frontend: Login Request
+Frontend->>Auth_API: Authenticate
+Auth_API-->>Frontend: JWT Token
+Frontend->>Protected_Route: JWT Authenticated Request
+Protected_Route->>Zustand: Update State
+Zustand-->>Frontend: State Updated
 ```
-
-- **Login Flow:** Users authenticate via the Next.js frontend, which requests a **JWT token** from the backend.  
-- **State Management:** The JWT token is stored in **Zustand**, and **React Query synchronizes** user sessions.  
-- **Protected Routes:** Pages enforce **role-based access control (RBAC)**.  
 
 ---
 
-## **Routing Structure**  
+## Project Structure
+
+```
+src/
+├── app/            # Next.js routes
+│   ├── (auth)/     # Authentication routes
+│   ├── barbers/    # Barber-specific pages
+│   ├── owners/     # Owner dashboards
+│   └── shops/      # Shop management
+├── modules/        # Feature-specific logic
+├── stores/         # Zustand global stores
+├── lib/            # Shared utilities
+└── types/          # TypeScript interfaces
+```
+
+---
+
+## Routing Structure
 
 ```mermaid
 graph TD
@@ -153,22 +150,22 @@ graph TD
   I["/profile/edit"] -->|All Roles| J["Profile Editor"]
 ```
 
-| **Route Pattern**       | **Component**           | **Access Level**  |
-|------------------------|-----------------------|------------------|
-| `/owner/[id]/dashboard` | Owner Analytics       | Authenticated    |
-| `/barber/[id]/schedule` | Appointment Calendar  | Barber Role      |
-| `/shops/[shopId]/seats` | Seat Management       | Shop Owner       |
-| `/profile/dashboard`    | Profile Dashboard     | All Roles        |
-| `/profile/edit`         | Profile Editor        | All Roles        |
+| Route                   | Component         | Access Role |
+| ----------------------- | ----------------- | ----------- |
+| `/owner/[id]/dashboard` | Owner Dashboard   | Owners      |
+| `/barber/[id]/schedule` | Schedule Calendar | Barbers     |
+| `/shops/[shopId]/seats` | Seat Management   | Owners      |
+| `/profile/dashboard`    | User Dashboard    | All Users   |
+| `/profile/edit`         | Profile Editor    | All Users   |
 
+---
 
+## License & Contribution
 
-## **License & Contribution**  
+Licensed under AGPL-3.0 – See [LICENSE](LICENSE).
 
-- **Licensed under AGPL-3.0** – See [LICENSE](LICENSE).  
-- **Contributions Welcome** – Check [CONTRIBUTING.md](docs/CONTRIBUTING.md).  
+---
 
+### [Backend Documentation](../backend/README.md)
 
-## End
-- [Check backend documentation](../backend/README.md)
-- [Landing Documentation](../README.md)
+### [Landing Documentation](../README.md)

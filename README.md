@@ -50,7 +50,6 @@ graph LR
     A[Client] --> B[Next.js Frontend]
     B --> C[Spring Boot API]
     C --> D[(PostgreSQL Database)]
-    C --> E[Redis Cache]
     C --> F["Payment Gateway \(Stripe/PayPal\)"]
     C --> G["Auth Service \(OAuth2\)"]
   end
@@ -68,15 +67,15 @@ mindmap
   root((User Roles))
     Owners
       Multi-Shop Management
-      Analytics & Insights
-      Staffing & Operations
+      Analytics | Insights
+      Staffing | Operations
     Barbers
       Schedule Management
       Client History
-      Earnings & Payouts
+      Earnings | Payouts
     Clients
       Booking Appointments
-      Reviews & Feedback
+      Reviews | Feedback
       Payment History
 ```
 
