@@ -11,7 +11,7 @@ import io.aharoj.barbershop_backend.modules.image.model.entity.Image;
 public interface ImageRepository extends JpaRepository<Image, Long> {
 
   // Possible future need: find all images for a certain owner, 
-  List<Image> findByOwnerId(Long ownerId);
+  Image findByOwnerId(Long ownerId);
 
   List<Image> findByBarberId(Long barberId);
 

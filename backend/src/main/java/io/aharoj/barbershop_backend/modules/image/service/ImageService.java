@@ -18,10 +18,14 @@ public interface ImageService {
    * @throws IOException if file saving fails
    */
   Image uploadForOwner(Long ownerId, MultipartFile file) throws IOException;
-
-
+  
   // plus, for one-image usage, we add a fetch method
   Image getOwnerImage(Long ownerId);
+
+  void deleteOwnerImage(Long ownerId);
+
+  Image updateOwnerImage(Long ownerId, MultipartFile file) throws IOException;
+
 
   /**
    * Upload an image for a specific barber.
