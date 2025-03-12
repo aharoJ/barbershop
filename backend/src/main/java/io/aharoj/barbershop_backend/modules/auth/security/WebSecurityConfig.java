@@ -124,7 +124,7 @@ public class WebSecurityConfig {
             .requestMatchers(HttpMethod.POST, "/api/shops/*/applications/*/reject").hasRole("OWNER")
 
             // 5) Images:
-            .requestMatchers(HttpMethod.POST, "/api/images/owners/**").hasRole("OWNER")
+            .requestMatchers( "/api/images/owners/**").hasRole("OWNER")
             .requestMatchers(HttpMethod.POST, "/api/images/barbers/**").hasRole("BARBER")
             .requestMatchers(HttpMethod.POST, "/api/images/customers/**").hasRole("CUSTOMER")
             // .requestMatchers(HttpMethod.POST, "/api/images/shops/**").hasRole("OWNER") // -- this is buggy?

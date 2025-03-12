@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.springframework.web.multipart.MultipartFile;
 
 import io.aharoj.barbershop_backend.modules.image.model.entity.Image;
+import  org.springframework.core.io.Resource;
 
 public interface ImageService {
 
@@ -17,6 +18,10 @@ public interface ImageService {
    * @throws IOException if file saving fails
    */
   Image uploadForOwner(Long ownerId, MultipartFile file) throws IOException;
+
+
+  // plus, for one-image usage, we add a fetch method
+  Image getOwnerImage(Long ownerId);
 
   /**
    * Upload an image for a specific barber.
@@ -40,5 +45,8 @@ public interface ImageService {
    * @return the Resource for streaming
    * @throws IOException if the file is not found or fails to read
    */
-  org.springframework.core.io.Resource loadFileAsResource(String fileName) throws IOException;
+  Resource loadFileAsResource(String fileName) throws IOException;
+
+  // has not been tested YET ***
+  void deleteFileFromDisk(String fileName);
 }

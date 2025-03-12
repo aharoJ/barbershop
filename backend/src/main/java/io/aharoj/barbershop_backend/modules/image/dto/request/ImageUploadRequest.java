@@ -18,5 +18,4 @@ public class ImageUploadRequest {
     this.description = description;
   }
 
-  
 }
