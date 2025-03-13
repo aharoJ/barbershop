@@ -16,4 +16,5 @@ export interface ImageService {
   uploadBarberImage(barberId: number, file: File): Promise<ImageResponse>;
   uploadCustomerImage(customerId: number, file: File): Promise<ImageResponse>;
   uploadShopImage(shopId: number, file: File): Promise<ImageResponse>;
+  deleteOwnerImage(ownerId: number): Promise<void>;
 }
