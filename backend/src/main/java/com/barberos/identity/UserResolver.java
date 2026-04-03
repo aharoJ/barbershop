@@ -24,24 +24,38 @@ public class UserResolver {
         return resolveUser(authentication).getId();
     }
 
+    /**
+     * Resolve the authenticated user. Rejects deleted and unclaimed (ghost) users.
+     * C44: Ghost users cannot authenticate until claimed.
+     * C47: Soft-deleted users filtered from active queries.
+     */
     public UserEntity resolveUser(Authentication authentication) {
+        UserEntity user;
+
         if (authentication instanceof OAuth2AuthenticationToken oauthToken) {
             OAuth2User oauth2User = oauthToken.getPrincipal();
             String registrationId = oauthToken.getAuthorizedClientRegistrationId();
             String subject = extractSubject(oauth2User, registrationId);
 
-            return identityRepository.findByProviderAndSubject(registrationId, subject)
+            user = identityRepository.findByProviderAndSubject(registrationId, subject)
                     .map(identity -> userRepository.findById(identity.getUserId())
                             .orElseThrow(() -> new ResourceNotFoundException("User not found")))
                     .orElseThrow(() -> new ResourceNotFoundException("User not found"));
-        }
-
-        if (authentication.getPrincipal() instanceof UUID userId) {
-            return userRepository.findById(userId)
+        } else if (authentication.getPrincipal() instanceof UUID userId) {
+            user = userRepository.findById(userId)
                     .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        } else {
+            throw new ResourceNotFoundException("User not found");
         }
 
-        throw new ResourceNotFoundException("User not found");
+        if (user.isDeleted()) {
+            throw new ResourceNotFoundException("User not found");
+        }
+        if (!user.isClaimed()) {
+            throw new ResourceNotFoundException("User not found");
+        }
+
+        return user;
     }
 
     private String extractSubject(OAuth2User oauth2User, String registrationId) {

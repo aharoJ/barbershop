@@ -16,4 +16,10 @@ public interface UserRepository extends JpaRepository<UserEntity, UUID> {
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("SELECT u FROM UserEntity u WHERE u.id = :id")
     Optional<UserEntity> findByIdForUpdate(@Param("id") UUID id);
+
+    /** D32: Find unclaimed ghost user by email for claim flow. */
+    Optional<UserEntity> findByEmailAndClaimedFalse(String email);
+
+    /** D32: Check if a claimed user already exists with this email. */
+    boolean existsByEmailAndClaimedTrue(String email);
 }
