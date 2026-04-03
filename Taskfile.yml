@@ -1,0 +1,34 @@
+version: '3'
+
+tasks:
+  dev:
+    desc: Start everything for development
+    cmds:
+      - docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build
+
+  down:
+    desc: Stop everything
+    cmds:
+      - docker compose -f docker-compose.yml -f docker-compose.dev.yml down
+
+  db:
+    desc: Start database + MinIO + Mailpit only
+    cmds:
+      - docker compose up db minio mailpit -d
+
+  backend:
+    desc: Run backend locally (requires db task first)
+    dir: backend
+    cmds:
+      - ./gradlew bootRun
+
+  frontend:
+    desc: Run frontend locally
+    dir: frontend
+    cmds:
+      - pnpm dev
+
+  test:
+    desc: Run all tests
+    cmds:
+      - cd backend && ./gradlew test

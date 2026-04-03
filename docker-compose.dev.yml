@@ -1,0 +1,49 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      target: dev
+    env_file:
+      - ./backend/.env
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/barberos
+      SPRING_DATASOURCE_USERNAME: barberos
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD:-devpassword}
+      S3_ENDPOINT: http://minio:9000
+      S3_ACCESS_KEY: minioadmin
+      S3_SECRET_KEY: minioadmin
+      S3_BUCKET: barberos-uploads
+      S3_PUBLIC_URL: http://localhost:9000/barberos-uploads
+      MAIL_HOST: mailpit
+      MAIL_PORT: 1025
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend/src:/app/src
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8080/actuator/health || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+      start_period: 120s
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: dev
+    environment:
+      API_URL: http://backend:8080
+      NEXT_PUBLIC_BACKEND_URL: http://localhost:8080
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/src:/app/src
+    depends_on:
+      backend:
+        condition: service_healthy

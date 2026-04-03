@@ -1,52 +1,30 @@
-# 📄 VERY SENSITIVE
-copy.bara.sky
-
-
-# 🔒 Security & Sensitive Files (Double protection)
+# Environment & secrets
 .env
-secrets/
-config/
-serviceImpl/
-application.properties
-modules/auth/security/util/
-modules/auth/controller/
-.docs/
-.automation/
-*impl*
-uploads/
+backend/.env
+!backend/.env.example
 
-
-# 🚀 Backend (Spring Boot)
-target/
-out/
-bin/
-mvnw
-mvnw.cmd
-.mvn/
-logs/
-*.log
+# Backend (Spring Boot + Gradle)
+backend/build/
+backend/.gradle/
+backend/out/
+backend/bin/
 *.jar
 *.war
-*.ear
-*.nar
-hs_err_pid*
-replay_pid*
-
-# 🏗️ Frontend (Next.js 15, Tailwind, TypeScript)
-.next/
-dist/
-.cache/
-node_modules/
-coverage/
-*.lock
 *.log
-*.tsbuildinfo
+hs_err_pid*
 
-# 🎨 Ignore System & IDE Files
+# Frontend (Next.js)
+frontend/.next/
+frontend/node_modules/
+frontend/dist/
+frontend/coverage/
+frontend/*.tsbuildinfo
+pnpm-lock.yaml
+
+# System & IDE
 .DS_Store
 .idea/
 .vscode/
 *.iml
 *.swp
 *.swo
-

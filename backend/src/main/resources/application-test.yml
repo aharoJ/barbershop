@@ -1,0 +1,19 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: test-google-client-id
+            client-secret: test-google-client-secret
+          github:
+            client-id: test-github-client-id
+            client-secret: test-github-client-secret
+
+app:
+  storage:
+    enabled: false
