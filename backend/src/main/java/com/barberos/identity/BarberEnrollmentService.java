@@ -29,6 +29,19 @@ public class BarberEnrollmentService {
         this.barberDetailsRepository = barberDetailsRepository;
     }
 
+    /**
+     * Resolve barber's profile ID from user ID. Used by Shop module for association lookups.
+     * Returns the profile ID which equals barber_details.profile_id (D33).
+     */
+    @Transactional(readOnly = true)
+    public UUID resolveBarberProfileId(UUID userId) {
+        ProfileEntity profile = profileService.getByUserId(userId);
+        if (!barberDetailsRepository.existsByProfileId(profile.getId())) {
+            throw new IllegalStateException("User is not enrolled as a barber");
+        }
+        return profile.getId();
+    }
+
     @Transactional
     public BarberDetailsEntity enrollAsBarber(UUID userId, String[] specialties,
                                                Integer experienceYears, String licenseNumber) {

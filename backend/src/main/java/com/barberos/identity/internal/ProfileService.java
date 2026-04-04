@@ -7,6 +7,7 @@ import com.barberos.shared.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.ZoneId;
 import java.util.UUID;
 
 @Service
@@ -67,7 +68,20 @@ public class ProfileService {
         }
         if (bio != null) profile.setBio(bio.isEmpty() ? null : bio);
         if (phoneNumber != null) profile.setPhoneNumber(phoneNumber.isEmpty() ? null : phoneNumber);
-        if (timezone != null) profile.setTimezone(timezone.isEmpty() ? null : timezone);
+        if (timezone != null) {
+            if (timezone.isEmpty()) {
+                profile.setTimezone(null);
+            } else {
+                try { ZoneId.of(timezone); } catch (Exception e) {
+                    throw new IllegalArgumentException("Invalid timezone: " + timezone);
+                }
+                if (!timezone.contains("/")) {
+                    throw new IllegalArgumentException(
+                            "Use an IANA region timezone (e.g., 'America/New_York'), not an offset");
+                }
+                profile.setTimezone(timezone);
+            }
+        }
         return profile;
     }
 
